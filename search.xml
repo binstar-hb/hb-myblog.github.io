@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>js中一些好用的数组方法</title>
+      <link href="/hb-myblog.github.io/2021/10/04/js%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/"/>
+      <url>/hb-myblog.github.io/2021/10/04/js%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h5 id="1、some"><a href="#1、some" class="headerlink" title="1、some()"></a>1、some()</h5><p><strong>语法：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.some(function(currentValue,index,arr),thisValue)</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//把10修改成20</span><br><span class="line">var ages = [5, 32, 7, 10, 33, 12, 40];</span><br><span class="line">ages.some(function (currentValue, index) &#123;</span><br><span class="line">  if (currentValue === 10) &#123;</span><br><span class="line">    ages[index] = 20</span><br><span class="line">    return true</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(index);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(ages);</span><br><span class="line"></span><br><span class="line">//把10修改成20 箭头函数</span><br><span class="line">var ages = [5, 32, 7, 10, 33, 12, 40];</span><br><span class="line">ages.some((item, index) =&gt; &#123;</span><br><span class="line">  if (item === 10) &#123;</span><br><span class="line">    ages[index] = 20</span><br><span class="line">    return true</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(index);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(ages);</span><br></pre></td></tr></table></figure><h5 id="2、every"><a href="#2、every" class="headerlink" title="2、every()"></a>2、every()</h5><p><strong>语法：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.every(function(currentValue,index,arr), thisValue)</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//判断每个元素的值是否都大于4</span><br><span class="line">var ages = [5, 32, 7, 10, 33, 12, 40];</span><br><span class="line"></span><br><span class="line">var res = ages.some(function (currentValue) &#123;</span><br><span class="line">  return currentValue &gt; 4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(res);</span><br><span class="line">//输出：true</span><br><span class="line"></span><br><span class="line">//箭头函数</span><br><span class="line">var res = ages.some(item =&gt; item &gt; 4)</span><br><span class="line">console.log(res);</span><br><span class="line">//-------------------------</span><br><span class="line">var arr = [ 1, 2, 3, 4, 5, 6 ]; </span><br><span class="line"></span><br><span class="line">var every = arr.every( function( val, index, arr)&#123;</span><br><span class="line">    console.log( &#x27;val：&#x27; + val); //打印1，不会打印2、3、4、5、6</span><br><span class="line"></span><br><span class="line">    return val &gt; 4; </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">console.log(every); //返回false</span><br></pre></td></tr></table></figure><h5 id="3、reduce"><a href="#3、reduce" class="headerlink" title="3、reduce()"></a>3、reduce()</h5><p><strong>语法：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(function(total, currentValue, currentIndex, arr), initialValue)</span><br><span class="line">total：必需。初始值, 或者计算结束后的返回值。</span><br><span class="line">currentValue：必需。当前元素</span><br><span class="line">currentIndex：可选。当前元素的索引</span><br><span class="line">arr：可选。当前元素所属的数组对象。</span><br><span class="line">initialValue：可选。传递给函数的初始值</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//计算所有元素的和</span><br><span class="line">var numbers = [15.5, 2.3, 1.1, 4.7];</span><br><span class="line">var res = numbers.reduce(function (total, currentValue) &#123;</span><br><span class="line">  return total += currentValue</span><br><span class="line">&#125;, 0)</span><br><span class="line"></span><br><span class="line">console.log(res);</span><br><span class="line">//23.6</span><br><span class="line"></span><br><span class="line">//计算大于4的元素的和</span><br><span class="line">var result = numbers.filter(item =&gt; item &gt; 4).reduce((total, item) =&gt; total += item, 0)</span><br><span class="line">console.log(result);</span><br><span class="line">//20.2</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> javaScript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数组方法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webSocket</title>
+      <link href="/hb-myblog.github.io/2021/10/04/webSocket/"/>
+      <url>/hb-myblog.github.io/2021/10/04/webSocket/</url>
+      
+        <content type="html"><![CDATA[<h5 id="websocket是什么"><a href="#websocket是什么" class="headerlink" title="websocket是什么"></a>websocket是什么</h5><p>&emsp;&emsp;服务器给客户端发送一个主动的消息技术。比如登录一个网页，在我们打开一个浏览器，在浏览器去请求一个网页的时候，会请求一个二维码，放到浏览器端，用手机微信去扫描的时候，微信手机端会把扫描的结果推送到微信的服务器，微信的服务器会将消息推送到第三方的另一个服务器，地三方服务器会主动推送一条消息到浏览器前端，第三方服务器主动推送消息的地方用到的技术就是websocket，也就是由服务器主动推送消息到浏览器，这就是websocket。</p><p>&emsp;&emsp;这个时候有一个疑惑，为什么不使用http呢？http首先带有协议头和协议body，协议头比较大，如果只推送几个字节或十几个字节的情况下，会产生大量的response，大部分都是无用的消息，利用率不高。又为什么不用裸TCP呢？TCP是一个传输层的协议，对于使用浏览器的版本和其他的版本，并没有做到协议上的鉴定，不能跟http一起。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> javaScript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webSocket </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>用CSS代码让你的列表网页提升渲染性能</title>
       <link href="/hb-myblog.github.io/2021/10/03/%E7%94%A8CSS%E4%BB%A3%E7%A0%81%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%88%97%E8%A1%A8%E7%BD%91%E9%A1%B5%E6%8F%90%E5%8D%87%E6%B8%B2%E6%9F%93%E6%80%A7%E8%83%BD/"/>
       <url>/hb-myblog.github.io/2021/10/03/%E7%94%A8CSS%E4%BB%A3%E7%A0%81%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%88%97%E8%A1%A8%E7%BD%91%E9%A1%B5%E6%8F%90%E5%8D%87%E6%B8%B2%E6%9F%93%E6%80%A7%E8%83%BD/</url>
@@ -32,7 +82,7 @@
       
       <categories>
           
-          <category> JavaScript </category>
+          <category> javaScript </category>
           
       </categories>
       
