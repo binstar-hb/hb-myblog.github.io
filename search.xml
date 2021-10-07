@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>git版本回退</title>
+      <link href="/hb-myblog.github.io/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
+      <url>/hb-myblog.github.io/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</url>
+      
+        <content type="html"><![CDATA[<p>对于git版本的回退，我们一般会用到如下两个命令：</p><ul><li>git reset</li><li>git revert</li></ul><p>这两个命令有什么区别呢？</p><h5 id="1、git-reset"><a href="#1、git-reset" class="headerlink" title="1、git reset"></a>1、git reset</h5><p>假设有如下几个提交:</p><p><img src="https://i.bmp.ovh/imgs/2021/10/acf69ed2c12427dd.png"></p><p>执行如下命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard a0fvf8</span><br></pre></td></tr></table></figure><p>命令执行之后，HEAD指针就会移动到B提交下</p><p><img src="https://i.bmp.ovh/imgs/2021/10/fc6aaccc7c536e28.png"></p><p>此时，远程仓库的指针依然在D提交上。直接push的话，无法将更改推送到远程仓库，只能使用-f强推到远程仓库：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f</span><br></pre></td></tr></table></figure><p>这个方法的弊端显而易见，之前的C、D提交将会被抹除，无法再找回了。</p><h5 id="2、git-revert"><a href="#2、git-revert" class="headerlink" title="2、git revert"></a>2、git revert</h5><p>通过反做创建一个新的版本，新版本的内容与要回退的目标版本一样，而HEAD指针指向新生成的版本。</p><p>用git revert 来实现上述例子的话可以先revert D，再revert C（由新到旧依次revert）</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git revert 5lk4er</span><br><span class="line">git revert 76sdeb</span><br></pre></td></tr></table></figure><p><img src="https://i.bmp.ovh/imgs/2021/10/9acffeb81c1085a5.png"></p><p>如果回退的数量较大，一个个回退容易出错，可以使用以下方法进行批量回退</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert OLDER_COMMIT^..NEWER_COMMIT</span><br></pre></td></tr></table></figure><p>这样操作的话HEAD指针是往后移动的，可以直接push到远程仓库中。将来甩锅便有迹可循</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CSS3阴影(box-shadow)</title>
       <link href="/hb-myblog.github.io/2021/10/06/CSS3%E9%98%B4%E5%BD%B1-box-shadow/"/>
       <url>/hb-myblog.github.io/2021/10/06/CSS3%E9%98%B4%E5%BD%B1-box-shadow/</url>
