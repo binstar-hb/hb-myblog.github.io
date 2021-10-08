@@ -186,6 +186,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/08/vue%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hb-myblog.github.io/images/myhead.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="Tough times never last, but tough people do.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/hb-myblog.github.io/2021/10/08/vue%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">vue基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-08 22:26:02 / 修改时间：22:44:38" itemprop="dateCreated datePublished" datetime="2021-10-08T22:26:02+08:00">2021-10-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hb-myblog.github.io/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="Setter"><a href="#Setter" class="headerlink" title="Setter"></a>Setter</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line"> el: &#x27;#el&#x27;,</span><br><span class="line"> data: &#123;</span><br><span class="line">  num: 100,</span><br><span class="line"> &#125;</span><br><span class="line"> computed: &#123;</span><br><span class="line">  price: &#123;</span><br><span class="line">   set: function(newValue)&#123;</span><br><span class="line">    this.num = newValue * 100;</span><br><span class="line">   &#125;,</span><br><span class="line">   get: function() &#123;</span><br><span class="line">    return (this.num/100).toFixed(2);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="绑定value"><a href="#绑定value" class="headerlink" title="绑定value"></a>绑定value</h5><p>表单控件的值可以绑定在vue实例的动态属性上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;checkbox&quot; v-model=&quot;checked&quot; v-bind:true-value=&quot;a&quot; v-bind:false-value=&quot;b&quot;&gt;</span><br><span class="line"></span><br><span class="line">// 选中：vm.checked==vm.a</span><br><span class="line"></span><br><span class="line">// 未选中：vm.hchecked==vm.b</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/hb-myblog.github.io/2021/10/08/vue%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -470,10 +549,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-04 15:37:44 / 修改时间：18:28:23" itemprop="dateCreated datePublished" datetime="2021-10-04T15:37:44+08:00">2021-10-04</time>
+              <time title="创建时间：2021-10-04 15:37:44" itemprop="dateCreated datePublished" datetime="2021-10-04T15:37:44+08:00">2021-10-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-08 21:55:09" itemprop="dateModified" datetime="2021-10-08T21:55:09+08:00">2021-10-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -497,7 +582,15 @@
       
           <h5 id="websocket是什么"><a href="#websocket是什么" class="headerlink" title="websocket是什么"></a>websocket是什么</h5><p>&emsp;&emsp;服务器给客户端发送一个主动的消息技术。比如登录一个网页，在我们打开一个浏览器，在浏览器去请求一个网页的时候，会请求一个二维码，放到浏览器端，用手机微信去扫描的时候，微信手机端会把扫描的结果推送到微信的服务器，微信的服务器会将消息推送到第三方的另一个服务器，地三方服务器会主动推送一条消息到浏览器前端，第三方服务器主动推送消息的地方用到的技术就是websocket，也就是由服务器主动推送消息到浏览器，这就是websocket。</p>
 <p>&emsp;&emsp;这个时候有一个疑惑，为什么不使用http呢？http首先带有协议头和协议body，协议头比较大，如果只推送几个字节或十几个字节的情况下，会产生大量的response，大部分都是无用的消息，利用率不高。又为什么不用裸TCP呢？TCP是一个传输层的协议，对于使用浏览器的版本和其他的版本，并没有做到协议上的鉴定，不能跟http一起。</p>
-
+<h5 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h5><p>&emsp;&emsp;广播和收听</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/hb-myblog.github.io/2021/10/04/webSocket/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -748,20 +841,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/hb-myblog.github.io/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/hb-myblog.github.io/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/hb-myblog.github.io/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
