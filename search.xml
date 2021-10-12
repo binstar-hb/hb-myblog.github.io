@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>js函数柯里化</title>
+      <link href="/hb-myblog.github.io/2021/10/12/js%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+      <url>/hb-myblog.github.io/2021/10/12/js%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<p>&emsp;&emsp;函数柯里化，指的是将一个接受多个参数的函数，变为接受一个参数返回一个函数的固定形式，这样便于再次调用，例如f(1)(2)。</p><p>&emsp;&emsp;如何实现add(1)(2)(3)(4)=10</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">// 将传入的不定参数转为数组对象</span><br><span class="line">var _args = Array.prototype.slice.call(arguments);</span><br><span class="line">var _adder = function()&#123;</span><br><span class="line">_args.push(...arguments)</span><br><span class="line">return _adder</span><br><span class="line">&#125;</span><br><span class="line">// toString隐形转换的特性</span><br><span class="line">_adder.toString = function()&#123;</span><br><span class="line">return _args.reduce((a,b) =&gt; &#123;</span><br><span class="line">return a + b</span><br><span class="line">&#125;, 0)</span><br><span class="line">&#125;</span><br><span class="line">return _adder</span><br><span class="line">&#125;</span><br><span class="line">console.log(add(1,2,3)) // 6</span><br><span class="line">console.log(add(1)(2)(3)) // 6</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> javaScript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js函数柯里化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS white-space 属性</title>
+      <link href="/hb-myblog.github.io/2021/10/11/white-space/"/>
+      <url>/hb-myblog.github.io/2021/10/11/white-space/</url>
+      
+        <content type="html"><![CDATA[<h5 id="兼容性："><a href="#兼容性：" class="headerlink" title="兼容性："></a>兼容性：</h5><p>&emsp;&emsp;所有浏览器都支持 white-space 属性。</p><p>&emsp;&emsp;注释：任何的版本的 Internet Explorer （包括 IE8）都不支持属性值 “inherit”。</p><h5 id="官方定义和用法："><a href="#官方定义和用法：" class="headerlink" title="官方定义和用法："></a>官方定义和用法：</h5><p>&emsp;&emsp;这个属性声明建立布局过程中如何处理元素中的空白符。值 pre-wrap 和 pre-line 是 CSS 2.1 中新增的。</p><table><thead><tr><th>值</th><th>描述</th></tr></thead><tbody><tr><td>normal</td><td>默认。空白会被浏览器忽略。</td></tr><tr><td>pre</td><td>空白会被浏览器保留。其行为方式类似 HTML 中的 <pre> 标签。</pre></td></tr><tr><td>nowrap</td><td>文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。</td></tr><tr><td>pre-wrap</td><td>保留空白符序列，但是正常地进行换行。</td></tr><tr><td>pre-line</td><td>合并空白符序列，但是保留换行符。</td></tr><tr><td>inherit</td><td>规定应该从父元素继承 white-space 属性的值。</td></tr></tbody></table><h6 id="pre-line"><a href="#pre-line" class="headerlink" title="pre-line"></a>pre-line</h6><p>&emsp;&emsp;合并空格，保留换行符，允许自动换行</p><h6 id="normal"><a href="#normal" class="headerlink" title="normal"></a>normal</h6><p>&emsp;&emsp;合并空格，换行符转化为一个空格，允许自动换行</p><h6 id="nowrap"><a href="#nowrap" class="headerlink" title="nowrap"></a>nowrap</h6><p>&emsp;&emsp;合并空格，换行符转化为一个空格，不允许自动换行</p><h6 id="pre"><a href="#pre" class="headerlink" title="pre"></a>pre</h6><p>&emsp;&emsp;保留空格，保留换行符，不允许自动换行</p><h6 id="pre-wrap"><a href="#pre-wrap" class="headerlink" title="pre-wrap"></a>pre-wrap</h6><p>&emsp;&emsp;保留空格，保留换行符，允许自动换行。</p><table><thead><tr><th><strong>值</strong></th><th><strong>空白符</strong></th><th><strong>换行符</strong></th><th><strong>自动换行</strong></th></tr></thead><tbody><tr><td>pre-line</td><td>合并</td><td>保留</td><td>允许</td></tr><tr><td>normal</td><td>合并</td><td>忽略</td><td>允许</td></tr><tr><td>nowrap</td><td>合并</td><td>忽略</td><td>不允许</td></tr><tr><td>pre</td><td>保留</td><td>保留</td><td>不允许</td></tr><tr><td>pre-wrap</td><td>保留</td><td>保留</td><td>允许</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> css </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> white-space </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>async/await详解</title>
       <link href="/hb-myblog.github.io/2021/10/09/async-await%E8%AF%A6%E8%A7%A3/"/>
       <url>/hb-myblog.github.io/2021/10/09/async-await%E8%AF%A6%E8%A7%A3/</url>
