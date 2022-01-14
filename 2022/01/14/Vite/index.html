@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/hb-myblog.github.io/images/favicon-more.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="mask-icon" href="/hb-myblog.github.io/images/favicon-more.png" color="#222">
+
+<link rel="stylesheet" href="/hb-myblog.github.io/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/hb-myblog.github.io/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binstar-hb.github.io","root":"/hb-myblog.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="特点 极速的服务启动，使用原生 ESM 文件，无需打包! 轻量快速的热重载，无论应用程序大小如何，都始终极快的模块热重载（HMR） 丰富的功能，对 TypeScript、JSX、CSS 等支持开箱即用。 优化的构建，可选 “多页应用” 或 “库” 模式的预配置 Rollup 构建 通用的插件，在开发和构建之间共享 Rollup-superset 插件接口。 完全类型化的API，灵活的 API 和完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vite构建工具的使用">
+<meta property="og:url" content="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/14/Vite/index.html">
+<meta property="og:site_name" content="Where there is a will, there is a way!">
+<meta property="og:description" content="特点 极速的服务启动，使用原生 ESM 文件，无需打包! 轻量快速的热重载，无论应用程序大小如何，都始终极快的模块热重载（HMR） 丰富的功能，对 TypeScript、JSX、CSS 等支持开箱即用。 优化的构建，可选 “多页应用” 或 “库” 模式的预配置 Rollup 构建 通用的插件，在开发和构建之间共享 Rollup-superset 插件接口。 完全类型化的API，灵活的 API 和完">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-14T11:28:29.000Z">
+<meta property="article:modified_time" content="2022-01-14T12:13:59.005Z">
+<meta property="article:author" content="Binstar">
+<meta property="article:tag" content="vite">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/14/Vite/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vite构建工具的使用 | Where there is a will, there is a way!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/hb-myblog.github.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Where there is a will, there is a way!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/hb-myblog.github.io/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/hb-myblog.github.io/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/hb-myblog.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/hb-myblog.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/hb-myblog.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">13</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/14/Vite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hb-myblog.github.io/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title
+        " itemprop="name headline">
+          Vite构建工具的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-14 19:28:29 / 修改时间：20:13:59" itemprop="dateCreated datePublished" datetime="2022-01-14T19:28:29+08:00">2022-01-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hb-myblog.github.io/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ul>
+<li>极速的服务启动，使用原生 ESM 文件，无需打包!</li>
+<li>轻量快速的热重载，无论应用程序大小如何，都始终极快的模块热重载（HMR）</li>
+<li>丰富的功能，对 TypeScript、JSX、CSS 等支持开箱即用。</li>
+<li>优化的构建，可选 “多页应用” 或 “库” 模式的预配置 Rollup 构建</li>
+<li>通用的插件，在开发和构建之间共享 Rollup-superset 插件接口。</li>
+<li>完全类型化的API，灵活的 API 和完整 TypeScript 类型。</li>
+</ul>
+<h5 id="为什么选-Vite"><a href="#为什么选-Vite" class="headerlink" title="为什么选 Vite"></a>为什么选 Vite</h5><p>直接点说，现市面上的构建工具太慢了（webpack、Rollup 和、Parcel等），Vite直接利用浏览器原生的ES模块使构建速度更快</p>
+<h5 id="搭建第一个-Vite-项目"><a href="#搭建第一个-Vite-项目" class="headerlink" title="搭建第一个 Vite 项目"></a>搭建第一个 Vite 项目</h5><p>使用 npm:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init vite@latest</span><br></pre></td></tr></table></figure>
+
+<p>使用 yarn:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn create vite</span><br></pre></td></tr></table></figure>
+
+<p>然后按照提示操作即可！</p>
+<p>你还可以通过附加的命令行选项直接指定项目名称和你想要使用的模板。例如，要构建一个 Vite + Vue 项目，运行:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># npm <span class="number">6.</span>x</span><br><span class="line">npm init vite@latest my-vue-app --template vue</span><br><span class="line"></span><br><span class="line"># npm <span class="number">7</span>+, 需要额外的双横线：</span><br><span class="line">npm init vite@latest my-vue-app -- --template vue</span><br><span class="line"></span><br><span class="line"># yarn</span><br><span class="line">yarn create vite my-vue-app --template vue</span><br></pre></td></tr></table></figure>
+
+<h5 id="命令行界面"><a href="#命令行界面" class="headerlink" title="命令行界面"></a>命令行界面</h5><p>在安装了 Vite 的项目中，可以在 npm scripts 中使用 vite 可执行文件，或者直接使用 npx vite 运行它。下面是通过脚手架创建的 Vite 项目中默认的 npm scripts：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>, <span class="comment">// 启动开发服务器，别名：`vite dev`，`vite serve`</span></span><br><span class="line">    <span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>, <span class="comment">// 为生产环境构建产物</span></span><br><span class="line">    <span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span> <span class="comment">// 本地预览生产构建产物</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以指定额外的命令行选项，如 –port 或 –https。运行 npx vite –help 获得完整的命令行选项列表。</p>
+<h5 id="配置文件解析（常用配置）"><a href="#配置文件解析（常用配置）" class="headerlink" title="配置文件解析（常用配置）"></a>配置文件解析（常用配置）</h5><p>当以命令行方式运行 vite 时，Vite 会自动解析 项目根目录 下名为 vite.config.js 的文件。</p>
+<p>最基础的配置文件是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vite.config.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 配置选项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：即使项目没有在 package.json 中开启 type: “module”，Vite 也支持在配置文件中使用 ESM 语法。这种情况下，配置文件会在被加载前自动进行预处理。</p>
+<p>你可以显式地通过 –config 命令行选项指定一个配置文件（相对于 cwd 路径进行解析）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vite --config my-config.js</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置智能提示"><a href="#配置智能提示" class="headerlink" title="配置智能提示"></a>配置智能提示</h5><p>因为 Vite 本身附带 Typescript 类型，所以你可以通过 IDE 和 jsdoc 的配合来实现智能提示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@type <span class="type">&#123;import(&#x27;vite&#x27;).UserConfig&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> config</span><br></pre></td></tr></table></figure>
+
+<p>另外你可以使用 defineConfig 工具函数，这样不用 jsdoc 注解也可以获取类型提示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Vite 也直接支持 TS 配置文件。你可以在 vite.config.ts 中使用 defineConfig 工具函数。</p>
+<h5 id="情景配置"><a href="#情景配置" class="headerlink" title="情景配置"></a>情景配置</h5><p>如果配置文件需要基于（dev/serve 或 build）命令或者不同的 模式 来决定选项，则可以选择导出这样一个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(<span class="function">(<span class="params">&#123; command, mode &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (command === <span class="string">&#x27;serve&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// dev 独有配置</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// command === &#x27;build&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// build 独有配置</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在 Vite 的 API 中，在开发环境下 command 的值为 serve（在 CLI 中， vite dev 和 vite serve 是 vite 的别名），而在生产环境下为 build（vite build）。</p>
+<h5 id="异步配置"><a href="#异步配置" class="headerlink" title="异步配置"></a>异步配置</h5><p>如果配置需要调用一个异步函数，也可以转而导出一个异步函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(<span class="keyword">async</span> (&#123; command, mode &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> asyncFunction()</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// 构建模式所需的特有配置</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="共享配置"><a href="#共享配置" class="headerlink" title="共享配置"></a>共享配置</h5><h6 id="root"><a href="#root" class="headerlink" title="root"></a>root</h6><ul>
+<li><strong>类型：</strong> string</li>
+<li><strong>默认：</strong> process.cwd()项目根目录（index.html 文件所在的位置）。可以是一个绝对路径，或者一个相对于该配置文件本身的相对路径。</li>
+</ul>
+<h6 id="base"><a href="#base" class="headerlink" title="base"></a>base</h6><ul>
+<li><strong>类型：</strong> string</li>
+<li><strong>默认：</strong> /开发或生产环境服务的公共基础路径。合法的值包括以下几种：绝对 URL 路径名，例如 /foo/完整的 URL，例如 <a target="_blank" rel="noopener" href="https://foo.com/%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%96">https://foo.com/空字符串或</a> ./（用于开发环境）</li>
+</ul>
+<h6 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h6><ul>
+<li><strong>类型：</strong> string</li>
+<li><strong>默认：</strong> ‘development’（开发模式），’production’（生产模式）在配置中指明将会把 <strong>serve 和 build</strong> 时的模式 <strong>都</strong> 覆盖掉。也可以通过命令行 –mode 选项来重写。</li>
+</ul>
+<h6 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h6><ul>
+<li><strong>类型：</strong> (Plugin | Plugin[])[]需要用到的插件数组。Falsy 虚值的插件将被忽略，插件数组将被扁平化（flatten）。</li>
+</ul>
+<h6 id="publicDir"><a href="#publicDir" class="headerlink" title="publicDir"></a>publicDir</h6><ul>
+<li><strong>类型：</strong> string | false</li>
+<li><strong>默认：</strong> “public”作为静态资源服务的文件夹。该目录中的文件在开发期间在 / 处提供，并在构建期间复制到 outDir 的根目录，并且始终按原样提供或复制而无需进行转换。该值可以是文件系统的绝对路径，也可以是相对于项目的根目录的相对路径。将 publicDir 设定为 false 可以关闭此项功能。</li>
+</ul>
+<h5 id="开发服务器选项"><a href="#开发服务器选项" class="headerlink" title="开发服务器选项"></a>开发服务器选项</h5><h6 id="server-host"><a href="#server-host" class="headerlink" title="server.host"></a>server.host</h6><ul>
+<li><strong>类型：</strong> string | boolean</li>
+<li><strong>默认：</strong> ‘127.0.0.1’指定服务器应该监听哪个 IP 地址。 如果将此设置为 0.0.0.0 或者 true 将监听所有地址，包括局域网和公网地址。也可以通过 CLI 使用 –host 0.0.0.0 或 –host 来设置。</li>
+</ul>
+<h6 id="server-port"><a href="#server-port" class="headerlink" title="server.port"></a>server.port</h6><ul>
+<li><strong>类型：</strong> number</li>
+<li><strong>默认值：</strong> 3000指定开发服务器端口。注意：如果端口已经被使用，Vite 会自动尝试下一个可用的端口，所以这可能不是开发服务器最终监听的实际端口</li>
+</ul>
+<h6 id="server-https"><a href="#server-https" class="headerlink" title="server.https"></a>server.https</h6><ul>
+<li><strong>类型：</strong> boolean | https.ServerOptions启用 TLS + HTTP/2。注意：当 server.proxy 选项 也被使用时，将会仅使用 TLS。这个值也可以是一个传递给 https.createServer() 的 选项对象。</li>
+</ul>
+<h6 id="server-open"><a href="#server-open" class="headerlink" title="server.open"></a>server.open</h6><ul>
+<li><strong>类型：</strong> boolean | string在开发服务器启动时自动在浏览器中打开应用程序。当此值为字符串时，会被用作 URL 的路径名。若你想指定喜欢的浏览器打开服务器，你可以设置环境变量 process.env.BROWSER（例如：firefox）。示例：**export default defineConfig({ server: { open: ‘/docs/index.html’ } })</li>
+</ul>
+<h6 id="server-proxy"><a href="#server-proxy" class="headerlink" title="server.proxy"></a>server.proxy</h6><ul>
+<li><strong>类型：</strong> Record&lt;string, string | ProxyOptions&gt;为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。如果 key 值以 ^ 开头，将会被解释为 RegExp。configure 可用于访问 proxy 实例。使用 http-proxy。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="comment">// 字符串简写写法</span></span><br><span class="line">      <span class="string">&#x27;/foo&#x27;</span>: <span class="string">&#x27;http://localhost:4567&#x27;</span>,</span><br><span class="line">      <span class="comment">// 选项写法</span></span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://jsonplaceholder.typicode.com&#x27;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">rewrite</span>: <span class="function">(<span class="params">path</span>) =&gt;</span> path.replace(<span class="regexp">/^\/api/</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 正则表达式写法</span></span><br><span class="line">      <span class="string">&#x27;^/fallback/.*&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://jsonplaceholder.typicode.com&#x27;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">rewrite</span>: <span class="function">(<span class="params">path</span>) =&gt;</span> path.replace(<span class="regexp">/^\/fallback/</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 使用 proxy 实例</span></span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://jsonplaceholder.typicode.com&#x27;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">configure</span>: <span class="function">(<span class="params">proxy, options</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// proxy 是 &#x27;http-proxy&#x27; 的实例</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="构建选项"><a href="#构建选项" class="headerlink" title="构建选项"></a>构建选项</h5><h6 id="build-target"><a href="#build-target" class="headerlink" title="build.target#"></a>build.target#</h6><ul>
+<li><strong>类型：</strong> string | string[]</li>
+<li><strong>默认：</strong> ‘modules’</li>
+<li><strong>相关内容：:</strong> 浏览器兼容性设置最终构建的浏览器兼容目标。默认值是一个 Vite 特有的值——‘modules’，这是指 支持原生 ES 模块的浏览器。另一个特殊值是 “esnext” —— 即假设有原生动态导入支持，并且将会转译得尽可能小：如果 build.minify 选项为 ‘terser’， ‘esnext’ 将会强制降级为 ‘es2019’。其他情况下将完全不会执行转译。转换过程将会由 esbuild 执行，并且此值应该是一个合法的 esbuild 目标选项。自定义目标也可以是一个 ES 版本（例如：es2015）、一个浏览器版本（例如：chrome58）或是多个目标组成的一个数组。注意：如果代码包含不能被 esbuild 安全地编译的特性，那么构建将会失败。查看 esbuild 文档 获取更多细节。</li>
+</ul>
+<h6 id="build-outDir"><a href="#build-outDir" class="headerlink" title="build.outDir"></a>build.outDir</h6><ul>
+<li><strong>类型：</strong> string</li>
+<li><strong>默认：</strong> dist指定输出路径（相对于 项目根目录).</li>
+</ul>
+<h6 id="build-assetsDir"><a href="#build-assetsDir" class="headerlink" title="build.assetsDir"></a>build.assetsDir</h6><ul>
+<li><strong>类型：</strong> string</li>
+<li><strong>默认：</strong> assets指定生成静态资源的存放路径（相对于 build.outDir）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">官方地址：https://vitejs.cn/</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Binstar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/14/Vite/" title="Vite构建工具的使用">https://binstar-hb.github.io/hb-myblog.github.io/2022/01/14/Vite/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/hb-myblog.github.io/tags/vite/" rel="tag"># vite</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2021/11/02/vue3%E5%AF%B9%E6%AF%94vue2/" rel="prev" title="vue3对比vue2">
+      <i class="fa fa-chevron-left"></i> vue3对比vue2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2022/01/14/%E5%89%8D%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84-Web-%E6%BC%8F%E6%B4%9E/" rel="next" title="前端程序员必须知道的 Web 漏洞">
+      前端程序员必须知道的 Web 漏洞 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89-Vite"><span class="nav-number">2.</span> <span class="nav-text">为什么选 Vite</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA-Vite-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">搭建第一个 Vite 项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">命令行界面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%EF%BC%88%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">配置文件解析（常用配置）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA"><span class="nav-number">6.</span> <span class="nav-text">配置智能提示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%83%85%E6%99%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">情景配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">异步配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE"><span class="nav-number">9.</span> <span class="nav-text">共享配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#root"><span class="nav-number">9.1.</span> <span class="nav-text">root</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#base"><span class="nav-number">9.2.</span> <span class="nav-text">base</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mode"><span class="nav-number">9.3.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#plugins"><span class="nav-number">9.4.</span> <span class="nav-text">plugins</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#publicDir"><span class="nav-number">9.5.</span> <span class="nav-text">publicDir</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%89%E9%A1%B9"><span class="nav-number">10.</span> <span class="nav-text">开发服务器选项</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#server-host"><span class="nav-number">10.1.</span> <span class="nav-text">server.host</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#server-port"><span class="nav-number">10.2.</span> <span class="nav-text">server.port</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#server-https"><span class="nav-number">10.3.</span> <span class="nav-text">server.https</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#server-open"><span class="nav-number">10.4.</span> <span class="nav-text">server.open</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#server-proxy"><span class="nav-number">10.5.</span> <span class="nav-text">server.proxy</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9"><span class="nav-number">11.</span> <span class="nav-text">构建选项</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#build-target"><span class="nav-number">11.1.</span> <span class="nav-text">build.target#</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#build-outDir"><span class="nav-number">11.2.</span> <span class="nav-text">build.outDir</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#build-assetsDir"><span class="nav-number">11.3.</span> <span class="nav-text">build.assetsDir</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Binstar"
+      src="/hb-myblog.github.io/images/head.png">
+  <p class="site-author-name" itemprop="name">Binstar</p>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/hb-myblog.github.io/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/hb-myblog.github.io/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/hb-myblog.github.io/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Binstar</span>
+</div>
+  <div class="powered-by">
+
+  </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/hb-myblog.github.io/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/hb-myblog.github.io/js/utils.js"></script>
+
+<script src="/hb-myblog.github.io/js/motion.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/schemes/pisces.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/next-boot.js"></script>
+
+
+  <script defer src="/hb-myblog.github.io/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/hb-myblog.github.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
