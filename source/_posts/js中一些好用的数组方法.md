@@ -9,11 +9,11 @@ categories: javaScript
 
 **语法：**
 
-```
+```js
 array.some(function(currentValue,index,arr),thisValue)
 ```
 
-```
+```js
 //把10修改成20
 var ages = [5, 32, 7, 10, 33, 12, 40];
 ages.some(function (currentValue, index) {
@@ -43,11 +43,11 @@ console.log(ages);
 
 **语法：**
 
-```
+```js
 array.every(function(currentValue,index,arr), thisValue)
 ```
 
-```
+```js
 //判断每个元素的值是否都大于4
 var ages = [5, 32, 7, 10, 33, 12, 40];
 
@@ -76,7 +76,7 @@ console.log(every); //返回false
 
 **语法：**
 
-```
+```js
 array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 total：必需。初始值, 或者计算结束后的返回值。
 currentValue：	必需。当前元素
@@ -85,7 +85,7 @@ arr：可选。当前元素所属的数组对象。
 initialValue：可选。传递给函数的初始值
 ```
 
-```
+```js
 //计算所有元素的和
 var numbers = [15.5, 2.3, 1.1, 4.7];
 var res = numbers.reduce(function (total, currentValue) {
@@ -105,12 +105,12 @@ console.log(result);
 
 **语法：**
 
-```
+```js
 arr.includes(searchElement)
 arr.includes(searchElement, fromIndex)
 ```
 
-```
+```js
 [1, 2, 3].includes(2);     // true
 [1, 2, 3].includes(4);     // false
 [1, 2, 3].includes(3, 3);  // false

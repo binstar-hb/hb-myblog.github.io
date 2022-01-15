@@ -11,7 +11,7 @@ categories: css
 
 - 单侧投影的核心是第四个参数：扩张半径。这个参数会根据你指定的值去扩大或缩小投影尺寸，如果我们用一个负的扩张半径，而他的值刚好等于模糊半径，那么投影的尺寸就会与投影所属的元素尺寸完全一致，除非使用偏移量来移动他，否则我们将看不到任何投影。
 
-```
+```html
 <style>
 .left {
  box-shadow: -8px 0 5px -5px #333;
@@ -44,7 +44,7 @@ categories: css
   - S：Saturation(饱和度)。取值为：0.0% - 100.0%
   - L：Lightness(亮度)。取值为：0.0% - 100.0%
 
-```
+```css
 <style>
 @function blessing($color) {
  $val: 0px 0px $color;
@@ -73,7 +73,7 @@ div {
 - 借用了元素的两个伪元素
 - 通过渐变色填充两个伪元素，再通过位移、变换放置在合适的位置
 
-```
+```css
 <style>
 div {
  position: relative;
@@ -128,7 +128,7 @@ div::after {
 - 阴影实现缺点，单个标签最多只能是2个内切圆角
 - 径向渐变实现内切圆角可以是4边
 
-```
+```css
 <style>
 div {
  position: relative;

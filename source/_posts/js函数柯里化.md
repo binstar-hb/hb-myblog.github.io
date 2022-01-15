@@ -9,7 +9,7 @@ categories: javaScript
 
 &emsp;&emsp;如何实现add(1)(2)(3)(4)=10
 
-```
+```js
 function add(){
 	// 将传入的不定参数转为数组对象
 	var _args = Array.prototype.slice.call(arguments);

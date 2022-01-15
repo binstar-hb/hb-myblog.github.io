@@ -49,7 +49,7 @@ categories: javaScript
 
 **客户端**
 
-```
+```js
 <div class="btn">
     <input type="button" value="清空" onclick="reset()"/>
     <input type="button" value="发送" onclick="send()">
@@ -93,7 +93,7 @@ function reset(){
 
 **服务器端**
 
-```
+```java
 package action;
 
 import java.io.IOException;

@@ -29,7 +29,7 @@
 <meta property="og:description" content="&amp;emsp;&amp;emsp;函数柯里化，指的是将一个接受多个参数的函数，变为接受一个参数返回一个函数的固定形式，这样便于再次调用，例如f(1)(2)。 &amp;emsp;&amp;emsp;如何实现add(1)(2)(3)(4)&#x3D;10 1234567891011121314151617function add()&amp;#123;	&#x2F;&#x2F; 将传入的不定参数转为数组对象	var _args &#x3D; Array.prototype">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-12T14:05:48.000Z">
-<meta property="article:modified_time" content="2021-10-12T14:23:35.202Z">
+<meta property="article:modified_time" content="2022-01-14T12:44:41.701Z">
 <meta property="article:author" content="Binstar">
 <meta property="article:tag" content="js函数柯里化">
 <meta name="twitter:card" content="summary">
@@ -101,7 +101,7 @@
       <h1 class="site-title">Where there is a will, there is a way!</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
   </div>
 
   <div class="site-nav-right">
@@ -128,17 +128,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/hb-myblog.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">8</span></a>
+    <a href="/hb-myblog.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/hb-myblog.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/hb-myblog.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/hb-myblog.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">11</span></a>
+    <a href="/hb-myblog.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">13</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -201,7 +201,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/hb-myblog.github.io/images/head.png">
       <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="Tough times never last, but tough people do.">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -219,10 +219,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-12 22:05:48 / 修改时间：22:23:35" itemprop="dateCreated datePublished" datetime="2021-10-12T22:05:48+08:00">2021-10-12</time>
+              <time title="创建时间：2021-10-12 22:05:48" itemprop="dateCreated datePublished" datetime="2021-10-12T22:05:48+08:00">2021-10-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-14 20:44:41" itemprop="dateModified" datetime="2022-01-14T20:44:41+08:00">2022-01-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,7 +259,7 @@
       
         <p>&emsp;&emsp;函数柯里化，指的是将一个接受多个参数的函数，变为接受一个参数返回一个函数的固定形式，这样便于再次调用，例如f(1)(2)。</p>
 <p>&emsp;&emsp;如何实现add(1)(2)(3)(4)=10</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	// 将传入的不定参数转为数组对象</span><br><span class="line">	var _args = Array.prototype.slice.call(arguments);</span><br><span class="line">	var _adder = function()&#123;</span><br><span class="line">		_args.push(...arguments)</span><br><span class="line">		return _adder</span><br><span class="line">	&#125;</span><br><span class="line">	// toString隐形转换的特性</span><br><span class="line">	_adder.toString = function()&#123;</span><br><span class="line">		return _args.reduce((a,b) =&gt; &#123;</span><br><span class="line">			return a + b</span><br><span class="line">		&#125;, 0)</span><br><span class="line">	&#125;</span><br><span class="line">	return _adder</span><br><span class="line">&#125;</span><br><span class="line">console.log(add(1,2,3)) // 6</span><br><span class="line">console.log(add(1)(2)(3)) // 6</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 将传入的不定参数转为数组对象</span></span><br><span class="line">	<span class="keyword">var</span> _args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">	<span class="keyword">var</span> _adder = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		_args.push(...arguments)</span><br><span class="line">		<span class="keyword">return</span> _adder</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// toString隐形转换的特性</span></span><br><span class="line">	_adder.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> _args.reduce(<span class="function">(<span class="params">a,b</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> a + b</span><br><span class="line">		&#125;, <span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> _adder</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)) <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -373,27 +379,27 @@
     <img class="site-author-image" itemprop="image" alt="Binstar"
       src="/hb-myblog.github.io/images/head.png">
   <p class="site-author-name" itemprop="name">Binstar</p>
-  <div class="site-description" itemprop="description">Tough times never last, but tough people do.</div>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/hb-myblog.github.io/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/hb-myblog.github.io/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/hb-myblog.github.io/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -420,7 +426,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

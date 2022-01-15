@@ -7,7 +7,7 @@ categories: vue
 
 ##### Setter
 
-```
+```js
 var vm = new Vue({
  el: '#el',
  data: {
@@ -30,7 +30,7 @@ var vm = new Vue({
 
 表单控件的值可以绑定在vue实例的动态属性上
 
-```
+```html
 <input type="checkbox" v-model="checked" v-bind:true-value="a" v-bind:false-value="b">
 
 // 选中：vm.checked==vm.a
@@ -40,7 +40,7 @@ var vm = new Vue({
 
 ##### 内联样式绑定
 
-```
+```html
 <div v-bind:style="dada"></div>
 
 data: {
@@ -53,7 +53,7 @@ data: {
 
 数组语法：v-bind:style允许将多个样式对象绑定到统一元素上。
 
-```
+```html
 <div v-bind:style="[ styleObjectA, styleObjectB ]"></div>
 ```
 
@@ -61,13 +61,13 @@ data: {
 
 v-for 内置了 $index 变量，输出当前数组元素的索引，也可以自己指定索引的别名。
 
-```
+```html
 <li v-for="(index,item) in items">{{index}} – {{$index}} – {{item.title}}</li>
 ```
 
 在vue.js中提供了$set方法，修改数据的同时进行试图更新。
 
-```
+```js
 this.$set('item[0]', {title: 'da'})
 
 this.$set( target, key, value )
@@ -75,7 +75,7 @@ this.$set( target, key, value )
 
 ##### 内置指令
 
-```
+```js
 v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mustache标签，用来减少编译时间
 ```
 
@@ -99,7 +99,7 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
 
 ​		相对于 v-for 的 key， v-if/v-else-if/v-else 中的 key 相对简单，我们可以直接写入固定的字符串或者数组即可
 
-```
+```html
   <transition>
     <button 
       v-if="isEditing"
@@ -116,7 +116,7 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
   </transition>
 ```
 
-```
+```css
 .v-enter-active, .v-leave-active {
   transition: all 1s;
 }
@@ -139,7 +139,7 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
 
 ​		原因是 v-for 的 优先级高于 v-if，所以当它们使用再同一个标签上时，每一个渲染都会先循环再进行条件判断
 
-```
+```html
 <ul>
   <li v-for="user in users" v-if="user.active">
     {{ user.name }}
@@ -149,7 +149,7 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
 
 ​		我们应该尽量将 v-if 移动到上级 或者 使用 计算属性来处理数据
 
-```
+```html
 <ul v-if="active">
   <li v-for="user in users">
     {{ user.name }}
@@ -161,7 +161,7 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
 
 ​		如果我想要判断遍历对象里面每一项的内容来选择渲染的数据的话，可以使用 computed 来对遍历对象进行过滤
 
-```
+```vue
 // js
 let usersActive = computed(()=>users.filter(user => user.active))
 
@@ -177,7 +177,7 @@ let usersActive = computed(()=>users.filter(user => user.active))
 
 ​		computed 大家后很熟悉， 它会在其表达式中依赖的响应式数据发送变化时重新计算。如果我们在一个计算属性中书写了比较复杂的表达式，那么其依赖的响应式数据也任意变得更多。当其中任何一个依赖项变化时整个表达式都需要重新计算
 
-```
+```js
 let price = computed(()=>{
   let basePrice = manufactureCost / (1 - profitMargin)
   return (
@@ -189,7 +189,7 @@ let price = computed(()=>{
 
 ​		当 manufactureCost、profitMargin、discountPercent 中任何一个变化时都会重新计算整个 price。
 
-```
+```js
 let basePrice = computed(() => manufactureCost / (1 - profitMargin))
 let discount = computed(() => basePrice * (discountPercent || 0))
 let finalPrice = computed(() => basePrice - discount)
@@ -201,7 +201,7 @@ let finalPrice = computed(() => basePrice - discount)
 
 优化前
 
-```
+```vue
 <template> 
     <div class="cell"> 
         <div v-if="value" class="on"></div> 
@@ -218,7 +218,7 @@ export default {
 
 优化后
 
-```
+```vue
 <template functional> 
     <div class="cell"> 
         <div v-if="props.value" class="on"></div> 
@@ -238,7 +238,7 @@ export default {
 
 ##### 采用合理的数据处理算法
 
-```
+```js
 /**
  * 数组转树形结构,时间复杂度O(n)
  * @param list 数组

@@ -41,7 +41,7 @@ categories: javaScript
 
 **语法：**
 
-```
+```js
 async function 函数名() {
 	await XXX;
 }
@@ -49,7 +49,7 @@ async function 函数名() {
 
 **示例代码：**
 
-```
+```js
 function testAsync() {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() {
@@ -95,7 +95,7 @@ console.log(test());
 
 &emsp;&emsp;再升级一下，在上面的基础上再加入两个普通函数：
 
-```
+```js
 function fun1() {
 	return '函数1'
 }
@@ -131,7 +131,7 @@ function fun3() {
 
 &emsp;&emsp;await后面的函数是有可能出现异常的，所以最好把await命令放在try...catch代码块中。如果await后是Promise对象，也可以使用.catch进行捕获。
 
-```
+```js
  // 第一种写法
  async function myFunction() {
    try {

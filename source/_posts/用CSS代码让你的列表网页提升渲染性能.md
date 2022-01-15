@@ -15,7 +15,7 @@ categories: css
 
 ##### 代码：
 
-```
+```html
     <div class="card"></div>
     <div class="card"></div>
     <!-- ... -->
@@ -26,7 +26,7 @@ categories: css
 
 
 
-```
+```css
  .card {
     position: relative;
     overflow: hidden;
@@ -45,7 +45,7 @@ categories: css
 
 ##### 解决方法：
 
-​&emsp;&emsp;如果在已知元素高度的情况下，可以使用contains-intrinsic-size属性，为上面的card添加：contains-intrinsic-size：312px;，这会给内容附一个初始高度值。（如果高度不固定也可以附一个大致的初始高度值，会使滚动条问题相对减少）。
+&emsp;&emsp;如果在已知元素高度的情况下，可以使用contains-intrinsic-size属性，为上面的card添加：contains-intrinsic-size：312px;，这会给内容附一个初始高度值。（如果高度不固定也可以附一个大致的初始高度值，会使滚动条问题相对减少）。
 
 ##### 总结：
 

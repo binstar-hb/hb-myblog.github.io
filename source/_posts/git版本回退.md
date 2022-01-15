@@ -20,7 +20,7 @@ categories: git
 
 执行如下命令
 
-```
+```js
 git reset --hard a0fvf8
 ```
 
@@ -30,7 +30,7 @@ git reset --hard a0fvf8
 
 此时，远程仓库的指针依然在D提交上。直接push的话，无法将更改推送到远程仓库，只能使用-f强推到远程仓库：
 
-```
+```js
 git push -f
 ```
 
@@ -42,7 +42,7 @@ git push -f
 
 用git revert 来实现上述例子的话可以先revert D，再revert C（由新到旧依次revert）
 
-```
+```js
 git revert 5lk4er
 git revert 76sdeb
 ```
@@ -51,7 +51,7 @@ git revert 76sdeb
 
 如果回退的数量较大，一个个回退容易出错，可以使用以下方法进行批量回退
 
-```
+```js
 git revert OLDER_COMMIT^..NEWER_COMMIT
 ```
 
