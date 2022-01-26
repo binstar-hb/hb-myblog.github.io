@@ -119,7 +119,7 @@ let unusable1: void = null;
 var num1: number = unusable; // 报错
 var num2: number = unusable1; // 报错
 
-let un: undefined = undefined; 
+let un: undefined = undefined;
 var num3: number = un; // 不报错
 ```
 
@@ -140,7 +140,7 @@ var num3: number = un; // 不报错
 ```typescript
 class Person {
   constructor(){
-    
+
   }
 }
 
@@ -448,7 +448,7 @@ class Person<T> {
   reduce(index: number) {
     this.list.splice(index, 1)
   }
-  
+
   getList(): T[]{
     return this.list
   }
@@ -509,3 +509,360 @@ val3(Object.create(null))
 ##### 总结
 
 - 泛型接口可以看成是一个动态的类型，这种类型只能通过我们在最终的调用的时候去来确定它，作用就是可以避免代码冗余
+
+### 装饰器
+
+#### 基于webpack4.x从0开始搭建ts的开发环境
+
+webpack4.x已经问世好久了，0配置是一大亮点，but，在配置ts的开发环境时，才明白这就只是一个噱头而已。下我们一步步的来搭建我们的项目吧
+
+##### 一、创建工程目录和基本目录
+
+> mkdir ts<br>cd ts
+
+初始化项目目录后，我们需要初始化我们的项目配置文件package.json文件。我们在ts目录下运行
+
+> npm init -y
+
+后会生成一个默认的package.json配置文件。
+
+接下来，我们创建ts的配置文件，tsconfig.json，我们运行
+
+> tsc --init
+
+即可，在package.json相同目录会生成一个tsconfig.json文件，这里面默认是对ts的基本配置。
+
+两个配置文件完成了以后，我们创建一个src目录
+
+> mkdir src<br>cd src
+
+这里创建了ts的工程目录，以及webpack4.x默认的目录src,在src中，我们创建一个**index.ts**文件，注意这里是**.ts**文件哦，它将将是我们的程序的主入口文件
+
+##### 二、安装依赖和基本配置
+
+我们要编译ts，我们需要在当前目录下安装typescript 、ts-loader和webpack
+
+> cnpm install typescript ts-loader webpack -D
+
+安装完成后，我们还不能直接运行webpack命令，因为webpack默认会去找src下的index.js文件为入口文件，而我们创建的是ts文件，并且我们需要手动配置我们的ts-loader
+
+创建webpack.config.js文件。
+
+手动指定我们的入口文件
+
+> entry : './src/index.ts'
+
+同时，我们需要将.ts结尾的文件通过ts-loader来处理它。我们需要在module下配置ts的编译配置，如下：
+
+```js
+module.exports = {
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  }
+}
+```
+
+到这里，我们的开发环境就配置好了，接下来我们来打包看下效果
+
+```ts
+function hello(): void {
+  console.log('hello typescript...');
+}
+hello()
+```
+
+```shell
+// ts
+webpack --mode development
+// cd dist
+node .\main.js
+```
+
+##### 三、ts中的装饰器的基本使用
+
+环境配置完后以后，我们再来看看ts中的装饰器。先来看下什么是装饰器？
+
+顾名思义，装饰器就是用来修饰其它的事物的。
+
+在ts中，装饰器就是函数,它可以用来装饰类。类的属性，方法以及方法的参数等。这样说好像有点抽象，没关系，我先来举个栗子
+
+我们先来申明一个装饰器。
+
+```ts
+// 申明一个装饰器
+function say(target:any):void {
+  console.log(target);
+}
+
+@say
+class Person {
+  constructor() {
+
+  }
+}
+new Person();
+```
+
+```powershell
+// ts
+webpack --mode development
+// cd dist
+node .\main.js
+```
+
+**这里要注意的是ts中默认不支持装饰器的语法解析，我们需要手动更新其配置文件tsconfigs.json**
+
+**我们需要将experimentalDecorators设置为true,默认被注释掉了，只需要将注释去掉即可。**
+
+申明了一个say的装饰器，然后我将它修饰在一个类上面，注意，我们通过 **@+装饰器名** 直接加在类的前面即可。最后在执行的时候，我们打印了装饰器中的第一个参数target。结果是[Function Person]
+
+说明了，当前的装饰器中的第一个参数target 就是我们的要修饰的类对象。
+
+##### 四、装饰器传参和应用
+
+要想让装饰器能够传参，我们在定义装饰器的时候，内部必须是返回一个函数。像这样
+
+```ts
+function Say(name: any): Function {
+  // 这里的name就是来接收装饰器传过来的实参
+  return function (target:any):void {
+    // target是我们的要修饰的对象。这里是类
+    target.prototype.name = name
+  }
+}
+
+// 调用
+@Say('hell0 ts')
+class Person {
+  constructor() {
+
+  }
+}
+
+var p: any = new Person();
+
+console.log(p.name);
+
+```
+
+注意，这里调用的时候我们传入了hello ts 参数，我们在装饰器函数内部可以接收到这个函数。传参的目的达到了。
+
+我们在Person类中并没有定义name属性，我们接下来打印一下最终的结果
+
+```shell
+// ts
+webpack --mode development
+// cd dist
+node .\main.js
+// hello ts
+```
+
+从执行结果可以看出来，最终打印出来了 hello ts , 它是我们通过装饰器传入的，在装饰器内部，我们给类的原型对象上添加了一个name属性，并且赋值为我们传入的参数 。
+
+**也就是说：我们可以不改变类的内部代码逻辑，通过装饰器可能实现动态修改类的内部逻辑**
+
+**同样的道理，我们也可以在装饰器中去重写类的方法成员**
+
+##### 五、属性装饰器
+
+和类的装饰器一样，通过函数的方式去申明，只不过我们需要将装饰器加在对应的属性上面
+
+```typescript
+function logProperty(params:any) {
+  return function (target:any, attr:any) {
+    console.log(params, target, attr);
+
+    target[attr] = params
+  }
+}
+
+class Person {
+  @logProperty('我是属性装饰器')
+  public name: any;
+  constructor() {
+
+  }
+}
+```
+
+```powershell
+// ts
+webpack --mode development
+// cd dist
+node .\main.js
+// 我是属性装饰器 Person{} name
+```
+
+- params是我们动态传入的装饰器的参数
+- target是我们修饰的属性对象
+- attr是我们要修饰的属性名
+
+最后我们可以通过
+
+```
+target[attr] = params;
+```
+
+来改变类的属性值
+
+```
+let p1 = new Person();
+
+console.log('p1.name =>', p1.name)
+```
+
+```shell
+node .\main.js
+// p1.name => 我是属性装饰器
+```
+
+可以看到我们已经通过装饰器修改了类的属性。
+
+##### 总结：
+
+1. 如何从0-1配置webpack编译ts的项目
+2. ts中的使用装饰器需要修改默认配置
+3. 类装饰器和属性装饰器的基本用法和传参
+
+#### 类及其高级应用
+
+##### 在ES中的类的基本使用
+
+在ES6之前，前端开发者想要使用面向对象编程，不得不用function 来模拟类，然后通过原型prototype去编写类的方法。
+
+自从ES6出现了，我们终于可以像后端php,java,python他们那样通过class关键字来定义类了。
+
+##### ts中的类
+
+###### 一、类的方法和属性成员私有化
+
+我们在ES6中定义的类的属性和方法默认都是公共的，也就是说，实例化类的对象可以访问到类的所有的属性和方法。
+
+从某种意义上来说，js中的类和java，C#中的类还有是一些差距的，好在typescript完美的帮我们解决了这个问题。
+
+在typescript中，我们可以使用private 和public关键字来定义类的方法和属性成员。像这样
+
+![image-20220117222259860.png](https://ae04.alicdn.com/kf/Haca096d0537643899f22a630408e38a2D.png)
+
+我们实例化一个Person类的时候，然后通过类的对象去访问类的私有属性时，ts的语法已经通不过了。提示信息已经说的很清楚。
+
+###### 二、类的属性的存取器（getter,setter）
+
+了解过java和C#的都知道，在类中可以给属性添加get和set方法，当我们获取和设置属性的时候，可以触发对应的方法。
+
+那么刁的功能，typescript肯定也不能落下。于是它也搞了一个出来，我们来看下它怎么用
+
+```typescript
+class Person {
+  //private定义私有变量
+  private _age: number = 18;
+
+  //public定义公共变量
+  public name: string;
+
+  get age(): number{
+    console.log('getter trigger');
+    return this._age
+  }
+  set age(age: number) {
+    console.log('setter trigger');
+    this._age = age
+  }
+  constructor(name:string) {
+    this.name = name
+  }
+}
+
+var p = new Person('asd')
+
+console.log(p.age);
+
+p.age = 20;
+
+
+```
+
+```shell
+tsc .\class.ts
+// error: Accesscrs are only available when targeting ECMAScript 5 and highter.
+```
+
+这是因为默认ts会将它编译成es3，这里我们在编译的时候需要指定一下target参数。我们需要这样去编译
+
+```shell
+tsc .\class.ts --target es5
+node .\class.js
+// getter trigger
+// 18
+// setter trigger
+```
+
+可以看到，当我们获取和设置了age 属性的时候，对应的get和set方法都被触发了
+
+一看到这个get和set,很容易联想到vue的数据劫持也有一个get 和set方法，功能类似，我们不妨去看看ts编译后的代码吧
+
+```js
+var Person = /** @class */(function () {
+  function Person(name) {
+    // private定义私有变量
+    this._age = 18;
+    this.name = name;
+  }
+  Object.defineProperty(Person.prototype, "age", {
+    get: function () {
+      console.log('getter trigger');
+      return this._age;
+    },
+    set: function () {
+      console.log('setter trigger');
+      this._age = age;
+    },
+    enumerable: true,
+    configurable: true
+  })
+  return Person;
+}());
+var p = new Person('asd');
+console.log(p.age);
+p.age = 20;
+```
+
+看到这段代码，熟悉vue原理的都能明白，它就是这么干的。
+
+不得不说typescript 厉害呀
+
+##### 泛型类
+
+前面我说到了泛型的基本用法，普通的ts约束只能限制变量为某一种类型，而这种往往不能满足一些特有的需求，还好有泛型来救场
+
+泛型类的定义，我们只需要在类名后加了泛型即可，像这样
+
+![image.png](https://ae01.alicdn.com/kf/H8d63c82ee9f84676b471b69d15f9202f5.png)
+
+我们定义了一个泛型类，并且在实例化的时候指定类型为number 当我们add 一个字符串的时候，编辑器已经给我们详细的提示了。
+
+##### 总结：
+
+- typescript针对es6中的类做了一些功能增强。
+
+- typescript中的class 中的get 和set的使用，内部原理其实就是使用的ES5的Object.defineProperty来实现的。
+
+- 泛型类的基本使用
+
+
+
+
+typescript专题
+转自[typescript专题(一)](https://www.toutiao.com/a6734282037391262219/?log_from=79f8b2c28766f_1642469215977)
+转自[typescript专题(二)](https://www.toutiao.com/a6734666550055272974/?log_from=3291dd28b3e37_1642469256902)
+转自[typescript专题(三)](https://www.toutiao.com/a6735052568625414668/?log_from=843a83fa29522_1642469295110)
+转自[typescript专题(四)](https://www.toutiao.com/a6741709889225097736/?log_from=915ba51bb4fbb_1642469306454)
+转自[typescript专题(五)](https://www.toutiao.com/a6745703806786339335/?log_from=334669fbee1f_1642469318246)
+转自[typescript专题(六)](https://www.toutiao.com/a6746469903143797259/?log_from=dfbaf4a9eac3d_1642469328989)

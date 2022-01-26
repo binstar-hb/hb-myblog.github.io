@@ -1,16 +1,21 @@
-interface IPrint<T>{
-  (val:T):T
+class Person<T> {
+  // 定义一个泛型数组
+  public list: T[] = [];
+
+  add(val: T) {
+    this.list.push(val);
+    return this;
+  }
+  delete(index: number) {
+    this.list.splice(index, 1);
+    return this;
+  }
 }
 
-var getData<T>(val:T) :T{
-  return val;
-}
+var p1 = new Person<number>();
+p1.add(1);
 
-var val1: IPrint<string> = getData;
-val1('123')
 
-var val2: IPrint<number> = getData;
-val2(NaN)
 
-var val3: IPrint<object> = getData;
-val3(Object.create(null))
+
+p1.add('2')
