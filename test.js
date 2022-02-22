@@ -1,23 +1,20 @@
-var Person = /** @class */(function () {
-  function Person(name) {
-    // private定义私有变量
-    this._age = 18;
-    this.name = name;
+module.exports = {
+  plugins: {
+    autoprefixer: {
+      overrideBrowserslist: [
+        "Android 4.1",
+        "iOS 7.1",
+        "Chrome > 31",
+        "ff > 31",
+        "ie >= 8",
+        "last 10 versions", // 所有主流浏览器最近10版本用
+      ],
+      grid: true,
+    },
+    'postcss-pxtorem': {
+      rootValue: 37.5,
+      propList: ['*'],
+      unitPrecision: 5
+    }
   }
-  Object.defineProperty(Person.prototype, "age", {
-    get: function () {
-      console.log('getter trigger');
-      return this._age;
-    },
-    set: function () {
-      console.log('setter trigger');
-      this._age = age;
-    },
-    enumerable: true,
-    configurable: true
-  })
-  return Person;
-}());
-var p = new Person('asd');
-console.log(p.age);
-p.age = 20;
+}
