@@ -101,14 +101,14 @@ v-pre指令，表示跳过编译这个元素和子元素，显示原始的{{}}Mu
 
 ```html
   <transition>
-    <button 
+    <button
       v-if="isEditing"
       v-on:click="isEditing = false"
     >
       Save
     </button>
-    <button 
-      v-else 
+    <button
+      v-else
       v-on:click="isEditing = true"
     >
       Edit
@@ -202,82 +202,38 @@ let finalPrice = computed(() => basePrice - discount)
 优化前
 
 ```vue
-<template> 
-    <div class="cell"> 
-        <div v-if="value" class="on"></div> 
-        <section v-else class="off"></section> 
-    </div> 
-</template> 
+<template>
+    <div class="cell">
+        <div v-if="value" class="on"></div>
+        <section v-else class="off"></section>
+    </div>
+</template>
 
-<script> 
-export default { 
-    props: ['value'], 
-} 
+<script>
+export default {
+    props: ['value'],
+}
 </script>
 ```
 
 优化后
 
 ```vue
-<template functional> 
-    <div class="cell"> 
-        <div v-if="props.value" class="on"></div> 
-        <section v-else class="off"></section> 
-    </div> 
-</template> 
+<template functional>
+    <div class="cell">
+        <div v-if="props.value" class="on"></div>
+        <section v-else class="off"></section>
+    </div>
+</template>
 
-<script> 
-export default { 
-    props: ['value'], 
-} 
+<script>
+export default {
+    props: ['value'],
+}
 </script>
 ```
 
 - 没有this（没有实例）
 - 没有响应式数据
 
-##### 采用合理的数据处理算法
-
-```js
-/**
- * 数组转树形结构,时间复杂度O(n)
- * @param list 数组
- * @param idKey 元素id键
- * @param parIdKey 元素父id键
- * @param parId 第一级根节点的父id值
- * @return {[]}
- */
- function listToTree (list,idKey,parIdKey,parId) {
-    let map = {};
-    let result = [];
-    let len = list.length;
-
-    // 构建map
-    for (let i = 0; i < len; i++) {
-        //将数组中数据转为键值对结构 (这里的数组和obj会相互引用，这是算法实现的重点)
-        map[list[i][idKey]] = list[i];
-    }
-
-    // 构建树形数组
-    for(let i=0; i < len; i++) {
-        let itemParId = list[i][parIdKey];
-        // 顶级节点
-        if(itemParId === parId) {
-            result.push(list[i]);
-            continue;
-        }
-        // 孤儿节点，舍弃(不存在其父节点)
-        if(!map[itemParId]){
-            continue;
-        }
-        // 将当前节点插入到父节点的children中（由于是引用数据类型，obj中对于节点变化，result中对应节点会跟着变化）
-        if(map[itemParId].children) {
-            map[itemParId].children.push(list[i]);
-        } else {
-            map[itemParId].children = [list[i]];
-        }
-    }
-    return result;
-}
-```
 

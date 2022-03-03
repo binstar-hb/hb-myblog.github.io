@@ -13,7 +13,8 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://binstar-hb.github.io/hb-myblog.github.io #绑定域名
+# url: https://binstar-hb.github.io/hb-myblog.github.io #绑定域名
+url: http:hb12321xx.top #绑定域名
 root: /hb-myblog.github.io/ #默认根路径，指向实际的source
 permalink: :year/:month/:day/:title/
 permalink_defaults:

@@ -28,3 +28,38 @@ lodash.js是一个简单实用模块化、高性能的 JavaScript 实用工具�
 ```shell
 $ npm i --save lodash
 ```
+
+#### FileSaver.js
+
+FileSaver.js 是一个在客户端保存文件的一个js库，Api简单易用，非常适合需要生成文件，或者保存不应该发送到外部服务器的敏感信息的 web App。
+
+```sh
+npm install file-saver --save
+```
+
+##### 使用
+
+```js
+// 引入
+import { saveAs } from 'file-saver'
+
+// 保存文本
+// 生成blob文本
+const blob = new Blob(["您好!"], {type: "text/plain;charset=utf-8"});
+// 第二个参数指定保存的文件名
+saveAs(blob, "hello.txt");
+
+// 保存文件流(url链接)
+// 比如后台传过来的文件流
+saveAs("https://httpbin.org/image", "image.jpg");
+
+// 把canvas保存成一个图片
+const canvas = document.getElementById("myCanvas");
+canvas.toBlob(function(blob) {
+    saveAs(blob, "image.png");
+});
+
+// 保存纯文件
+const file = new File(["您好!"], "hello.txt", {type: "text/plain;charset=utf-8"});
+saveAs(file);
+```
