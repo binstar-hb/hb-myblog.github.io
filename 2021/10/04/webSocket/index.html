@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/hb-myblog.github.io/images/favicon-more.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="mask-icon" href="/hb-myblog.github.io/images/favicon-more.png" color="#222">
+
+<link rel="stylesheet" href="/hb-myblog.github.io/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/hb-myblog.github.io/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binstar-hb.github.io","root":"/hb-myblog.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="websocket是什么WebSocket 是一种在单个TCP连接上进行全双工通信的协议。WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。 在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接， 并进行双向数据传输。（维基百科） WebSocket 本质上一种计算机网络应用层的协议，用来弥补 ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webSocket">
+<meta property="og:url" content="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/04/webSocket/index.html">
+<meta property="og:site_name" content="Where there is a will, there is a way!">
+<meta property="og:description" content="websocket是什么WebSocket 是一种在单个TCP连接上进行全双工通信的协议。WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。 在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接， 并进行双向数据传输。（维基百科） WebSocket 本质上一种计算机网络应用层的协议，用来弥补 ht">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/7b1dae8c025e4ed3a5006000f0f8722c.png?from=pc">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/45f75f823c203613.png">
+<meta property="og:image" content="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/24b5143d012e4234aa0f0ade3da44c16.png?from=pc">
+<meta property="og:image" content="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/24b1bbe39dcf428196f25c31500354a2.png?from=pc">
+<meta property="article:published_time" content="2021-10-04T07:37:44.000Z">
+<meta property="article:modified_time" content="2022-02-15T09:19:36.523Z">
+<meta property="article:author" content="Binstar">
+<meta property="article:tag" content="webSocket">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/7b1dae8c025e4ed3a5006000f0f8722c.png?from=pc">
+
+<link rel="canonical" href="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/04/webSocket/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>webSocket | Where there is a will, there is a way!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/hb-myblog.github.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Where there is a will, there is a way!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/hb-myblog.github.io/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/hb-myblog.github.io/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/hb-myblog.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/hb-myblog.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/hb-myblog.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/04/webSocket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hb-myblog.github.io/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title
+        " itemprop="name headline">
+          webSocket
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-04 15:37:44" itemprop="dateCreated datePublished" datetime="2021-10-04T15:37:44+08:00">2021-10-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-15 17:19:36" itemprop="dateModified" datetime="2022-02-15T17:19:36+08:00">2022-02-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hb-myblog.github.io/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h5 id="websocket是什么"><a href="#websocket是什么" class="headerlink" title="websocket是什么"></a>websocket是什么</h5><p>WebSocket 是一种在单个TCP连接上进行全双工通信的协议。WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。</p>
+<p>在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接， 并进行双向数据传输。（维基百科）</p>
+<p>WebSocket 本质上一种计算机网络应用层的协议，用来弥补 http 协议在持久通信能力上的不足。</p>
+<p>WebSocket 协议在2008年诞生，2011年成为国际标准。现在最新版本浏览器都已经支持了。</p>
+<p>它的最大特点就是，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。</p>
+<p>WebSocket 的其他特点包括：</p>
+<ul>
+<li>（1）建立在 TCP 协议之上，服务器端的实现比较容易。</li>
+<li>（2）与 HTTP 协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。</li>
+<li>（3）数据格式比较轻量，性能开销小，通信高效。</li>
+<li>（4）可以发送文本，也可以发送二进制数据。</li>
+<li>（5）没有同源限制，客户端可以与任意服务器通信。</li>
+<li>（6）协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws://example.com:80/some/path</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/7b1dae8c025e4ed3a5006000f0f8722c.png?from=pc" alt="一文吃透 WebSocket 原理"></p>
+<p>&emsp;&emsp;服务器给客户端发送一个主动的消息技术。比如登录一个网页，在我们打开一个浏览器，在浏览器去请求一个网页的时候，会请求一个二维码，放到浏览器端，用手机微信去扫描的时候，微信手机端会把扫描的结果推送到微信的服务器，微信的服务器会将消息推送到第三方的另一个服务器，地三方服务器会主动推送一条消息到浏览器前端，第三方服务器主动推送消息的地方用到的技术就是websocket，也就是由服务器主动推送消息到浏览器，这就是websocket。</p>
+<p>&emsp;&emsp;这个时候有一个疑惑，为什么不使用http呢？http首先带有协议头和协议body，协议头比较大，如果只推送几个字节或十几个字节的情况下，会产生大量的response，大部分都是无用的消息，利用率不高。又为什么不用裸TCP呢？TCP是一个传输层的协议，对于使用浏览器的版本和其他的版本，并没有做到协议上的鉴定。</p>
+<h5 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h5><p>&emsp;&emsp;广播和收听</p>
+<img src="https://i.bmp.ovh/imgs/2021/10/45f75f823c203613.png" style="zoom: 67%;">
+
+<h5 id="为什么需要websocket协议"><a href="#为什么需要websocket协议" class="headerlink" title="为什么需要websocket协议"></a>为什么需要websocket协议</h5><p>　　因为 HTTP 协议有一个缺陷：通信只能先由客户端发起，然后服务器再作出响应，并不能由服务器主动向客户端推送消息。<br>　　WebSocket 协议最大的特点是，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息。</p>
+<p>举例来说，我们想了解查询今天的天气实时数据，只能是客户端向服务器发出请求，服务器返回查询结果。HTTP 协议做不到服务器主动向客户端推送信息。</p>
+<p>这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。我们只能使用”轮询”：每隔一段时候，就发出一个询问，了解服务器有没有新的信息。最典型的场景就是聊天室。轮询的效率低，非常浪费资源（因为必须不停连接，或者 HTTP 连接始终打开）。</p>
+<p>在 WebSocket 协议出现以前，创建一个和服务端进双通道通信的 web 应用，需要依赖HTTP协议，进行不停的轮询，这会导致一些问题：</p>
+<ul>
+<li>服务端被迫维持来自每个客户端的大量不同的连接</li>
+<li>大量的轮询请求会造成高开销，比如会带上多余的header，造成了无用的数据传输。</li>
+</ul>
+<p>http 协议本身是没有持久通信能力的，但是我们在实际的应用中，是很需要这种能力的，所以，为了解决这些问题，WebSocket 协议由此而生，于2011年被IETF定为标准RFC6455，并被RFC7936所补充规范。并且在 HTML5 标准中增加了有关 WebSocket 协议的相关 api ，所以只要实现了 HTML5 标准的客户端，就可以与支持 WebSocket 协议的服务器进行全双工的持久通信了。</p>
+<h5 id="WebSocket-与-HTTP-的区别"><a href="#WebSocket-与-HTTP-的区别" class="headerlink" title="WebSocket 与 HTTP 的区别"></a>WebSocket 与 HTTP 的区别</h5><p><img src="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/24b5143d012e4234aa0f0ade3da44c16.png?from=pc" alt="一文吃透 WebSocket 原理"></p>
+<ul>
+<li><strong>相同点：</strong> 都是一样基于TCP的，都是可靠性传输协议。都是应用层协议。</li>
+<li><strong>联系：</strong> WebSocket在建立握手时，数据是通过HTTP传输的。但是建立之后，在真正传输时候是不需要HTTP协议的。</li>
+</ul>
+<p>下面一张图说明了 HTTP 与 WebSocket 的主要区别：</p>
+<p><img src="https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/24b1bbe39dcf428196f25c31500354a2.png?from=pc" alt="一文吃透 WebSocket 原理"></p>
+<p>不同点：</p>
+<ul>
+<li>1、 WebSocket 是双向通信协议，模拟 Socket 协议，可以双向发送或接受信息，而 HTTP 是单向的；</li>
+<li>2、 WebSocket 是需要浏览器和服务器握手进行建立连接的，而 http 是浏览器发起向服务器的连接。</li>
+<li>3、 虽然 HTTP/2 也具备服务器推送功能，但 HTTP/2 只能推送静态资源，无法推送指定的信息。</li>
+</ul>
+<h5 id="WebSocket协议的原理"><a href="#WebSocket协议的原理" class="headerlink" title="WebSocket协议的原理"></a>WebSocket协议的原理</h5><p>与http协议一样， WebSocket 协议也需要通过已建立的TCP连接来传输数据。具体实现上是通过http协议建立通道，然后在此基础上用真正 WebSocket 协议进行通信，所以WebSocket协议和http协议是有一定的交叉关系的。首先， WebSocket 是一个持久化的协议，相对于 HTTP 这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的 PHP 生命周期来解释。</p>
+<p>HTTP 的生命周期通过 Request 来界定，也就是一个 Request 一个 Response ，那么在 HTTP1.0 中，这次 HTTP 请求就结束了。</p>
+<p>在 HTTP1.1 中进行了改进，使得有一个 keep-alive，也就是说，在一个 HTTP 连接中，可以发送多个 Request，接收多个 Response。但是请记住 Request = Response， 在 HTTP 中永远是这样，也就是说一个 Request 只能有一个 Response。而且这个 Response 也是被动的，不能主动发起。首先 WebSocket 是基于 HTTP 协议的，或者说借用了 HTTP 协议来完成一部分握手。</p>
+<p>首先我们来看个典型的 WebSocket 握手</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br><span class="line">Origin: http://example.com  </span><br></pre></td></tr></table></figure>
+
+<p>熟悉 HTTP 的童鞋可能发现了，这段类似 HTTP 协议的握手请求中，多了这么几个东西。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+
+<p>这个就是 WebSocket 的核心了，告诉 Apache 、 Nginx 等服务器：注意啦，我发起的请求要用 WebSocket 协议，快点帮我找到对应的助理处理~而不是那个老土的 HTTP 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先， Sec-WebSocket-Key 是一个 Base64 encode 的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠我，我要验证你是不是真的是 WebSocket 助理。</li>
+<li>然后， Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同 URL 下，不同的服务所需要的协议。简单理解：今晚我要服务A，别搞错啦~</li>
+<li>最后， Sec-WebSocket-Version 是告诉服务器所使用的 WebSocket Draft （协议版本），在最初的时候，WebSocket 协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，什么 Firefox 和 Chrome 用的不是一个版本之类的，当初 WebSocket 协议太多可是一个大难题。。不过现在还好，已经定下来啦~大家都使用同一个版本：服务员，我要的是13岁的噢→_→ 然后服务器会返回下列东西，表示已经接受到请求， 成功建立 WebSocket 啦！</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
+
+<p>这里开始就是 HTTP 最后负责的区域了，告诉客户，我已经成功切换协议啦~</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+
+<p>依然是固定的，告诉客户端即将升级的是 WebSocket 协议，而不是 mozillasocket ，lurnarsocket 或者 shitsocket。</p>
+<p>然后， Sec-WebSocket-Accept 这个则是经过服务器确认，并且加密过后的 Sec-WebSocket-Key。服务器：好啦好啦，知道啦，给你看我的 ID CARD 来证明行了吧。后面的， Sec-WebSocket-Protocol 则是表示最终使用的协议。至此，HTTP 已经完成它所有工作了，接下来就是完全按照 WebSocket 协议进行了。总结， WebSocket 连接的过程是：</p>
+<ul>
+<li>首先，客户端发起http请求，经过3次握手后，建立起TCP连接；http 请求里存放 WebSocket 支持的版本号等信息，如：Upgrade、Connection、WebSocket-Version等；</li>
+<li>然后，服务器收到客户端的握手请求后，同样采用HTTP协议回馈数据；</li>
+<li>最后，客户端收到连接成功的消息后，开始借助于TCP传输信道进行全双工通信。</li>
+</ul>
+<h5 id="什么场景下用websocket"><a href="#什么场景下用websocket" class="headerlink" title="什么场景下用websocket"></a>什么场景下用websocket</h5><ol>
+<li>websocket社交订阅</li>
+<li>websocket多玩家游戏</li>
+<li>websocket协同编辑/编程</li>
+<li>websocket收集点击流数据</li>
+<li>股票基金报价</li>
+<li>体育实况更新</li>
+<li>多媒体聊天</li>
+<li>基于位置的应用</li>
+<li>在线教育</li>
+<li>论坛的消息广播</li>
+<li>弹幕、客服等等</li>
+</ol>
+<h5 id="怎么使用websocket"><a href="#怎么使用websocket" class="headerlink" title="怎么使用websocket"></a>怎么使用websocket</h5><p>服务器端：…</p>
+<p>客户端：浏览器原生对象websocket（功能较少）、第三方 socket.io</p>
+<ol>
+<li>启动服务器</li>
+<li>启动客户端程序连接服务器（<strong>永久</strong>连接）</li>
+<li>服务器为每个客户创建专用对象（负责当前客户消息的收发）</li>
+<li>客户端可以向服务器发消息、服务器向所有客户发送广播消息（每个客户接收消息）</li>
+</ol>
+<p><strong>客户端</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;清空&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;reset()&quot;</span>/&gt;</span></span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;发送&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;send()&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">&#x27;ws://127.0.0.1:80/websocket/ws&#x27;</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//创建Socket </span></span><br><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">    <span class="comment">//向服务器发送数据</span></span><br><span class="line">    <span class="comment">//socket.send(&#x27;哈哈哈哈&#x27;); </span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收数据事件</span></span><br><span class="line">    socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    body.innerHTML+=<span class="string">&quot;&lt;br/&gt;对方：&quot;</span>+event.data;</span><br><span class="line">    &#125;; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// socket关闭事件</span></span><br><span class="line">    socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    body.innerHTML+=<span class="string">&quot;&lt;br/&gt;系统：已和服务器断开连接！！！&quot;</span>;</span><br><span class="line">    &#125;; </span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭socket</span></span><br><span class="line">    <span class="comment">//socket.close()</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//-----------</span></span><br><span class="line"><span class="keyword">var</span> body=<span class="built_in">document</span>.getElementById(<span class="string">&quot;body&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> msg=<span class="built_in">document</span>.getElementById(<span class="string">&quot;content&quot;</span>).value;<span class="comment">//获取输入框内容</span></span><br><span class="line">    socket.send(msg);<span class="comment">//发送消息</span></span><br><span class="line">    reset();<span class="comment">//清空输入框</span></span><br><span class="line">    body.innerHTML+=<span class="string">&quot;&lt;br/&gt;我：&quot;</span>+msg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;content&quot;</span>).value=<span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>服务器端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> action;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.websocket.CloseReason;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnClose;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnError;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnMessage;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnOpen;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.Session;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.server.PathParam;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.server.ServerEndpoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//@ServerEndpoint注解中的内容是用户客户端websocket的连接url,例如ws://127.0.0.1:80/websocket/ws,</span></span><br><span class="line"><span class="comment">//结构形式为“ws：//ip:端口/项目名/指定的url”</span></span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WSServer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Session session;</span><br><span class="line">    <span class="comment">//连接打开时执行</span></span><br><span class="line">    <span class="meta">@OnOpen</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">(Session session)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.session=session;</span><br><span class="line">        System.out.println(<span class="string">&quot;一个客户端连接进来了 ... 它的sessionid是：&quot;</span> + session.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//收到消息时执行</span></span><br><span class="line">    <span class="meta">@OnMessage</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(String message, Session session)</span> </span>&#123;</span><br><span class="line">    	System.out.println(session.getId()+<span class="string">&quot;客户端发送的消息是：&quot;</span>+message);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">        	<span class="keyword">this</span>.sendMessage(message);<span class="comment">//消息发回给客户端</span></span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//return currentUser + &quot;：&quot; + message;如果有返回值，则客户端发送消息后会收到这个返回值</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//连接关闭时执行</span></span><br><span class="line">    <span class="meta">@OnClose</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">(Session session, CloseReason closeReason)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;一个客户端关闭了，它的sessionid是：&quot;</span> + session.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//连接错误时执行</span></span><br><span class="line">    <span class="meta">@OnError</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable t)</span> </span>&#123;</span><br><span class="line">        t.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自定义的方法，用于发送消息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.session.getBasicRemote().sendText(message);</span><br><span class="line">        <span class="comment">//this.session.getAsyncRemote().sendText(message);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="websocket-断线重连"><a href="#websocket-断线重连" class="headerlink" title="websocket 断线重连"></a>websocket 断线重连</h5><p>心跳就是客户端定时的给服务端发送消息，证明客户端是在线的， 如果超过一定的时间没有发送则就是离线了。</p>
+<h6 id="如何判断在线离线？"><a href="#如何判断在线离线？" class="headerlink" title="如何判断在线离线？"></a>如何判断在线离线？</h6><p>当客户端第一次发送请求至服务端时会携带唯一标识、以及时间戳，服务端到db或者缓存去查询改请求的唯一标识，如果不存在就存入db或者缓存中， 第二次客户端定时再次发送请求依旧携带唯一标识、以及时间戳，服务端到db或者缓存去查询改请求的唯一标识，如果存在就把上次的时间戳拿取出来，使用当前时间戳减去上次的时间， 得出的毫秒秒数判断是否大于指定的时间，若小于的话就是在线，否则就是离线；</p>
+<h6 id="如何解决断线问题"><a href="#如何解决断线问题" class="headerlink" title="如何解决断线问题"></a>如何解决断线问题</h6><p>通过查阅资料了解到 nginx 代理的 websocket 转发，无消息连接会出现超时断开问题。网上资料提到解决方案两种，一种是修改nginx配置信息，第二种是 websocket 发送心跳包。下面就来总结一下本次项目实践中解决的 websocket 的断线 和 重连 这两个问题的解决方案。主动触发包括主动断开连接，客户端主动发送消息给后端</p>
+<ul>
+<li>1 主动断开连接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws.close();</span><br></pre></td></tr></table></figure>
+
+<p>主动断开连接，根据需要使用，基本很少用到。</p>
+<ul>
+<li>2 主动发送消息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws.send(&quot;hello world&quot;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>断线的可能原因1：websocket超时没有消息自动断开连接，应对措施：这时候我们就需要知道服务端设置的超时时长是多少，在小于超时时间内发送心跳包，有2中方案:一种是客户端主动发送上行心跳包，另一种方案是服务端主动发送下行心跳包。</li>
+</ul>
+<p>下面主要讲一下客户端也就是前端如何实现心跳包：</p>
+<p>首先了解一下心跳包机制</p>
+<p>跳包之所以叫心跳包是因为：它像心跳一样每隔固定时间发一次，以此来告诉服务器，这个客户端还活着。事实上这是为了保持长连接，至于这个包的内容，是没有什么特别规定的，不过一般都是很小的包，或者只包含包头的一个空包。</p>
+<p>在 TCP 的机制里面，本身是存在有心跳包的机制的，也就是 TCP 的选项：SO_KEEPALIVE 。系统默认是设置的2小时的心跳频率。但是它检查不到机器断电、网线拔出、防火墙这些断线。而且逻辑层处理断线可能也不是那么好处理。一般，如果只是用于保活还是可以的。</p>
+<p>心跳包一般来说都是在逻辑层发送空的 echo 包来实现的。下一个定时器，在一定时间间隔下发送一个空包给客户端，然后客户端反馈一个同样的空包回来，服务器如果在一定时间内收不到客户端发送过来的反馈包，那就只有认定说掉线了。</p>
+<p>在长连接下，有可能很长一段时间都没有数据往来。理论上说，这个连接是一直保持连接的，但是实际情况中，如果中间节点出现什么故障是难以知道的。更要命的是，有的节点(防火墙)会自动把一定时间之内没有数据交互的连接给断掉。在这个时候，就需要我们的心跳包了，用于维持长连接，保活。</p>
+<p>心跳检测步骤：</p>
+<ul>
+<li>客户端每隔一个时间间隔发生一个探测包给服务器</li>
+<li>客户端发包时启动一个超时定时器</li>
+<li>服务器端接收到检测包，应该回应一个包</li>
+<li>如果客户机收到服务器的应答包，则说明服务器正常，删除超时定时器</li>
+<li>如果客户端的超时定时器超时，依然没有收到应答包，则说明服务器挂了</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 前端解决方案：心跳检测</span><br><span class="line">var heartCheck = &#123;</span><br><span class="line">    timeout: 30000, //30秒发一次心跳</span><br><span class="line">    timeoutObj: null,</span><br><span class="line">    serverTimeoutObj: null,</span><br><span class="line">    reset: function()&#123;</span><br><span class="line">        clearTimeout(this.timeoutObj);</span><br><span class="line">        clearTimeout(this.serverTimeoutObj);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;,</span><br><span class="line">    start: function()&#123;</span><br><span class="line">        var self = this;</span><br><span class="line">        this.timeoutObj = setTimeout(function()&#123;</span><br><span class="line">            //这里发送一个心跳，后端收到后，返回一个心跳消息，</span><br><span class="line">            //onmessage拿到返回的心跳就说明连接正常</span><br><span class="line">            ws.send(&quot;ping&quot;);</span><br><span class="line">            console.log(&quot;ping!&quot;)</span><br><span class="line"></span><br><span class="line">            self.serverTimeoutObj = setTimeout(function()&#123;//如果超过一定时间还没重置，说明后端主动断开了</span><br><span class="line">                ws.close(); //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次</span><br><span class="line">            &#125;, self.timeout);</span><br><span class="line">        &#125;, this.timeout);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>断线的可能原因2：websocket 异常包括服务端出现中断，交互切屏等等客户端异常中断等等 当若服务端宕机了，客户端怎么做、服务端再次上线时怎么做？客户端则需要断开连接，通过 onclose 关闭连接，服务端再次上线时则需要清除之间存的数据，若不清除 则会造成只要请求到服务端的都会被视为离线。</li>
+</ul>
+<p>针对这种异常的中断解决方案就是处理重连，下面我们给出的重连方案是使用js库处理：引入reconnecting-websocket.min.js，ws建立链接方法使用js库api方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ws = new ReconnectingWebSocket(url);</span><br><span class="line">// 断线重连：</span><br><span class="line">reconnectSocket()&#123;</span><br><span class="line">    if (&#x27;ws&#x27; in window) &#123;</span><br><span class="line">        ws = new ReconnectingWebSocket(url);</span><br><span class="line">    &#125; else if (&#x27;MozWebSocket&#x27; in window) &#123;</span><br><span class="line">       ws = new MozWebSocket(url);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      ws = new SockJS(url);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>断网监测支持使用js库：offline.min.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">onLineCheck()&#123;</span><br><span class="line">    Offline.check();</span><br><span class="line">    console.log(Offline.state,&#x27;---Offline.state&#x27;);</span><br><span class="line">    console.log(this.socketStatus,&#x27;---this.socketStatus&#x27;);</span><br><span class="line"></span><br><span class="line">    if(!this.socketStatus)&#123;</span><br><span class="line">        console.log(&#x27;网络连接已断开！&#x27;);</span><br><span class="line">        if(Offline.state === &#x27;up&#x27; &amp;&amp; websocket.reconnectAttempts &gt; websocket.maxReconnectInterval)&#123;</span><br><span class="line">            window.location.reload();</span><br><span class="line">        &#125;</span><br><span class="line">        reconnectSocket();</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        console.log(&#x27;网络连接成功！&#x27;);</span><br><span class="line">        websocket.send(&quot;heartBeat&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用：在websocket断开链接时调用网络中断监测</span><br><span class="line">websocket.onclose =&gt; () &#123;</span><br><span class="line">    onLineCheck();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>WebSocket 是为了在 web 应用上进行双通道通信而产生的协议，相比于轮询HTTP请求的方式，WebSocket 有节省服务器资源，效率高等优点。WebSocket 中的掩码是为了防止早期版本中存在中间缓存污染攻击等问题而设置的，客户端向服务端发送数据需要掩码，服务端向客户端发送数据不需要掩码。WebSocket 中 Sec-WebSocket-Key 的生成算法是拼接服务端和客户端生成的字符串，进行SHA1哈希算法，再用base64编码。WebSocket 协议握手是依靠 HTTP 协议的，依靠于 HTTP 响应101进行协议升级转换。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Binstar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://binstar-hb.github.io/hb-myblog.github.io/2021/10/04/webSocket/" title="webSocket">https://binstar-hb.github.io/hb-myblog.github.io/2021/10/04/webSocket/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/hb-myblog.github.io/tags/webSocket/" rel="tag"># webSocket</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2021/10/03/%E7%94%A8CSS%E4%BB%A3%E7%A0%81%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%88%97%E8%A1%A8%E7%BD%91%E9%A1%B5%E6%8F%90%E5%8D%87%E6%B8%B2%E6%9F%93%E6%80%A7%E8%83%BD/" rel="prev" title="用CSS代码让你的列表网页提升渲染性能">
+      <i class="fa fa-chevron-left"></i> 用CSS代码让你的列表网页提升渲染性能
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2021/10/04/js%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" rel="next" title="js中一些好用的数组方法">
+      js中一些好用的数组方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#websocket%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">websocket是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">工作方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81websocket%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">为什么需要websocket协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WebSocket-%E4%B8%8E-HTTP-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">WebSocket 与 HTTP 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WebSocket%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">WebSocket协议的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%94%A8websocket"><span class="nav-number">6.</span> <span class="nav-text">什么场景下用websocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8websocket"><span class="nav-number">7.</span> <span class="nav-text">怎么使用websocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#websocket-%E6%96%AD%E7%BA%BF%E9%87%8D%E8%BF%9E"><span class="nav-number">8.</span> <span class="nav-text">websocket 断线重连</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9C%A8%E7%BA%BF%E7%A6%BB%E7%BA%BF%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">如何判断在线离线？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%96%AD%E7%BA%BF%E9%97%AE%E9%A2%98"><span class="nav-number">8.2.</span> <span class="nav-text">如何解决断线问题</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Binstar"
+      src="/hb-myblog.github.io/images/head.png">
+  <p class="site-author-name" itemprop="name">Binstar</p>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/hb-myblog.github.io/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/hb-myblog.github.io/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/hb-myblog.github.io/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Binstar</span>
+</div>
+  <div class="powered-by">
+
+  </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/hb-myblog.github.io/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/hb-myblog.github.io/js/utils.js"></script>
+
+<script src="/hb-myblog.github.io/js/motion.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/schemes/pisces.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/next-boot.js"></script>
+
+
+  <script defer src="/hb-myblog.github.io/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/hb-myblog.github.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

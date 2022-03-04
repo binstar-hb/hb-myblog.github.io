@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/hb-myblog.github.io/images/favicon-more.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/hb-myblog.github.io/images/favicon.png">
+  <link rel="mask-icon" href="/hb-myblog.github.io/images/favicon-more.png" color="#222">
+
+<link rel="stylesheet" href="/hb-myblog.github.io/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/hb-myblog.github.io/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binstar-hb.github.io","root":"/hb-myblog.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我们每时每刻使用的互联网、移动手机APK，都是由各种各样的资源拼成的HTML（JS、CSS）页面。这些资源绝大多数是静态资源，他们大多数都是不需要实时更新的。比如图片，CSS样式，JS库，这些静态资源构成了互联网的框架。 这些资源文件都很小，但是由于往往需要每次刷新页面时候都会重新下载，如果有什么方法可以减少对这些图像、样式等固定文件的下载，只获取必须API实时的数据然后渲染页面则用户访问肯定会更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http缓存机制">
+<meta property="og:url" content="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/25/http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="Where there is a will, there is a way!">
+<meta property="og:description" content="我们每时每刻使用的互联网、移动手机APK，都是由各种各样的资源拼成的HTML（JS、CSS）页面。这些资源绝大多数是静态资源，他们大多数都是不需要实时更新的。比如图片，CSS样式，JS库，这些静态资源构成了互联网的框架。 这些资源文件都很小，但是由于往往需要每次刷新页面时候都会重新下载，如果有什么方法可以减少对这些图像、样式等固定文件的下载，只获取必须API实时的数据然后渲染页面则用户访问肯定会更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/Ha63d64c619264ee3bd102582b4899216e.png">
+<meta property="og:image" content="https://ae03.alicdn.com/kf/H9410b0890a644644aef783045d7b8352l.png">
+<meta property="og:image" content="https://ae03.alicdn.com/kf/Hf78c4503b8434ba091227977ed50aefav.png">
+<meta property="og:image" content="https://ae03.alicdn.com/kf/H71e6086ff970444799a03b5238f07323L.png">
+<meta property="og:image" content="https://ae04.alicdn.com/kf/H5cd49c7d2ab44225abc01a4b2365f16fs.png">
+<meta property="og:image" content="https://ae03.alicdn.com/kf/Hfc4ef39e6be04d8f8256e56391c2224c9.png">
+<meta property="og:image" content="https://ae05.alicdn.com/kf/H26cc208e0b2f44679dde9dd019504162p.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H584a967472624ec8a17d58141efe858ck.png">
+<meta property="og:image" content="https://ae03.alicdn.com/kf/H712755c4ec3649048b3c7b1f342e86baB.png">
+<meta property="og:image" content="https://ae02.alicdn.com/kf/Hfed6678218b44d589e8c0db6d9aebe424.png">
+<meta property="og:image" content="https://ae02.alicdn.com/kf/Hed9db8c1b93747e097f4d8c7278d2bd7a.png">
+<meta property="og:image" content="https://ae04.alicdn.com/kf/Hac13b9577c2541dda9351096e15436185.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H01e573bcd9544ee2beb9318cba6e9737D.png">
+<meta property="article:published_time" content="2022-01-25T14:22:12.000Z">
+<meta property="article:modified_time" content="2022-02-14T09:47:17.932Z">
+<meta property="article:author" content="Binstar">
+<meta property="article:tag" content="http缓存机制">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/Ha63d64c619264ee3bd102582b4899216e.png">
+
+<link rel="canonical" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/25/http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>http缓存机制 | Where there is a will, there is a way!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/hb-myblog.github.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Where there is a will, there is a way!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/hb-myblog.github.io/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/hb-myblog.github.io/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/hb-myblog.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/hb-myblog.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/hb-myblog.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/25/http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hb-myblog.github.io/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title
+        " itemprop="name headline">
+          http缓存机制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-25 22:22:12" itemprop="dateCreated datePublished" datetime="2022-01-25T22:22:12+08:00">2022-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-14 17:47:17" itemprop="dateModified" datetime="2022-02-14T17:47:17+08:00">2022-02-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hb-myblog.github.io/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我们每时每刻使用的互联网、移动手机APK，都是由各种各样的资源拼成的HTML（JS、CSS）页面。这些资源绝大多数是静态资源，他们大多数都是不需要实时更新的。比如图片，CSS样式，JS库，这些静态资源构成了互联网的框架。</p>
+<p>这些资源文件都很小，但是由于往往需要每次刷新页面时候都会重新下载，如果有什么方法可以减少对这些图像、样式等固定文件的下载，只获取必须API实时的数据然后渲染页面则用户访问肯定会更快更流畅。其实上HTTP协议本身就提供一个强大的机制来解决这个问题，这就是今天要给大家介绍的HTTP Cache缓存。作为一个Web开发者必须熟练掌握HTTP的缓存机制，它可以帮我们节省大量的带宽、服务器硬件，极大的优化我们网站和APP的性能改善用户体验。</p>
+<p>缓存是一种保存资源副本并在下次请求时直接使用该副本的技术。</p>
+<p>我们使用 HTTP 缓存，通过复用缓存资源，减少了客户端等待时间和网络流量，同时也能缓解服务器端的压力。可以显著的提升我们网站和应用的性能。</p>
+<p>虽然 HTTP 缓存不是必须的，但重用缓存的资源通常是必要的，HTTP 缓存是一个 web 性能优化的重要手段。</p>
+<h4 id="缓存基础知识"><a href="#缓存基础知识" class="headerlink" title="缓存基础知识"></a>缓存基础知识</h4><p>我们首先从概述缓存基本概念讲起。如果我们知道一些资源（图片，CSS样式文件等）在一段时间内会不改变，则可以用缓存保存这些资源。在设置的时间内，资源被认为是新鲜（fresh），过了这段时间后设置它的状态为过期（stale）。</p>
+<p>缓存允许客户端（例如浏览器）尽可能长时间地保留住资源，然后过期后丢弃它再从服务器获取新版本。为了使缓存机制能生效，需要一种方法来发送资源的过期时间。</p>
+<p>为了解决这个问题，HTTP提供了两种主要方式。下面我们首先讨论第一种方法。</p>
+<p><img src="https://ae01.alicdn.com/kf/Ha63d64c619264ee3bd102582b4899216e.png" alt="image.png"></p>
+<h5 id="HTTP-缓存的类型"><a href="#HTTP-缓存的类型" class="headerlink" title="HTTP 缓存的类型"></a>HTTP 缓存的类型</h5><p>通常 HTTP 缓存策略分为两种：</p>
+<ul>
+<li>强缓存</li>
+<li>协商缓存。</li>
+</ul>
+<p>从字面意思我们可以很直观的看到它们的差别：</p>
+<ul>
+<li>强缓存即强制直接使用缓存。</li>
+<li>协商缓存就得和服务器协商确认下这个缓存能不能用。</li>
+</ul>
+<h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><p>强缓存不会向服务器发送请求，直接从缓存中读取资源，在 chrome 控制台的 network 选项中可以看到该请求返回 200 的状态码，并且size显示from disk cache或from memory cache；</p>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><p>协商缓存会先向服务器发送一个请求，服务器会根据这个请求的 request header 的一些参数来判断是否命中协商缓存，如果命中，则返回 304 状态码并带上新的 response header 通知浏览器从缓存中读取资源。</p>
+<h5 id="HTTP-缓存控制"><a href="#HTTP-缓存控制" class="headerlink" title="HTTP 缓存控制"></a>HTTP 缓存控制</h5><p>在 HTTP 中，我们可以通过设置响应头以及请求头来控制缓存策略。</p>
+<p>强缓存可以通过设置Expires和Cache-Control 两种响应头实现。如果同时存在，Cache-Control优先级高于Expires。</p>
+<h4 id="缓存过期Expires和HTTP-1-0缓存的源起"><a href="#缓存过期Expires和HTTP-1-0缓存的源起" class="headerlink" title="缓存过期Expires和HTTP/1.0缓存的源起"></a>缓存过期Expires和HTTP/1.0缓存的源起</h4><h5 id="缓存过期Expires"><a href="#缓存过期Expires" class="headerlink" title="缓存过期Expires"></a>缓存过期Expires</h5><p>Expires是在HTTP/1.0协议中引入的，它与Pragma，Last-Modified和If-Modified-Since共同构成了HTTP缓存体系。Expires也是我们可以使用的最简单的HTTP缓存标识头，表示给定资源过期的时间。我们来看一个例子：</p>
+<p><img src="https://ae03.alicdn.com/kf/H9410b0890a644644aef783045d7b8352l.png" alt="image.png"></p>
+<p>上图中这个logo的过期时间为”Expires: wed, 15 May 2019 88:07:42 GMT”。如果超过Expires指定的日期，浏览器就会尝试重新获这个资源取。到期之前浏览器都会缓存这个资源，刷新页面时候并不会再从服务下载。</p>
+<h4 id="使用Last-Modified和If-Modified-Since验证"><a href="#使用Last-Modified和If-Modified-Since验证" class="headerlink" title="使用Last-Modified和If-Modified-Since验证"></a>使用Last-Modified和If-Modified-Since验证</h4><p>要做到完美的缓存，就要做到仅仅在确定资源更新时候才重新下载它。实现这个目标的一种方法是允许浏览器根据这个资源去询问服务端。浏览器怎么确定目前资源的更新版本呢？有一个HTTP请求If-Modified-Since标识。</p>
+<p>假设我们在该资源过期日期5月16日请求该资源，客户端浏览器会发起请求：</p>
+<p><img src="https://ae03.alicdn.com/kf/Hf78c4503b8434ba091227977ed50aefav.png" alt="image.png"></p>
+<p>请求头总包含”If-Modified-Since”，它表示浏览器已经下载过服务器18年12月25日修改过的版本。收到该请求后，服务器会判断，这个日期之后，图像是否已经更新，如果是，则服务器会响应下载新的图像下载。否则响应”304 Not Modified”</p>
+<p><img src="https://ae03.alicdn.com/kf/H71e6086ff970444799a03b5238f07323L.png" alt="image.png"></p>
+<p>收到此这个响应，浏览器就从浏览器缓存中读取资源，不再从服务器下载。通过使用Last-Modified和If-Modified-Since可以确保客户端不会重复下载资源，也可以确保服务器端有变化时候，客户端可以及时更新到最新的资源。</p>
+<h4 id="用Pragma更新缓存"><a href="#用Pragma更新缓存" class="headerlink" title="用Pragma更新缓存"></a>用Pragma更新缓存</h4><p>虽然HTTP/1.0没方法让服务器告诉客户端不缓存特定资源，但通过客户端请求可以设置HTTP请求头，不为该资源请求缓存，这个头方法叫Pragma：</p>
+<p>Firefox的调试工具中，有个”禁用缓存”的复选框，选择后，HTTP请求就会自动在请求头中增加”Cache-Control: no-cache”</p>
+<p><img src="https://ae04.alicdn.com/kf/H5cd49c7d2ab44225abc01a4b2365f16fs.png" alt="image.png"></p>
+<p>该请求就不会使用缓存直接从服务器请求该资源，如下图，HTTP状态码返回为200而非之前的304。</p>
+<p>Pragma最初设计可能为了抓取标题所用。后续的HTTP/1.1为兼容也严格支持该选项。</p>
+<h4 id="HTTP-1-1和cache-control"><a href="#HTTP-1-1和cache-control" class="headerlink" title="HTTP/1.1和cache-control"></a>HTTP/1.1和cache-control</h4><p>为了克服Expires的局限性，HTTP/1.1中引入了cache-control，极大地增强了开发人员管理缓存资源的灵活性。cache-control不严格依赖日期，而通过一些指令来完成对缓存的管理。</p>
+<h4 id="输入max-age指令"><a href="#输入max-age指令" class="headerlink" title="输入max-age指令"></a>输入max-age指令</h4><p>我们可以将max-age指令看成是对Expires的简单替代方法。比如上面对应于5月15号，一个月过期的日期（259200s），对应的cache-control头进行响应：</p>
+<p><img src="https://ae03.alicdn.com/kf/Hfc4ef39e6be04d8f8256e56391c2224c9.png" alt="image.png"></p>
+<p>注意，max-age是对应于请求的时间的，所以在缓存生成时开始计算。单位为持续的秒数，由于不用考虑时区等因素，这种方法更加简单准确。</p>
+<p>max-age指令可以支持的最多一年的持久时间，可以满足绝大多数情况的需求。</p>
+<h4 id="使用Etag和If-None-Match更新缓存"><a href="#使用Etag和If-None-Match更新缓存" class="headerlink" title="使用Etag和If-None-Match更新缓存"></a>使用Etag和If-None-Match更新缓存</h4><p>HTTP/1.1还引入一种新的Etag缓存更新策略，用来补充If-Modified-Since。我们将实体标记视为服务器唯一标识Etag，响应标头中使用带有字母数字ID的资源版本表示方法：</p>
+<p><img src="https://ae05.alicdn.com/kf/H26cc208e0b2f44679dde9dd019504162p.png" alt="image.png"></p>
+<p>客户端下次请求时候，会使用”If-None-Match”头通知服务器端目前缓存的资源版本的ID特定版本的资源：</p>
+<p><img src="https://ae01.alicdn.com/kf/H584a967472624ec8a17d58141efe858ck.png" alt="image.png"></p>
+<p>如果资源的最新版本与上面的实体标签 ID”5c2209c2-14d05”不匹配，则服务器会响应新版本的ID。否则响应”304 Not Modified”。</p>
+<p><img src="https://ae03.alicdn.com/kf/H712755c4ec3649048b3c7b1f342e86baB.png" alt="image.png"></p>
+<p>为了防止ID名重名，一般会使用散列（比如MD5）来表示正Etag的ID，通过对资源进行计算散列可以保证文件变更和验证，也能防止资源被篡改。</p>
+<h4 id="通过私有和公共方式确保缓存隐私"><a href="#通过私有和公共方式确保缓存隐私" class="headerlink" title="通过私有和公共方式确保缓存隐私"></a>通过私有和公共方式确保缓存隐私</h4><p>上面我们讨论了，基于浏览器的本地HTTP缓存，他在第一次请求时候在本地缓存资源。现实中，我们请求的资源在被下载到本地之前通过一个或多个缓存或”共享”缓存（CDN）。这些缓存或者代理由ISP供应商或者或服务商IT部门提供。在HTTP访问中，各级中间缓存都会缓存并且浏览这些资源。</p>
+<p>为了解决这个问题，HTTP/1.1引入了私有缓存和公共缓存控制指令。尽管这些指令还不十分完善，但是，我们可以使用它来设置，某些资源不会被在公共代理中被缓存。</p>
+<p>如果多个人共享电脑，他们则可以共享一个缓存。如果资源指定了私有缓存指令，那么浏览器只会让请求他用户可以使用它。</p>
+<h4 id="使用no-store和no-cache限制缓存"><a href="#使用no-store和no-cache限制缓存" class="headerlink" title="使用no-store和no-cache限制缓存"></a>使用no-store和no-cache限制缓存</h4><p>HTTP/1.1纠正了HTTP/1.0的Pragma头的不足，并为Web开发人员提供了一种可以完全禁用缓存的方法。第一个指令<strong>no-cache</strong>强制缓存在重用之前重新验证。与must-revalidate不同，no-cache强制浏览器在必须重新验证。</p>
+<p>第二个指令，no-store 表示资源在任何情况下都不会被缓存。</p>
+<h4 id="限制特定请求的缓存"><a href="#限制特定请求的缓存" class="headerlink" title="限制特定请求的缓存"></a>限制特定请求的缓存</h4><p>如果我们想要申请至少在一定时间内刷新的资源，该怎么办？也没有问题！缓存控制不仅仅可以通过服务器控制客户端的缓存，相应地客户端也可以用来指示对某些缓存的限制。</p>
+<p><strong>max-age，no-cach</strong>e和<strong>no-store</strong>指令都支持在客户端请求头中使用。但是注意具体的意义可能是相反的。例如，在请求中指定max-age标头会通知代理服务器它们不能使用任何早于该标头指定的持续时间的缓存响应。</p>
+<p>除上面的三个指令外，我们还可以使用四个仅在请求头中使用的缓存控制指令。</p>
+<p>第一个是<strong>min-fres</strong>： 它允许客户请求在设定时间秒数内会更新的资源。</p>
+<p><img src="https://ae02.alicdn.com/kf/Hfed6678218b44d589e8c0db6d9aebe424.png" alt="image.png"></p>
+<p><strong>max-stale</strong>指令通知缓存服务器，客户端愿意接受过期的资源，且过期不超过设定秒数的缓存。</p>
+<p><img src="https://ae02.alicdn.com/kf/Hed9db8c1b93747e097f4d8c7278d2bd7a.png" alt="image.png"></p>
+<p><strong>no-transform</strong>指令通知缓存服务器客户端不希望请求任何版已经被修改该过的资源的缓存。</p>
+<p>最后一个指令<strong>only-if-cached</strong>通知缓存服务器客户端只需要一个缓存的响应，且不需要直接请求服务器获得缓存状态。如果缓存无法满足请求，则应返回504网关超时响应。</p>
+<h4 id="Vary头和服务器协商的响应"><a href="#Vary头和服务器协商的响应" class="headerlink" title="Vary头和服务器协商的响应"></a>Vary头和服务器协商的响应</h4><p>我们最后要说明的浏览器如何识别缓存资源，以及服务器协商怎么进行。</p>
+<p>浏览器缓存实际上只查看URL和方法，由于几乎所有可缓存的请求都是GET请求，所以浏览器通过URL就能识别资源。客户端服务器用于协商的HTTP头标识，服务器通过Vary标头传送给客户端。例如，客户端发出以下请求：</p>
+<p><img src="https://ae04.alicdn.com/kf/Hac13b9577c2541dda9351096e15436185.png" alt="image.png"></p>
+<p>Accept-Encoding头表示在服务器端支持的情况下允Web服务器采用gzip对响应的资源进行压缩传输。服务器需要响应协商请求头时候会使用Vary标识头，它会将其附加到其响应头的Vary标头中，如下图所示：</p>
+<p><img src="https://ae01.alicdn.com/kf/H01e573bcd9544ee2beb9318cba6e9737D.png" alt="image.png"></p>
+<p>这样，对资源缓存时候不仅应该使用URL的值来缓存响应，而且加上使用请求头的Accept-Encoding值来进一步限定缓存的键。因此使用不同Accept-Encoding标识头的请求（例如deflate），则其缓存就不用gzip。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>缓存是增强Web服务和应用APP性能的一种非常强大的方法，本文旨在指导Web开发者和相关码农了解HTTP缓存，并将其作为一们必须的工具来学习。如果你想需要更深入的学习，可以参考MDN的文档学习。</p>
+<p>转自<a target="_blank" rel="noopener" href="https://www.toutiao.com/a6680079212524601864/?log_from=2b50a753def3d_1643120288254">每一个Web开发者需要掌握的HTTP缓存知识</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Binstar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/25/http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" title="http缓存机制">https://binstar-hb.github.io/hb-myblog.github.io/2022/01/25/http缓存机制/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/hb-myblog.github.io/tags/http%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" rel="tag"># http缓存机制</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2022/01/15/typeScript%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" rel="prev" title="typescript从入门到精通">
+      <i class="fa fa-chevron-left"></i> typescript从入门到精通
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/hb-myblog.github.io/2022/01/26/%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Pinia-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" rel="next" title="状态管理工具 Pinia 从入门到精通">
+      状态管理工具 Pinia 从入门到精通 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">缓存基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP-%E7%BC%93%E5%AD%98%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP 缓存的类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">协商缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP-%E7%BC%93%E5%AD%98%E6%8E%A7%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">HTTP 缓存控制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E8%BF%87%E6%9C%9FExpires%E5%92%8CHTTP-1-0%E7%BC%93%E5%AD%98%E7%9A%84%E6%BA%90%E8%B5%B7"><span class="nav-number">2.</span> <span class="nav-text">缓存过期Expires和HTTP&#x2F;1.0缓存的源起</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E8%BF%87%E6%9C%9FExpires"><span class="nav-number">2.1.</span> <span class="nav-text">缓存过期Expires</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Last-Modified%E5%92%8CIf-Modified-Since%E9%AA%8C%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">使用Last-Modified和If-Modified-Since验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8Pragma%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">用Pragma更新缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-1-1%E5%92%8Ccache-control"><span class="nav-number">5.</span> <span class="nav-text">HTTP&#x2F;1.1和cache-control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5max-age%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">输入max-age指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Etag%E5%92%8CIf-None-Match%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-number">7.</span> <span class="nav-text">使用Etag和If-None-Match更新缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%A7%81%E6%9C%89%E5%92%8C%E5%85%AC%E5%85%B1%E6%96%B9%E5%BC%8F%E7%A1%AE%E4%BF%9D%E7%BC%93%E5%AD%98%E9%9A%90%E7%A7%81"><span class="nav-number">8.</span> <span class="nav-text">通过私有和公共方式确保缓存隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8no-store%E5%92%8Cno-cache%E9%99%90%E5%88%B6%E7%BC%93%E5%AD%98"><span class="nav-number">9.</span> <span class="nav-text">使用no-store和no-cache限制缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E7%89%B9%E5%AE%9A%E8%AF%B7%E6%B1%82%E7%9A%84%E7%BC%93%E5%AD%98"><span class="nav-number">10.</span> <span class="nav-text">限制特定请求的缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vary%E5%A4%B4%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8D%8F%E5%95%86%E7%9A%84%E5%93%8D%E5%BA%94"><span class="nav-number">11.</span> <span class="nav-text">Vary头和服务器协商的响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Binstar"
+      src="/hb-myblog.github.io/images/head.png">
+  <p class="site-author-name" itemprop="name">Binstar</p>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/hb-myblog.github.io/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/hb-myblog.github.io/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/hb-myblog.github.io/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Binstar</span>
+</div>
+  <div class="powered-by">
+
+  </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/hb-myblog.github.io/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.min.js"></script>
+  <script src="/hb-myblog.github.io/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/hb-myblog.github.io/js/utils.js"></script>
+
+<script src="/hb-myblog.github.io/js/motion.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/schemes/pisces.js"></script>
+
+
+<script src="/hb-myblog.github.io/js/next-boot.js"></script>
+
+
+  <script defer src="/hb-myblog.github.io/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/hb-myblog.github.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
