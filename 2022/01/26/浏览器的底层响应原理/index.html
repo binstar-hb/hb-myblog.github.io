@@ -18,13 +18,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hb12321xx.top","root":"/hb-myblog.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"binstar-hb.github.io","root":"/hb-myblog.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="前言对于面试的大部分前端开发者来说，对浏览器的了解也算是一知半解，因为我们一开始前端觉得，我们开发中通常使用浏览器来显示和调试页面用的，不会涉入到太过的相关浏览器工作原理知识。 这你就大错特错了，虽然浏览器默默的为我们工作，但是有关浏览器的工作原理不但在你就业前端面试中属于重中之重，也是在前端优化中占有很大比重。作为一个前端开发如果不了解浏览器的工作原理，只能永远停留在前端“切图仔”水平。 学习浏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器的底层响应原理">
-<meta property="og:url" content="http://hb12321xx.top/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:url" content="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Where there is a will, there is a way!">
 <meta property="og:description" content="前言对于面试的大部分前端开发者来说，对浏览器的了解也算是一知半解，因为我们一开始前端觉得，我们开发中通常使用浏览器来显示和调试页面用的，不会涉入到太过的相关浏览器工作原理知识。 这你就大错特错了，虽然浏览器默默的为我们工作，但是有关浏览器的工作原理不但在你就业前端面试中属于重中之重，也是在前端优化中占有很大比重。作为一个前端开发如果不了解浏览器的工作原理，只能永远停留在前端“切图仔”水平。 学习浏">
 <meta property="og:locale" content="zh_CN">
@@ -42,7 +42,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ae02.alicdn.com/kf/H36ec9e3a547445fbb65d841f05d7db2fE.png">
 
-<link rel="canonical" href="http://hb12321xx.top/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/">
+<link rel="canonical" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/hb-myblog.github.io/images/head.png">
@@ -340,7 +340,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hb12321xx.top/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/" title="浏览器的底层响应原理">http://hb12321xx.top/2022/01/26/浏览器的底层响应原理/</a>
+    <a href="https://binstar-hb.github.io/hb-myblog.github.io/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/" title="浏览器的底层响应原理">https://binstar-hb.github.io/hb-myblog.github.io/2022/01/26/浏览器的底层响应原理/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
