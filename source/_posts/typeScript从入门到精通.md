@@ -861,8 +861,3 @@ p.age = 20;
 
 typescript专题
 转自[typescript专题(一)](https://www.toutiao.com/a6734282037391262219/?log_from=79f8b2c28766f_1642469215977)
-转自[typescript专题(二)](https://www.toutiao.com/a6734666550055272974/?log_from=3291dd28b3e37_1642469256902)
-转自[typescript专题(三)](https://www.toutiao.com/a6735052568625414668/?log_from=843a83fa29522_1642469295110)
-转自[typescript专题(四)](https://www.toutiao.com/a6741709889225097736/?log_from=915ba51bb4fbb_1642469306454)
-转自[typescript专题(五)](https://www.toutiao.com/a6745703806786339335/?log_from=334669fbee1f_1642469318246)
-转自[typescript专题(六)](https://www.toutiao.com/a6746469903143797259/?log_from=dfbaf4a9eac3d_1642469328989)

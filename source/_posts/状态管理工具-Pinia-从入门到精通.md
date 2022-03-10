@@ -285,7 +285,7 @@ export const useUserStore = defineStore({
       name: '张三'
     }
   },
-  
+
   // 开启数据缓存
   persist: {
     enabled: true
@@ -321,7 +321,7 @@ state: () => {
     name: '张三',
     age: 18,
     gender: '男'
-  }  
+  }
 },
 
 persist: {
@@ -346,7 +346,3 @@ persist: {
 以上就是关于 Pinia.js 用法的一些介绍，Pinia.js 的内容还远不止这些，更多内容及使用有待大家自己探索。[Piana文档](https://segmentfault.com/a/1190000040373313?utm_source=sf-similar-article)
 
 
-
-
-
-转自[新一代状态管理工具，Pinia.js 上手指南](https://mp.weixin.qq.com/s/jjQllawIYjpx-6fM-zcJFQ)
