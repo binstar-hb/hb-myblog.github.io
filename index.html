@@ -125,17 +125,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">11</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">27</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -188,6 +188,398 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/05/30/webpack%E6%89%93%E5%8C%85%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/05/30/webpack%E6%89%93%E5%8C%85%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">webpack打包缓存问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-30 11:15:40 / 修改时间：14:10:22" itemprop="dateCreated datePublished" datetime="2022-05-30T11:15:40+08:00">2022-05-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index"><span itemprop="name">webpack</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>因为浏览器缓存原因导致打包的文件偶尔会出现不能及时更新最新代码。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>对于每次打包后的文件加上一个时间戳，使浏览器的缓存失效 找到vue.config.js文件下的chainWebpack 并加入以下配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">chainWebpack</span>(<span class="params">config</span>)</span> &#123;</span><br><span class="line">   <span class="comment">// 略......</span></span><br><span class="line">   <span class="keyword">const</span> timestamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">     <span class="comment">// 给js和css配置版本号</span></span><br><span class="line">     config.output.filename(<span class="string">`js/[name].<span class="subst">$&#123;timestamp&#125;</span>.js`</span>).end()</span><br><span class="line">     config.output.chunkFilename(<span class="string">`js/[name].<span class="subst">$&#123;timestamp&#125;</span>.js`</span>).end()</span><br><span class="line">     config.plugin(<span class="string">&#x27;extract-css&#x27;</span>).tap(<span class="function"><span class="params">args</span> =&gt;</span> [&#123;</span><br><span class="line">       <span class="attr">filename</span>: <span class="string">`css/[name].<span class="subst">$&#123;timestamp&#125;</span>.css`</span>,</span><br><span class="line">       <span class="attr">chunkFilename</span>: <span class="string">`css/[name].<span class="subst">$&#123;timestamp&#125;</span>.css`</span></span><br><span class="line">     &#125;])</span><br><span class="line">      <span class="comment">// 注意 此处由坑</span></span><br><span class="line">     <span class="comment">//当我们配置了 打包后静态文件输出为 assetsDir:&#x27;static&#x27; 后</span></span><br><span class="line">     <span class="comment">// 那么下面的路径也应该加上static</span></span><br><span class="line">     <span class="comment">/*  config.output.filename(`static/js/[name].$&#123;timestamp&#125;.js`).end()</span></span><br><span class="line"><span class="comment">       config.output.chunkFilename(`static/js/[name].$&#123;timestamp&#125;.js`).end()</span></span><br><span class="line"><span class="comment">       config.plugin(&#x27;extract-css&#x27;).tap(args =&gt; [&#123;</span></span><br><span class="line"><span class="comment">       filename: `static/css/[name].$&#123;timestamp&#125;.css`,</span></span><br><span class="line"><span class="comment">       chunkFilename: `static/css/[name].$&#123;timestamp&#125;.css`</span></span><br><span class="line"><span class="comment">         &#125;]) */</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 略......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/05/30/gzip%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/05/30/gzip%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">gzip配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-30 11:10:32 / 修改时间：11:14:50" itemprop="dateCreated datePublished" datetime="2022-05-30T11:10:32+08:00">2022-05-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index"><span itemprop="name">webpack</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一、安装插件（compression-webpack-plugin）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install compression-webpack-plugin --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>可能出现的错误：</p>
+<p>Unsupported URL Type: npm:vue-loader@^16.1.0</p>
+<p>原因：npm版本过低</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/30/gzip%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/05/30/nuiapp%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/05/30/nuiapp%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">nuiapp踩坑指南</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-30 10:44:53 / 修改时间：11:06:34" itemprop="dateCreated datePublished" datetime="2022-05-30T10:44:53+08:00">2022-05-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uniapp/" itemprop="url" rel="index"><span itemprop="name">uniapp</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-主动调用uni-hideKeyboard-收起键盘后点击屏幕任意区域键盘重新抬起的问题。"><a href="#1-主动调用uni-hideKeyboard-收起键盘后点击屏幕任意区域键盘重新抬起的问题。" class="headerlink" title="1.主动调用uni.hideKeyboard()收起键盘后点击屏幕任意区域键盘重新抬起的问题。"></a>1.主动调用uni.hideKeyboard()收起键盘后点击屏幕任意区域键盘重新抬起的问题。</h4><p>解决方案:给input的focus绑一个flag(false)，聚焦赋true，失焦赋flase即可解决</p>
+<h4 id="2-日历组件选择时间域时-input显示的时间与点击同步修改，预期为点击完成时才进行值变更"><a href="#2-日历组件选择时间域时-input显示的时间与点击同步修改，预期为点击完成时才进行值变更" class="headerlink" title="2. 日历组件选择时间域时 input显示的时间与点击同步修改，预期为点击完成时才进行值变更"></a>2. 日历组件选择时间域时 input显示的时间与点击同步修改，预期为点击完成时才进行值变更</h4><p>原因: 传递给子组件的时一个数组，由于传入的是一个引用赋值时未进行深拷贝导致此问题出现 解决方案: 对象或者数组传递时需要进行深拷贝 可以使用扩展运算符 …</p>
+<h4 id="3-ios系统-浏览器div可编辑属性-contenteditable-quot-true-quot-不生效"><a href="#3-ios系统-浏览器div可编辑属性-contenteditable-quot-true-quot-不生效" class="headerlink" title="3. ios系统 浏览器div可编辑属性 contenteditable``=``&quot;true&quot; 不生效"></a>3. ios系统 浏览器div可编辑属性 <code>contenteditable``=``&quot;true&quot; 不生效</code></h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/30/nuiapp%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/03/30/JavaScript%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/03/30/JavaScript%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">JavaScript实现响应式原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-30 17:42:04 / 修改时间：17:56:26" itemprop="dateCreated datePublished" datetime="2022-03-30T17:42:04+08:00">2022-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>为什么前端框架Vue能够做到响应式？当依赖数据发生变化时，会对页面进行自动更新，其原理还是在于对响应式数据的获取和设置进行了监听，一旦监听到数据发生变化，依赖该数据的函数就会重新执行，达到更新的效果。那么我们如果想监听对象中的属性被设置和获取的过程，可以怎么做呢？</p>
+<h4 id="1、Object-defineProperty"><a href="#1、Object-defineProperty" class="headerlink" title="1、Object.defineProperty"></a>1、Object.defineProperty</h4><blockquote>
+<p>在ES6之前，如果想监听对象属性的获取和设置，可以借助Object.defineProperty方法的存取属性描述符来实现，具体怎么用呢？我们来看一下。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;curry&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">30</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.拿到obj所有的key</span></span><br><span class="line"><span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.遍历obj所有的key，并设置存取属性描述符</span></span><br><span class="line">keys.forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> value = obj[key]</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`obj对象的<span class="subst">$&#123;key&#125;</span>属性被访问啦！`</span>)</span><br><span class="line">      <span class="keyword">return</span> value</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`obj对象的<span class="subst">$&#123;key&#125;</span>属性被设置啦！`</span>)</span><br><span class="line">      value = newValue</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置：</span></span><br><span class="line">obj.name = <span class="string">&#x27;kobe&#x27;</span> <span class="comment">// obj对象的name属性被设置啦！</span></span><br><span class="line">obj.age = <span class="number">24</span> <span class="comment">// obj对象的age属性被设置啦！</span></span><br><span class="line"><span class="comment">// 访问：</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.name) <span class="comment">// obj对象的name属性被访问啦！</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.age) <span class="comment">// obj对象的age属性被访问啦！</span></span><br></pre></td></tr></table></figure>
+
+<p>在Vue2.x中响应式原理实现的核心就是使用的<font color="red">Object.defineProperty</font>，而在Vue3.x中响应式原理的核心被换成了<font color="red">Proxy</font>，为什么要这样做呢？主要是Object.defineProperty用来监听对象属性变化，有以下缺点：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/30/JavaScript%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/03/30/vuex%E5%9B%BA%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/03/30/vuex%E5%9B%BA%E5%8C%96/" class="post-title-link" itemprop="url">vuex固化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-30 17:08:38 / 修改时间：17:18:40" itemprop="dateCreated datePublished" datetime="2022-03-30T17:08:38+08:00">2022-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前段时间写项目遇到一个问题，更改代码时页面自动刷新，vuex中的数据丢失，导致需要重新返回赋值的页面，开发起来影响效率，于是想到了vuex的持久化处理。</p>
+<p>起初我是这样用的</p>
+<p>先下载插件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex-persistedstate --save</span><br></pre></td></tr></table></figure>
+
+<p>引入插件</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/30/vuex%E5%9B%BA%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -581,418 +973,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/17/%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6MicroApp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/17/%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6MicroApp/" class="post-title-link" itemprop="url">微前端框架MicroApp</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-17 17:49:45 / 修改时间：17:56:52" itemprop="dateCreated datePublished" datetime="2022-02-17T17:49:45+08:00">2022-02-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue%E6%8F%92%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">vue插件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这几年后端的微服务是比较火爆，我们公司目前只要是新项目，基本上都是基于微服务去架构的，那么微前端是什么呢？</p>
-<p>微前端是借鉴了微服务的架构理念，核心在于将一个庞大的前端应用拆分成多个独立灵活的小型应用，每个应用都可以独立开发、独立运行、独立部署，再将这些小型应用融合为一个完整的应用，或者将原本运行已久、没有关联的几个应用融合为一个应用。微前端既可以将多个项目融合为一，又可以减少项目之间的耦合，提升项目扩展性，相比一整块的前端仓库，微前端架构下的前端仓库倾向于更小更灵活</p>
-<h4 id="为什么不用iframe"><a href="#为什么不用iframe" class="headerlink" title="为什么不用iframe"></a>为什么不用iframe</h4><p>以前我们为了把几个独立运行的小型应用合并成一个应用都是通过iframe的方式去实现的，如果不考虑体验问题，iframe 几乎是最完美的微前端解决方案了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/17/%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6MicroApp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/16/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/16/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9/" class="post-title-link" itemprop="url">JavaScript知识点</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-16 18:02:32 / 修改时间：18:08:57" itemprop="dateCreated datePublished" datetime="2022-02-16T18:02:32+08:00">2022-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="1-严格模式"><a href="#1-严格模式" class="headerlink" title="1.严格模式"></a>1.严格模式</h5><ul>
-<li>使用严格模式，可以在函数内部进行较为严格的全局和局部的错误条件检查</li>
-<li>严格模式的编译指示，”use strict”</li>
-<li>创建全局变量，未声明变量，非严格模式下为创建全局变量；严格模式下为抛出ReferenceError</li>
-<li>对变量调用delete操作符，删除变量，非严格模式下为静默失败；严格模式下为抛出ReferenceError</li>
-<li>操作对象情况下：a，只读属性赋值会抛出TypeError；b，对不可配置的属性使用delete操作符会抛出TypeError；c，为不可扩展的对象添加属性会抛出TypeError。</li>
-<li>重名属性情况：a，非严格模式下没有错误，以第二个属性为准；b，严格模式下会抛出语法错误。</li>
-<li>函数参数必须唯一，重名参数，在非严格模式下没有错误，只能访问第二个参数；严格模式下，会抛出错误。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/15/%E5%B8%B8%E7%94%A8js%E5%B7%A5%E5%85%B7%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/15/%E5%B8%B8%E7%94%A8js%E5%B7%A5%E5%85%B7%E5%BA%93/" class="post-title-link" itemprop="url">常用js工具库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-15 17:06:04" itemprop="dateCreated datePublished" datetime="2022-02-15T17:06:04+08:00">2022-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-23 16:02:43" itemprop="dateModified" datetime="2022-02-23T16:02:43+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js%E5%B7%A5%E5%85%B7%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">js工具库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Day-js"><a href="#Day-js" class="headerlink" title="Day.js"></a>Day.js</h4><p>Day.js是一个轻量化的JavaScript库，文件大小仅有2KB左右，且浏览器的兼容性好，可以为浏览器解析、验证、操作时间和日期。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install dayjs</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Flv-js"><a href="#Flv-js" class="headerlink" title="Flv.js"></a>Flv.js</h4><p>Flv.js是由 bilibili 网站开源的HTML5 视频中播放 FLV 格式视频的 JavaScript 库。flv.js 实现了在 HTML5 上播放 FLV 格式视频。由于flash性能安全和可靠性的问题是长期以来深受诟病，Flv.js可以利用html5的video标签将http-flv直播流实时播放的一个js版的播放器来代替flash。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/15/%E5%B8%B8%E7%94%A8js%E5%B7%A5%E5%85%B7%E5%BA%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/14/js%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/14/js%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" class="post-title-link" itemprop="url">js事件代理和事件委托</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-14 17:55:55 / 修改时间：18:11:47" itemprop="dateCreated datePublished" datetime="2022-02-14T17:55:55+08:00">2022-02-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p><strong>事件委托</strong>是指借用 事件冒泡 或者 事件捕获 机制，如果我们有许多以类似方式处理的元素，那么就不必为每个元素都分配一个事件处理程序 —— 而是将单个处理程序放在它们的共同祖先上。</p>
-<p>举个通俗的例子：比如一个宿舍的同学同时快递到了，一种方法就是他们一个个去领取，还有一种方法就是把这件事情委托给宿舍长，让一个人出去拿好所有快递，然后再根据收件人一 一分发给每个宿舍同学；<br>在这里，取快递就是一个事件，每个同学指的是需要响应事件的 DOM 元素，而出去统一领取快递的宿舍长就是代理的元素，所以真正绑定事件的是这个元素，按照收件人分发快递的过程就是在事件执行中，需要判断当前响应的事件应该匹配到被代理元素中的哪一个或者哪几个。</p>
-<p>一个事件触发后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段。<br>（1）捕获阶段：从window对象传导到目标节点（上层传到底层）称为“捕获阶段”（capture phase），捕获阶段不会响应任何事件；<br>（2）目标阶段：在目标节点上触发，称为“目标阶段”<br>（3）冒泡阶段：从目标节点传导回window对象（从底层传回上层），称为“冒泡阶段”（bubbling phase）。事件代理即是利用事件冒泡的机制把里层所需要响应的事件绑定到外层。</p>
-<p><img src="https://ae02.alicdn.com/kf/Hdb3fd50b3284491e83212427192368bcU.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/14/js%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/14/vue-draggable%E6%8B%96%E6%8B%BD%E6%8F%92%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/14/vue-draggable%E6%8B%96%E6%8B%BD%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">vue.draggable拖拽插件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-14 17:49:27 / 修改时间：17:54:25" itemprop="dateCreated datePublished" datetime="2022-02-14T17:49:27+08:00">2022-02-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue%E6%8F%92%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">vue插件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>vue.draggable.next是一款Vue3支持拖放的插件，并且拖放完后会与数据自动同步</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// github官方地址</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//github.com/SortableJS/vue.draggable.next</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/f86f8f0e932843aaa080b03312c23186?from=pc" alt="image.png"></p>
-<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
-<li>基于 Sortable.js 封装</li>
-<li>完全支持PC端和移动端</li>
-<li>支持不同列表之间的拖放</li>
-<li>没有 jQuery 依赖</li>
-<li>列表变化和数据同步</li>
-<li>兼容 Vue.js 3.0</li>
-<li>支持取消动作</li>
-<li>各种监听事件提供</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/14/vue-draggable%E6%8B%96%E6%8B%BD%E6%8F%92%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1060,20 +1044,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
