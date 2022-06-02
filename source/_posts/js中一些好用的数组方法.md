@@ -1,4 +1,5 @@
 ---
+
 title: js中一些好用的数组方法
 date: 2021-10-04 18:30:25
 tags: 数组方法
@@ -61,13 +62,13 @@ console.log(res);
 var res = ages.some(item => item > 4)
 console.log(res);
 //-------------------------
-var arr = [ 1, 2, 3, 4, 5, 6 ]; 
+var arr = [ 1, 2, 3, 4, 5, 6 ];
 
 var every = arr.every( function( val, index, arr){
     console.log( 'val：' + val); //打印1，不会打印2、3、4、5、6
 
-    return val > 4; 
-}); 
+    return val > 4;
+});
 
 console.log(every); //返回false
 ```
@@ -118,3 +119,32 @@ arr.includes(searchElement, fromIndex)
 [1, 2, NaN].includes(NaN); // true
 ```
 
+##### 5、copyWithin()
+
+**语法**
+
+```js
+array.copyWithin(target, start, end)
+```
+
+| 参数     | 描述                                                         |
+| :------- | :----------------------------------------------------------- |
+| *target* | 必需。复制到指定目标索引位置。                               |
+| *start*  | 可选。元素复制的起始位置。                                   |
+| *end*    | 可选。停止复制的索引位置 (默认为 *array*.length)。如果为负值，表示倒数。 |
+
+```js
+var arr =[0,1,2,3,4,5,6]
+arr.copyWithin(3) // [0, 1, 2, 0, 1, 2, 3]
+arr.copyWithin(3,4) // [0, 1, 2, 4, 5, 6, 6]
+arr.copyWithin(0,2,5) //[2, 3, 4, 3, 4, 5, 6]
+```
+
+##### 6、fill()
+
+```js
+var arr = [0,1,2,3,4,5,6]
+arr.fill("b") //["b", "b", "b", "b", "b", "b", "b"]
+arr.fill("b",3) //[0, 1, 2, "b", "b", "b", "b"]
+arr.fill("b",1,4) //[0, "b", "b", "b", 4, 5, 6]
+```

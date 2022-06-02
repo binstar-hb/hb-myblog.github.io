@@ -959,3 +959,171 @@ button.addEventListener('click', event => {
 ```
 
 上面代码中，import()方法放在click事件的监听函数之中，只有用户点击了按钮，才会加载这个模块。
+
+#### ES2021(ES12)
+
+##### 逻辑运算符和赋值表达式（&&=，||=，??=）
+
+##### &&=
+
+逻辑与赋值 x &&= y等效于：
+
+```js
+x && (x = y);
+```
+
+上面的意思是，当x为真时，x=y。具体请看下面的示例:
+
+##### ||=
+
+逻辑或赋值（x ||= y）运算仅在 x 为false时赋值。
+
+```js
+const a = { duration: 50, title: '' };
+
+a.duration ||= 10;
+console.log(a.duration); // 50
+
+a.title ||= 'title is empty.';
+console.log(a.title); // "title is empty"
+```
+
+##### ??=
+
+逻辑空赋值运算符 (x ??= y) 仅在 x 是 nullish[3] (null 或 undefined) 时对其赋值。
+
+x ??= y 等价于：x ?? (x = y);
+
+**示例一**
+
+```js
+const a = { duration: 50 };
+
+a.duration ??= 10;
+console.log(a.duration); // 50
+
+a.speed ??= 25;
+console.log(a.speed); // 25
+```
+
+**示例二**
+
+```js
+function config(options) {
+  options.duration ??= 100;
+  options.speed ??= 25;
+  return options;
+}
+
+config({ duration: 125 }); // { duration: 125, speed: 25 }
+config({}); // { duration: 100, speed: 25 }
+```
+
+##### String.prototype.replaceAll()
+
+**介绍**
+
+replaceAll() 方法返回一个新字符串，新字符串中所有满足 pattern 的部分都会被replacement 替换。pattern可以是一个字符串或一个RegExp，replacement可以是一个字符串或一个在每次匹配被调用的函数。
+
+原始字符串保持不变。
+
+**示例**
+
+```js
+'aabbcc'.replaceAll('b', '.'); // 'aa..cc'
+```
+
+使用正则表达式搜索值时，它必须是全局的。
+
+```js
+'aabbcc'.replaceAll(/b/, '.');
+TypeError: replaceAll must be called with a global RegExp
+```
+
+这将可以正常运行:
+
+```js
+'aabbcc'.replaceAll(/b/g, '.');
+"aa..cc"
+```
+
+##### 数字分隔符
+
+欧美语言中，较长的数值允许每三位添加一个分隔符（通常是一个逗号），增加数值的可读性。比如，1000可以写作1,000。
+
+ES2021中允许 JavaScript 的数值使用下划线（_）作为分隔符。
+
+```js
+let budget = 1_000_000_000_000;
+budget === 10 ** 12 // true
+```
+
+这个数值分隔符没有指定间隔的位数，也就是说，可以每三位添加一个分隔符，也可以每一位、每两位、每四位添加一个。
+
+```js
+123_00 === 12_300 // true
+
+12345_00 === 123_4500 // true
+12345_00 === 1_234_500 // true
+```
+
+小数和科学计数法也可以使用数值分隔符。
+
+```js
+// 小数
+0.000_001
+
+// 科学计数法
+1e10_000
+```
+
+数值分隔符有几个使用注意点。
+
+- 不能放在数值的最前面（leading）或最后面（trailing）。
+- 不能两个或两个以上的分隔符连在一起。
+- 小数点的前后不能有分隔符。
+- 科学计数法里面，表示指数的e或E前后不能有分隔符。
+
+##### Promise.any
+
+方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。
+
+```js
+const promise1 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("promise1");
+      //  reject("error promise1 ");
+    }, 3000);
+  });
+};
+const promise2 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("promise2");
+      // reject("error promise2 ");
+    }, 1000);
+  });
+};
+const promise3 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("promise3");
+      // reject("error promise3 ");
+    }, 2000);
+  });
+};
+Promise.any([promise1(), promise2(), promise3()])
+  .then((first) => {
+    // 只要有一个请求成功 就会返回第一个请求成功的
+    console.log(first); // 会返回promise2
+  })
+  .catch((error) => {
+    // 所有三个全部请求失败 才会来到这里
+    console.log("error", error);
+  });
+```
+
+只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。
+
+Promise.any()跟Promise.race()方法很像，只有一点不同，就是Promise.any()不会因为某个 Promise 变成rejected状态而结束，必须等到所有参数 Promise 变成rejected状态才会结束。
