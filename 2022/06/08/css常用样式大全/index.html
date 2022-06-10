@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-more.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon-more.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hb12321xx.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="字体属性: (font)大小&amp;#123;font-size: x-large;&amp;#125;(特大) xx-small;(极小) 一般中文用不到，只要用数值就可以，单位: PX、 PD样式&amp;#123;font-style: oblique;&amp;#125;(偏斜体) italic;(斜体) normal;(正常)行高&amp;#123;line-height: normal;&amp;#125;(正常)单位: PX.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css常用样式大全">
+<meta property="og:url" content="http://hb12321xx.top/2022/06/08/css%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F%E5%A4%A7%E5%85%A8/index.html">
+<meta property="og:site_name" content="Where there is a will, there is a way!">
+<meta property="og:description" content="字体属性: (font)大小&amp;#123;font-size: x-large;&amp;#125;(特大) xx-small;(极小) 一般中文用不到，只要用数值就可以，单位: PX、 PD样式&amp;#123;font-style: oblique;&amp;#125;(偏斜体) italic;(斜体) normal;(正常)行高&amp;#123;line-height: normal;&amp;#125;(正常)单位: PX.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-08T01:42:50.000Z">
+<meta property="article:modified_time" content="2022-06-10T09:41:03.104Z">
+<meta property="article:author" content="Binstar">
+<meta property="article:tag" content="css常用样式大全">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hb12321xx.top/2022/06/08/css%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F%E5%A4%A7%E5%85%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>css常用样式大全 | Where there is a will, there is a way!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Where there is a will, there is a way!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/06/08/css%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title
+        " itemprop="name headline">
+          css常用样式大全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-08 09:42:50" itemprop="dateCreated datePublished" datetime="2022-06-08T09:42:50+08:00">2022-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-10 17:41:03" itemprop="dateModified" datetime="2022-06-10T17:41:03+08:00">2022-06-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="字体属性-font"><a href="#字体属性-font" class="headerlink" title="字体属性: (font)"></a>字体属性: (font)</h4><p><code>大小&#123;font-size: x-large;&#125;(特大) xx-small;(极小) 一般中文用不到，只要用数值就可以，单位: PX、 PD</code><br><code>样式&#123;font-style: oblique;&#125;(偏斜体) italic;(斜体) normal;(正常)</code><br><code>行高&#123;line-height: normal;&#125;(正常)单位: PX. PD、EM</code><br><code>粗细&#123;font-weight: bold;&#125;(粗体) lighter;(细体) normal;(正常)</code><br><code>变体&#123;font-variant: small-caps;&#125;(小型大写字母) normal;(正常)</code><br><code>大小写&#123;text- transform: capitalize;&#125;(首字母大写) uppercase;(大写) lowercase;(小写) none;(无)</code><br><code>修饰&#123;text-decoration: underline;&#125;(下划线) overline;(上划线) line-through;(删除线) blink;(闪烁)</code></p>
+<h4 id="常用字体-font-family"><a href="#常用字体-font-family" class="headerlink" title="常用字体: (font-family)"></a>常用字体: (font-family)</h4><p><code>&quot;Courier New&quot;, Courier, monospace, &quot;Times New Roman&quot;, Times, serif, Arial, Helvetica, sans-serif, Verdana</code></p>
+<h4 id="背景属性-background"><a href="#背景属性-background" class="headerlink" title="背景属性: (background)"></a>背景属性: (background)</h4><p><code>色彩&#123;background-color: #FFFFFF;&#125;</code><br><code>图片&#123;background-image: url();&#125;</code><br><code>重复&#123;background-repeat: no-repeat;&#125;</code><br><code>滚动&#123;background-attachment: fixed;(固定) scroll;(滚动)</code><br><code>位置&#123;background position: left;&#125;(水平) top(垂直);</code><br><code>简写方法&#123;background:#000 url(..) repeat fixed left top;&#125; 简写</code></p>
+<h4 id="区块属性-Block"><a href="#区块属性-Block" class="headerlink" title="区块属性: (Block)"></a>区块属性: (Block)</h4><p><code>字间距&#123;letter-spacing: normal;&#125; 数值</code><br><code>对齐&#123;text-align: justify;&#125;(两端对齐) left;(左对齐) right;(右对齐) center;(居中)</code><br><code>缩进&#123;text-indent:数值px;&#125;</code><br><code>垂直对齐&#123;vertical-align: baseline;(基线) sub;(下标) super;(下标) top; text-top; middle; bottom; text-bottom;</code><br><code>词间距word-spacing: normal; 数值</code><br><code>空格white-space: pre;(保留) nowrap;(不换行)</code><br><code>显示&#123;display:block;&#125;(块) inline;(内嵌) list-item;(列表项) run-in;(追加部分) compact; (紧凑) marker;(标记) table; inline-table; table-raw-group; table-header-group; table-footer-group; table-raw; table-column-group; table-column; table-cell; table-caption; (表格标题) </code></p>
+<h4 id="方框属性-Box"><a href="#方框属性-Box" class="headerlink" title="方框属性: (Box)"></a>方框属性: (Box)</h4><p><code>width; height; float;; clear:both; margin;; padding;顺序:上右下左</code></p>
+<h4 id="边框属性-Border"><a href="#边框属性-Border" class="headerlink" title="边框属性: (Border)"></a>边框属性: (Border)</h4><p><code>border-style: dotted;(点线) dashed;(虚线) solid; double;(双线) groove;(槽线) ridge;(脊状) inse;(凹陷) outset;</code><br><code>border-width;边框宽度</code><br><code>border-color:#000;</code><br><code>简写方法border: width style color; </code></p>
+<h4 id="列表属性-List-style"><a href="#列表属性-List-style" class="headerlink" title="列表属性: (List-style)"></a>列表属性: (List-style)</h4><p><code>类型list-style-type: disc;(圆点) circle;(圆圈) square; (方块) decimal;(数字) lower-roman; (小罗码数字) upper-roman; lower. alpha; upper-alpha; 位置list-style-position: outside;(外) inside; 图像list-style-image: ur();</code></p>
+<h4 id="定位属性-Position"><a href="#定位属性-Position" class="headerlink" title="定位属性: (Position)"></a>定位属性: (Position)</h4><p><code>position: absolute; relative; static;</code><br><code>visibility: inherit; visible; hidden;</code><br><code>overflow: visible; hidden; scroll; auto;</code><br><code>clip: rect(12px,auto,12px,auto) (裁切)</code></p>
+<h3 id="css属性代码大全"><a href="#css属性代码大全" class="headerlink" title="css属性代码大全"></a>css属性代码大全</h3><h4 id="一、CSS文字属性"><a href="#一、CSS文字属性" class="headerlink" title="一、CSS文字属性:"></a>一、CSS文字属性:</h4><p><code>color : #99999; /文字颜色/</code><br><code>font-family :宋体,sans-serif;/文字字体/</code><br><code>font-size :9pt;/文字大小/</code><br><code>font-style:itelic; /文字斜体/</code><br><code>font-variant:small-caps; /小字体/</code><br><code>letter-spacing: 1pt; /字间距离/</code><br><code>line-height : 200%; /设置行高/</code><br><code>font-weight:bold; /文字粗体/</code><br><code>vertical-align:sub;/下标字/</code><br><code>vertical-align:super;/上标字/</code><br><code>text-decoration:line-through; /加删除线/</code><br><code>text-decoration: overline; /加顶线/</code><br><code>text-decoration:underline; /加下划线/</code><br><code>text-decoration:none; /删除链接下划线/</code><br><code>text-transform : capitalize;/首字大写/</code><br><code>text-transform : uppercase;/英文大写/</code><br><code>text-transform : lowercase;/英文小写/</code><br><code>text-align:right;/文字右对齐/</code><br><code>text-align:left;/文字左对齐/</code><br><code>text-align:center; /文字居中对齐/</code><br><code>text- align:justify; /文字分散对齐/</code><br><code>vertical-align:top; /垂直向上对齐/</code><br><code>vertical-align:bottom; /垂直向下对齐/</code><br><code>vertical-align:middle; /垂直居中对齐/</code><br><code>vertical- align:text-top;/文字垂直向上对齐/</code><br><code>vertical- align:text- bottom; /文字垂直向下对齐/</code></p>
+<h4 id="二、CSS符号属性"><a href="#二、CSS符号属性" class="headerlink" title="二、CSS符号属性:"></a>二、CSS符号属性:</h4><p><code>list-style-type:none; /不编号/</code><br><code>list-style-type:decimal; /阿拉伯数字/</code><br><code>list-style-type:lower-roman; /小写罗马数字/</code><br><code>list-style-type:upper-roman; /大写罗马数字/</code><br><code>list-style-type:lower-alpha; /小写英文字母/</code><br><code>list-style-type:upper-alpha;/大写英文字母/</code><br><code>list-style-type:disc; /实心圆形符号/</code><br><code>list-style-type:circle; /空心圆形符号/</code><br><code>list-style-type:square; /实心方形符号/</code><br><code>list-style-image:url(/dot.gif); /图片式符号/</code><br><code>list-style-position: outside; /凸排/</code><br><code>list-style-position:inside; /缩进/</code></p>
+<h4 id="四、CSS背景样式"><a href="#四、CSS背景样式" class="headerlink" title="四、CSS背景样式:"></a>四、CSS背景样式:</h4><p><code>background-color:#F5E2EC;/背景颜色/</code><br><code>background:transparent; /透视背景/</code><br><code>background-image : ur(/image/bg.gif);/背景图片/</code><br><code>background-attachment : fixed; /浮水印固定背景/</code><br><code>background-repeat : repeat; /重复排列网页默认/</code><br><code>background-repeat : no-repeat; /不重复排列/</code><br><code>background-repeat : repeat-x; /在x轴重复排列/</code><br><code>background-repeat : repeat-y; /在y轴重复排列/</code></p>
+<p><strong>指定背景位置</strong><br><code>background-position : 90% 90%; /背景图片x与y轴的位置/</code><br><code>background-position: top; /向上对齐/</code><br><code>background-position : buttom; /向下对齐/</code><br><code>background-position : left; /向左对齐/</code><br><code>background-position : right; /向右对齐/</code><br><code>background-position: center; /居中对齐/</code></p>
+<h4 id="五、CSS连接属性"><a href="#五、CSS连接属性" class="headerlink" title="五、CSS连接属性:"></a>五、CSS连接属性:</h4><p><code>a /所有超链接/</code><br><code>a:link /超链接文字格式/</code><br><code>a:visited /浏览过的链接文字格式/</code><br><code>a:active /按下链接的格式/</code><br><code>a:hover /鼠标转到链接/</code></p>
+<p><strong>鼠标光标样式:</strong></p>
+<p><code>链接手指cursor: hand/pointer</code><br><code>十字体cursor:crosshair</code><br><code>箭头朝下cursor:s-resize</code><br><code>十字箭头cursor:move</code><br><code>箭头朝右cursor:move</code><br><code>加一问号cursor:help</code><br><code>箭头朝左cursor:w-resize</code><br><code>箭头朝_上cursor:n-resize</code><br><code>箭头朝右.上cursor:ne-resize</code><br><code>箭头朝左上cursor:nw-resize</code><br><code>文字|型cursor:text</code><br><code>箭头斜右下cursor:se-resize</code><br><code>箭头斜左下cursor:sw-resize</code><br><code>漏斗cursor:wait</code><br><code>光标图案(IE6) p &#123;cursor:ur(&quot;光标文件名.cur&quot;),text;&#125;</code></p>
+<h4 id="六、CSS框线-览表"><a href="#六、CSS框线-览表" class="headerlink" title="六、CSS框线- 览表:"></a>六、CSS框线- 览表:</h4><p><code>border-top : 1px solid #6699c;/上框线/</code><br><code>border-bottom : 1px solid #6699c;/下框线/</code><br><code>border-left : 1px solid #6699cc; /左框线/</code><br><code>border-right : 1px solid #6699cc; /右框线/</code><br>以上是建议书写方式,但也可以使用常规的方式如下:<br><code>border-top-color : #369 /设置上框线top颜色/</code><br><code>border-top-width :1px /设置上框线top宽度/</code><br><code>border-top-style : solid/设置上框线top样式/</code></p>
+<p><strong>其他框线样式</strong><br><code>solid /实线框/</code><br><code>dotted /虚线框/</code><br><code>double /双线框/</code><br><code>groove /立体内凸框/</code><br><code>ridge /立体浮雕框/</code><br><code>inset/凹框/</code><br><code>outset/凸框/</code></p>
+<h4 id="CSS属性-字体样式-Font-style"><a href="#CSS属性-字体样式-Font-style" class="headerlink" title="CSS属性:字体样式(Font style)"></a>CSS属性:字体样式(Font style)</h4><p><code>序号中文说明标记语法</code><br><code>1、字体样式&#123;font:font-style font-variant font-weight font-size font-family&#125;</code><br><code>2、字体类型&#123;font-family:&quot;字体1&quot;字体2&quot;,&quot;字体3..&#125;</code><br><code>3、字体大小&#123;font-size:数值|inherit| medium| large| larger| x-large| x-large| small | smaller| x-small xx-small&#125;</code><br><code>4、字体风格&#123;font-style:inherit|italic|normal|oblique&#125;</code><br><code>5、字体粗细&#123;font-weight:100-900|bold|bolder|lighter|normal;&#125;</code><br><code>6、字体颜色&#123;color:数值;&#125;</code><br><code>7、阴影颜色&#123;text-shadow:16位色值&#125;</code><br><code>8、字体行高&#123;line-height:数值|inherit|normal;&#125;</code><br><code>9、字间距&#123;letter-spacing:数值|inherit|normal&#125;</code><br><code>10、单词间距&#123;word-spacing:数值|inherit|normal&#125;</code><br><code>11、字体变形&#123;font-variant:inherit|normal|small-cps &#125;</code><br><code>12、英文转换&#123;text-transform:inherit|none|capitalize|uppercase|lowercase&#125;</code><br><code>13、字体变形&#123;font size-adjust:inherit|none&#125;</code><br><code>14、字体&#123;font-stretch:condensed|expanded|extra-condensed|extra-expanded|inherit|narrower|normall|semi-condensed|semi-expanded|ultra-condensed|ultra-expanded|wider&#125;</code></p>
+<h4 id="文本样式-Text-Style"><a href="#文本样式-Text-Style" class="headerlink" title="文本样式(Text Style)"></a>文本样式(Text Style)</h4><p><code>1、行间距&#123;line-height:数值|inherit|normal;&#125;</code><br><code>2、文本修饰&#123;text-decoration:inherit|none|underline|overline|line-through|blink&#125;</code><br><code>3、段首空格&#123;text- indent:数值linherit&#125;</code><br><code>4、水平对齐&#123;text align:eftrightlcenterljustify&#125;</code><br><code>5、垂直对齐&#123;vertical-align:inherit|top|bottom|text-top|text-bottom|baseline|middle|sublsuper&#125;</code><br><code>6书写方式&#123;writing-mode:lr-tb|tb-rI&#125;</code></p>
+<h4 id="背景样式"><a href="#背景样式" class="headerlink" title="背景样式"></a>背景样式</h4><p><code>1、背景颜色&#123;background-color:数值&#125;</code><br><code>2、背景图片&#123;background-image: url(URL)|none&#125;</code><br><code>3、背景重复&#123;background-repeat:inherit(no-repeat|repeat|repeat-x|repeat-y&#125;</code><br><code>4、背景固定&#123;background-attachment:fixed|scroll&#125;</code><br><code>5、背景定位&#123;background-position:数值top|bottom|left|right|center&#125;</code><br><code>6、背影样式&#123;background:背景颜色|背景图象|背景重复|背景附件背景位置&#125;</code></p>
+<h4 id="框架样式-Box-style"><a href="#框架样式-Box-style" class="headerlink" title="框架样式(Box style)"></a>框架样式(Box style)</h4><p><code>序号中文说明标记语法</code><br><code>1、边界留白&#123;margin:margin-top margin-right margin-bottom margin-left&#125;</code><br><code>2、补白 &#123;padding:padding top padding-right padding: bottom padding-eft&#125;</code><br><code>3、边框宽度&#123;border-width:border-top-width border-right-width border-bottom-width border-left-width&#125;</code><br><code>宽度值: thin|medium|thick|数值</code><br><code>4、边框颜色&#123;border-color;数值数值数值数值&#125;数值: 分别代表top、right、bottom、left颜色值</code><br><code>5、边框风格&#123;border-style:none|hidden|inherit|dashed|solid|double|inset|outset|ridge|groove&#125;</code><br><code>6、边框&#123;border:border width border-style color&#125;</code><br><code>上边框&#123;border-top:border.top-width border-style color&#125;</code><br><code>右边框&#123;border-right:border-right-width border-style color&#125;</code><br><code>下边框&#123;border-bottom:border-bottom-width border-style color&#125;</code><br><code>左边框&#123;border-left:border-left-width border-style color&#125;</code><br><code>7、宽度 &#123;width:长度|百分比| auto&#125;</code><br><code>8、高度&#123;height:数值|auto&#125;</code><br><code>9、漂浮&#123;float:left|right|none&#125;</code><br><code>10、清除 &#123;clear:none|left|right|both&#125;</code></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Binstar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://hb12321xx.top/2022/06/08/css%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F%E5%A4%A7%E5%85%A8/" title="css常用样式大全">http://hb12321xx.top/2022/06/08/css常用样式大全/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F%E5%A4%A7%E5%85%A8/" rel="tag"># css常用样式大全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/30/webpack%E6%89%93%E5%8C%85%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/" rel="prev" title="webpack打包缓存问题">
+      <i class="fa fa-chevron-left"></i> webpack打包缓存问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E5%B1%9E%E6%80%A7-font"><span class="nav-number">1.</span> <span class="nav-text">字体属性: (font)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%AD%97%E4%BD%93-font-family"><span class="nav-number">2.</span> <span class="nav-text">常用字体: (font-family)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7-background"><span class="nav-number">3.</span> <span class="nav-text">背景属性: (background)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E5%B1%9E%E6%80%A7-Block"><span class="nav-number">4.</span> <span class="nav-text">区块属性: (Block)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%86%E5%B1%9E%E6%80%A7-Box"><span class="nav-number">5.</span> <span class="nav-text">方框属性: (Box)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E6%A1%86%E5%B1%9E%E6%80%A7-Border"><span class="nav-number">6.</span> <span class="nav-text">边框属性: (Border)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%B1%9E%E6%80%A7-List-style"><span class="nav-number">7.</span> <span class="nav-text">列表属性: (List-style)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E5%B1%9E%E6%80%A7-Position"><span class="nav-number">8.</span> <span class="nav-text">定位属性: (Position)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css%E5%B1%9E%E6%80%A7%E4%BB%A3%E7%A0%81%E5%A4%A7%E5%85%A8"><span class="nav-number"></span> <span class="nav-text">css属性代码大全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81CSS%E6%96%87%E5%AD%97%E5%B1%9E%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">一、CSS文字属性:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81CSS%E7%AC%A6%E5%8F%B7%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">二、CSS符号属性:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81CSS%E8%83%8C%E6%99%AF%E6%A0%B7%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">四、CSS背景样式:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81CSS%E8%BF%9E%E6%8E%A5%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">五、CSS连接属性:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81CSS%E6%A1%86%E7%BA%BF-%E8%A7%88%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">六、CSS框线- 览表:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS%E5%B1%9E%E6%80%A7-%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F-Font-style"><span class="nav-number">6.</span> <span class="nav-text">CSS属性:字体样式(Font style)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F-Text-Style"><span class="nav-number">7.</span> <span class="nav-text">文本样式(Text Style)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E6%A0%B7%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">背景样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E6%A0%B7%E5%BC%8F-Box-style"><span class="nav-number">9.</span> <span class="nav-text">框架样式(Box style)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Binstar"
+      src="/images/head.png">
+  <p class="site-author-name" itemprop="name">Binstar</p>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Binstar</span>
+</div>
+  <div class="powered-by">
+
+  </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
