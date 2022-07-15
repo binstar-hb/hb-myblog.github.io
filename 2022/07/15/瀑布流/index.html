@@ -21,23 +21,20 @@
     var CONFIG = {"hostname":"hb12321xx.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="对于git版本的回退，我们一般会用到如下两个命令：  git reset git revert  这两个命令有什么区别呢？ 1、git reset假设有如下几个提交:">
+  <meta name="description" content="瀑布流布局纵向瀑布流实现方式 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758var colCount &#x2F;&#x2F;定义列数var colHeightArry &#x3D; [] &#x2F;&#x2F;定义列高度数组var imgWidth &#x3D; $(&amp;#x27;.wat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git版本回退">
-<meta property="og:url" content="http://hb12321xx.top/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/index.html">
+<meta property="og:title" content="瀑布流">
+<meta property="og:url" content="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/index.html">
 <meta property="og:site_name" content="Where there is a will, there is a way!">
-<meta property="og:description" content="对于git版本的回退，我们一般会用到如下两个命令：  git reset git revert  这两个命令有什么区别呢？ 1、git reset假设有如下几个提交:">
+<meta property="og:description" content="瀑布流布局纵向瀑布流实现方式 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758var colCount &#x2F;&#x2F;定义列数var colHeightArry &#x3D; [] &#x2F;&#x2F;定义列高度数组var imgWidth &#x3D; $(&amp;#x27;.wat">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/acf69ed2c12427dd.png">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/fc6aaccc7c536e28.png">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/9acffeb81c1085a5.png">
-<meta property="article:published_time" content="2021-10-07T09:55:22.000Z">
-<meta property="article:modified_time" content="2022-01-14T12:45:05.964Z">
+<meta property="article:published_time" content="2022-07-15T01:36:34.000Z">
+<meta property="article:modified_time" content="2022-07-15T01:37:54.829Z">
 <meta property="article:author" content="Binstar">
+<meta property="article:tag" content="瀑布流">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/10/acf69ed2c12427dd.png">
 
-<link rel="canonical" href="http://hb12321xx.top/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/">
+<link rel="canonical" href="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/">
 
 
 <script id="page-configurations">
@@ -50,7 +47,7 @@
   };
 </script>
 
-  <title>git版本回退 | Where there is a will, there is a way!</title>
+  <title>瀑布流 | Where there is a will, there is a way!</title>
   
 
 
@@ -199,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -213,7 +210,7 @@
       <header class="post-header">
         <h1 class="post-title
         " itemprop="name headline">
-          git版本回退
+          瀑布流
         </h1>
 
         <div class="post-meta">
@@ -222,23 +219,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-10-07 17:55:22" itemprop="dateCreated datePublished" datetime="2021-10-07T17:55:22+08:00">2021-10-07</time>
+              <time title="创建时间：2022-07-15 09:36:34 / 修改时间：09:37:54" itemprop="dateCreated datePublished" datetime="2022-07-15T09:36:34+08:00">2022-07-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-14 20:45:05" itemprop="dateModified" datetime="2022-01-14T20:45:05+08:00">2022-01-14</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
                 </span>
             </span>
 
@@ -260,32 +251,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>对于git版本的回退，我们一般会用到如下两个命令：</p>
-<ul>
-<li>git reset</li>
-<li>git revert</li>
-</ul>
-<p>这两个命令有什么区别呢？</p>
-<h5 id="1、git-reset"><a href="#1、git-reset" class="headerlink" title="1、git reset"></a>1、git reset</h5><p>假设有如下几个提交:</p>
-<p><img src="https://i.bmp.ovh/imgs/2021/10/acf69ed2c12427dd.png"></p>
-<p>执行如下命令</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard a0fvf8</span><br></pre></td></tr></table></figure>
+        <h4 id="瀑布流布局"><a href="#瀑布流布局" class="headerlink" title="瀑布流布局"></a>瀑布流布局</h4><h5 id="纵向瀑布流"><a href="#纵向瀑布流" class="headerlink" title="纵向瀑布流"></a>纵向瀑布流</h5><p>实现方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colCount <span class="comment">//定义列数</span></span><br><span class="line"><span class="keyword">var</span> colHeightArry = [] <span class="comment">//定义列高度数组</span></span><br><span class="line"><span class="keyword">var</span> imgWidth = $(<span class="string">&#x27;.waterfall img&#x27;</span>).outerWidth(<span class="literal">true</span>) <span class="comment">//单张图片的宽度</span></span><br><span class="line">colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth) <span class="comment">//计算出列数</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">  colHeightArry[i] = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//[0,0,0]</span></span><br><span class="line">$(<span class="string">&#x27;.waterfall img&#x27;</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>] <span class="comment">//定义最小的高度</span></span><br><span class="line">  <span class="keyword">var</span> minIndex = <span class="number">0</span> <span class="comment">//定义最小高度的下标</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123; <span class="comment">//如果最小高度组数中的值小于最小值</span></span><br><span class="line">      minValue = colHeightArry[i] <span class="comment">//那么认为最小高度数组中的值是真正的最小值</span></span><br><span class="line">      minIndex = i <span class="comment">//最小下标为当前下标</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">    <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">    <span class="attr">top</span>: minValue</span><br><span class="line">  &#125;)</span><br><span class="line">  colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口大小重置之后，重新执行</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口加载完毕，执行瀑布流</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义reset函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> colHeightArry = []</span><br><span class="line">  colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    colHeightArry[i] = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="string">&#x27;.waterfall img&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">var</span> minIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123;</span><br><span class="line">        minValue = colHeightArry[i]</span><br><span class="line">        minIndex = i</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">      <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">      <span class="attr">top</span>: minValue</span><br><span class="line">    &#125;)</span><br><span class="line">    colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>命令执行之后，HEAD指针就会移动到B提交下</p>
-<p><img src="https://i.bmp.ovh/imgs/2021/10/fc6aaccc7c536e28.png"></p>
-<p>此时，远程仓库的指针依然在D提交上。直接push的话，无法将更改推送到远程仓库，只能使用-f强推到远程仓库：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f</span><br></pre></td></tr></table></figure>
-
-<p>这个方法的弊端显而易见，之前的C、D提交将会被抹除，无法再找回了。</p>
-<h5 id="2、git-revert"><a href="#2、git-revert" class="headerlink" title="2、git revert"></a>2、git revert</h5><p>通过反做创建一个新的版本，新版本的内容与要回退的目标版本一样，而HEAD指针指向新生成的版本。</p>
-<p>用git revert 来实现上述例子的话可以先revert D，再revert C（由新到旧依次revert）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git revert 5lk4er</span><br><span class="line">git revert 76sdeb</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.bmp.ovh/imgs/2021/10/9acffeb81c1085a5.png"></p>
-<p>如果回退的数量较大，一个个回退容易出错，可以使用以下方法进行批量回退</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert OLDER_COMMIT^..NEWER_COMMIT</span><br></pre></td></tr></table></figure>
-
-<p>这样操作的话HEAD指针是往后移动的，可以直接push到远程仓库中。将来甩锅便有迹可循</p>
 
     </div>
 
@@ -301,7 +269,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hb12321xx.top/2021/10/07/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/" title="git版本回退">http://hb12321xx.top/2021/10/07/git版本回退/</a>
+    <a href="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/" title="瀑布流">http://hb12321xx.top/2022/07/15/瀑布流/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -321,6 +289,9 @@
       </div>
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%80%91%E5%B8%83%E6%B5%81/" rel="tag"># 瀑布流</a>
+          </div>
 
         
 
@@ -328,13 +299,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/06/CSS3%E9%98%B4%E5%BD%B1-box-shadow/" rel="prev" title="CSS3阴影(box-shadow)">
-      <i class="fa fa-chevron-left"></i> CSS3阴影(box-shadow)
+    <a href="/2022/07/14/%E9%97%AD%E5%8C%85/" rel="prev" title="闭包">
+      <i class="fa fa-chevron-left"></i> 闭包
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/08/vue%E5%9F%BA%E7%A1%80/" rel="next" title="vue基础">
-      vue基础 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -393,7 +361,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81git-reset"><span class="nav-number">1.</span> <span class="nav-text">1、git reset</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81git-revert"><span class="nav-number">2.</span> <span class="nav-text">2、git revert</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%80%91%E5%B8%83%E6%B5%81%E5%B8%83%E5%B1%80"><span class="nav-number">1.</span> <span class="nav-text">瀑布流布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%B5%E5%90%91%E7%80%91%E5%B8%83%E6%B5%81"><span class="nav-number">1.1.</span> <span class="nav-text">纵向瀑布流</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

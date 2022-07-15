@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">30</span></a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">34</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">35</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -188,6 +188,77 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/" class="post-title-link" itemprop="url">瀑布流</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-15 09:36:34 / 修改时间：09:37:54" itemprop="dateCreated datePublished" datetime="2022-07-15T09:36:34+08:00">2022-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="瀑布流布局"><a href="#瀑布流布局" class="headerlink" title="瀑布流布局"></a>瀑布流布局</h4><h5 id="纵向瀑布流"><a href="#纵向瀑布流" class="headerlink" title="纵向瀑布流"></a>纵向瀑布流</h5><p>实现方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colCount <span class="comment">//定义列数</span></span><br><span class="line"><span class="keyword">var</span> colHeightArry = [] <span class="comment">//定义列高度数组</span></span><br><span class="line"><span class="keyword">var</span> imgWidth = $(<span class="string">&#x27;.waterfall img&#x27;</span>).outerWidth(<span class="literal">true</span>) <span class="comment">//单张图片的宽度</span></span><br><span class="line">colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth) <span class="comment">//计算出列数</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">  colHeightArry[i] = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//[0,0,0]</span></span><br><span class="line">$(<span class="string">&#x27;.waterfall img&#x27;</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>] <span class="comment">//定义最小的高度</span></span><br><span class="line">  <span class="keyword">var</span> minIndex = <span class="number">0</span> <span class="comment">//定义最小高度的下标</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123; <span class="comment">//如果最小高度组数中的值小于最小值</span></span><br><span class="line">      minValue = colHeightArry[i] <span class="comment">//那么认为最小高度数组中的值是真正的最小值</span></span><br><span class="line">      minIndex = i <span class="comment">//最小下标为当前下标</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">    <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">    <span class="attr">top</span>: minValue</span><br><span class="line">  &#125;)</span><br><span class="line">  colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口大小重置之后，重新执行</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口加载完毕，执行瀑布流</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义reset函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> colHeightArry = []</span><br><span class="line">  colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    colHeightArry[i] = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="string">&#x27;.waterfall img&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">var</span> minIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123;</span><br><span class="line">        minValue = colHeightArry[i]</span><br><span class="line">        minIndex = i</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">      <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">      <span class="attr">top</span>: minValue</span><br><span class="line">    &#125;)</span><br><span class="line">    colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -899,84 +970,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/22/vue%E4%B8%AD%E4%BD%BF%E7%94%A8postcss/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/22/vue%E4%B8%AD%E4%BD%BF%E7%94%A8postcss/" class="post-title-link" itemprop="url">vue中使用postcss</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-22 22:43:05 / 修改时间：22:53:50" itemprop="dateCreated datePublished" datetime="2022-02-22T22:43:05+08:00">2022-02-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue%E6%8F%92%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">vue插件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="一、vue2-x中使用postcss"><a href="#一、vue2-x中使用postcss" class="headerlink" title="一、vue2.x中使用postcss"></a>一、vue2.x中使用postcss</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i postcss-plugin-px2rem -D</span><br></pre></td></tr></table></figure>
-
-<h5 id="vue-config-js配置项"><a href="#vue-config-js配置项" class="headerlink" title="vue.config.js配置项"></a>vue.config.js配置项</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="attr">css</span>: &#123;</span><br><span class="line">    <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">      <span class="attr">postcss</span>: &#123;</span><br><span class="line">        <span class="attr">plugins</span>: [</span><br><span class="line">          <span class="built_in">require</span>(<span class="string">&quot;postcss-plugin-px2rem&quot;</span>)(&#123;</span><br><span class="line">            <span class="attr">rootValue</span>: <span class="number">32</span>, <span class="comment">//换算基数， 默认100  ，这样的话把根标签的字体规定为1rem为50px,这样就可以从设计稿上量出多少个px直接在代码中写多上px了。</span></span><br><span class="line">            <span class="comment">// unitPrecision: 5, //允许REM单位增长到的十进制数字。</span></span><br><span class="line">            <span class="comment">//propWhiteList: [],  //默认值是一个空数组，这意味着禁用白名单并启用所有属性。</span></span><br><span class="line">            <span class="comment">// propBlackList: [], //黑名单</span></span><br><span class="line">            <span class="attr">exclude</span>: <span class="regexp">/(node_module)/</span>, <span class="comment">//默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)/ 。如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值</span></span><br><span class="line">            <span class="comment">// selectorBlackList: [], //要忽略并保留为px的选择器</span></span><br><span class="line">            <span class="comment">// ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。</span></span><br><span class="line">            <span class="comment">// replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。</span></span><br><span class="line">            mediaQuery: <span class="literal">false</span>, <span class="comment">//（布尔值）允许在媒体查询中转换px。</span></span><br><span class="line">            <span class="attr">minPixelValue</span>: <span class="number">3</span>, <span class="comment">//设置要替换的最小像素值(3px会被转rem)。 默认 0</span></span><br><span class="line">          &#125;),</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">  </span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/22/vue%E4%B8%AD%E4%BD%BF%E7%94%A8postcss/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1048,7 +1041,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1061,7 +1054,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
