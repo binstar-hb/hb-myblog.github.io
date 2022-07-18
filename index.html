@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">32</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">35</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">36</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -192,6 +192,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/07/18/js%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/07/18/js%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91/" class="post-title-link" itemprop="url">js数组转树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-18 16:54:35 / 修改时间：17:17:01" itemprop="dateCreated datePublished" datetime="2022-07-18T16:54:35+08:00">2022-07-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> input = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;学校&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="literal">null</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;班级1&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">1</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;班级2&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">1</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;学生1&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">2</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;学生2&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">6</span>,</span><br><span class="line">    <span class="attr">val</span>: <span class="string">&quot;学生3&quot;</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildTree</span>(<span class="params">arr, parentId, childrenArray</span>) </span>&#123;</span><br><span class="line">  arr.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (item.parentId === parentId) &#123;</span><br><span class="line">      item.children = [];</span><br><span class="line">      buildTree(arr, item.id, item.children);</span><br><span class="line">      childrenArray.push(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayToTree</span>(<span class="params">input, parentId</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> array = [];</span><br><span class="line">  buildTree(input, parentId, array);</span><br><span class="line">  <span class="keyword">return</span> array.length &gt; <span class="number">0</span> ? (array.length &gt; <span class="number">1</span> ? array : array[<span class="number">0</span>]) : &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj = arrayToTree(input, <span class="literal">null</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tempArr = [&#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="attr">parentId</span>: <span class="number">2</span></span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayToTree</span>(<span class="params">sourceArr</span>) </span>&#123;</span><br><span class="line">  sourceArr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> parentId = item.parentId;</span><br><span class="line">    <span class="keyword">if</span> (parentId !== <span class="number">0</span>) &#123;</span><br><span class="line">      sourceArr.forEach(<span class="function"><span class="params">subitem</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (subitem.id == parentId) &#123;</span><br><span class="line">          <span class="keyword">if</span> (!subitem.children) &#123;</span><br><span class="line">            subitem.children = [];</span><br><span class="line">          &#125;</span><br><span class="line">          subitem.children.push(item);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> sourceArr.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.parentId === <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrayToTree(tempArr));</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/07/18/js%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -218,7 +298,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-07-15 09:36:34 / 修改时间：09:37:54" itemprop="dateCreated datePublished" datetime="2022-07-15T09:36:34+08:00">2022-07-15</time>
+              <time title="创建时间：2022-07-15 09:36:34 / 修改时间：09:39:36" itemprop="dateCreated datePublished" datetime="2022-07-15T09:36:34+08:00">2022-07-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +324,15 @@
           <h4 id="瀑布流布局"><a href="#瀑布流布局" class="headerlink" title="瀑布流布局"></a>瀑布流布局</h4><h5 id="纵向瀑布流"><a href="#纵向瀑布流" class="headerlink" title="纵向瀑布流"></a>纵向瀑布流</h5><p>实现方式</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colCount <span class="comment">//定义列数</span></span><br><span class="line"><span class="keyword">var</span> colHeightArry = [] <span class="comment">//定义列高度数组</span></span><br><span class="line"><span class="keyword">var</span> imgWidth = $(<span class="string">&#x27;.waterfall img&#x27;</span>).outerWidth(<span class="literal">true</span>) <span class="comment">//单张图片的宽度</span></span><br><span class="line">colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth) <span class="comment">//计算出列数</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">  colHeightArry[i] = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//[0,0,0]</span></span><br><span class="line">$(<span class="string">&#x27;.waterfall img&#x27;</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>] <span class="comment">//定义最小的高度</span></span><br><span class="line">  <span class="keyword">var</span> minIndex = <span class="number">0</span> <span class="comment">//定义最小高度的下标</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123; <span class="comment">//如果最小高度组数中的值小于最小值</span></span><br><span class="line">      minValue = colHeightArry[i] <span class="comment">//那么认为最小高度数组中的值是真正的最小值</span></span><br><span class="line">      minIndex = i <span class="comment">//最小下标为当前下标</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">    <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">    <span class="attr">top</span>: minValue</span><br><span class="line">  &#125;)</span><br><span class="line">  colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口大小重置之后，重新执行</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当窗口加载完毕，执行瀑布流</span></span><br><span class="line">$(<span class="built_in">window</span>).on(<span class="string">&#x27;load&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reset()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义reset函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> colHeightArry = []</span><br><span class="line">  colCount = <span class="built_in">parseInt</span>($(<span class="string">&#x27;.waterfall&#x27;</span>).width() / imgWidth)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">    colHeightArry[i] = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="string">&#x27;.waterfall img&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> minValue = colHeightArry[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">var</span> minIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colCount; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (colHeightArry[i] &lt; minValue) &#123;</span><br><span class="line">        minValue = colHeightArry[i]</span><br><span class="line">        minIndex = i</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $(<span class="built_in">this</span>).css(&#123;</span><br><span class="line">      <span class="attr">left</span>: minIndex * imgWidth,</span><br><span class="line">      <span class="attr">top</span>: minValue</span><br><span class="line">    &#125;)</span><br><span class="line">    colHeightArry[minIndex] += $(<span class="built_in">this</span>).outerHeight(<span class="literal">true</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<h5 id="总结瀑布流布局原理"><a href="#总结瀑布流布局原理" class="headerlink" title="总结瀑布流布局原理"></a>总结瀑布流布局原理</h5>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/07/15/%E7%80%91%E5%B8%83%E6%B5%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -287,10 +375,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-07-14 17:28:21 / 修改时间：17:40:52" itemprop="dateCreated datePublished" datetime="2022-07-14T17:28:21+08:00">2022-07-14</time>
+              <time title="创建时间：2022-07-14 17:28:21" itemprop="dateCreated datePublished" datetime="2022-07-14T17:28:21+08:00">2022-07-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-15 17:59:32" itemprop="dateModified" datetime="2022-07-15T17:59:32+08:00">2022-07-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -313,9 +407,9 @@
 
       
           <h4 id="闭包是什么"><a href="#闭包是什么" class="headerlink" title="闭包是什么"></a>闭包是什么</h4><p>一个函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包（closure）</p>
-<p>也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域</p>
+<p>函数执行后返回结果是一个内部函数，并被外部变量所引用，如果内部函数持有被执行函数作用域的变量，即形成了闭包。</p>
+<p>可以在内部函数访问到外部函数作用域。使用闭包，一可以读取函数中的变量，二可以将函数中的变量存储在内存中，保护变量不被污染。而正因闭包会把函数中的变量值存储在内存中，会对内存有消耗，所以不能滥用闭包，否则会影响网页性能，造成内存泄漏。当不需要使用闭包时，要及时释放内存，可将内层函数对象的变量赋值为null。</p>
 <p>在 JavaScript中，每当创建一个函数，闭包就会在函数创建的同时被创建出来，作为函数内部与外部连接起来的一座桥梁</p>
-<p>下面给出一个简单的例子</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/07/14/%E9%97%AD%E5%8C%85/#more" rel="contents">
@@ -885,91 +979,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/02/23/ES7-ES12%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/02/23/ES7-ES12%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">ES7~ES12知识点总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-23 16:04:34" itemprop="dateCreated datePublished" datetime="2022-02-23T16:04:34+08:00">2022-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-14 17:30:08" itemprop="dateModified" datetime="2022-03-14T17:30:08+08:00">2022-03-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index"><span itemprop="name">javaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="ES2017-ES8"><a href="#ES2017-ES8" class="headerlink" title="ES2017(ES8)"></a>ES2017(ES8)</h4><h5 id="Object-values"><a href="#Object-values" class="headerlink" title="Object.values()"></a>Object.values()</h5><p>Object.values方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;jimmy&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">height</span>: <span class="number">188</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(obj)); <span class="comment">// [ &#x27;jimmy&#x27;, 18, 188 ]</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="Object-entries"><a href="#Object-entries" class="headerlink" title="Object.entries()"></a>Object.entries()</h5>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/23/ES7-ES12%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1041,7 +1050,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1054,7 +1063,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
