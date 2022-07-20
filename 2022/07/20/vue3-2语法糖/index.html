@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-more.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon-more.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hb12321xx.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue3.2 版本开始才能使用语法糖！在 Vue3.0 中变量必须 return 出来， template 中才能使用；而在 Vue3.2 中只需要在 script 标签上加上 setup 属性，无需 return ， template 便可直接使用，非常的香啊！ 1、如何使用setup语法糖只需在 script 标签上写上 setup 代码如下（示例）： 123456&lt;template&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3.2语法糖">
+<meta property="og:url" content="http://hb12321xx.top/2022/07/20/vue3-2%E8%AF%AD%E6%B3%95%E7%B3%96/index.html">
+<meta property="og:site_name" content="Where there is a will, there is a way!">
+<meta property="og:description" content="vue3.2 版本开始才能使用语法糖！在 Vue3.0 中变量必须 return 出来， template 中才能使用；而在 Vue3.2 中只需要在 script 标签上加上 setup 属性，无需 return ， template 便可直接使用，非常的香啊！ 1、如何使用setup语法糖只需在 script 标签上写上 setup 代码如下（示例）： 123456&lt;template&amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-20T07:30:54.000Z">
+<meta property="article:modified_time" content="2022-07-20T08:30:03.716Z">
+<meta property="article:author" content="Binstar">
+<meta property="article:tag" content="vue3.2语法糖">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hb12321xx.top/2022/07/20/vue3-2%E8%AF%AD%E6%B3%95%E7%B3%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue3.2语法糖 | Where there is a will, there is a way!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Where there is a will, there is a way!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Everyday is stronger than yesterday, one day in the future, you don't have to be on the shoulders of giants, because you are giant!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">37</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/07/20/vue3-2%E8%AF%AD%E6%B3%95%E7%B3%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title
+        " itemprop="name headline">
+          vue3.2语法糖
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-20 15:30:54 / 修改时间：16:30:03" itemprop="dateCreated datePublished" datetime="2022-07-20T15:30:54+08:00">2022-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="vue3-2-版本开始才能使用语法糖！"><a href="#vue3-2-版本开始才能使用语法糖！" class="headerlink" title="vue3.2 版本开始才能使用语法糖！"></a>vue3.2 版本开始才能使用语法糖！</h3><p>在 Vue3.0 中变量必须 return 出来， template 中才能使用；而在 Vue3.2 中只需要在 script 标签上加上 setup 属性，无需 return ， template 便可直接使用，非常的香啊！</p>
+<h4 id="1、如何使用setup语法糖"><a href="#1、如何使用setup语法糖" class="headerlink" title="1、如何使用setup语法糖"></a>1、如何使用setup语法糖</h4><p>只需在 script 标签上写上 setup 代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、data数据的使用"><a href="#2、data数据的使用" class="headerlink" title="2、data数据的使用"></a>2、data数据的使用</h4><p>由于 setup 不需写 return ，所以直接声明数据即可 代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; ref, reactive, toRefs &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">  const data = reactive(&#123;</span><br><span class="line">    patternVisible: false,</span><br><span class="line">    debugVisible: false,</span><br><span class="line">    aboutExeVisible: false,</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  const content = ref(&#x27;content&#x27;)</span><br><span class="line">  //使用toRefs解构</span><br><span class="line">  const &#123; patternVisible, debugVisible, aboutExeVisible &#125; = toRefs(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、method方法的使用"><a href="#3、method方法的使用" class="headerlink" title="3、method方法的使用"></a>3、method方法的使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template &gt;</span><br><span class="line">  &lt;button @click=&quot;onClickHelp&quot;&gt;系统帮助&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;reactive&#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">const data = reactive(&#123;</span><br><span class="line">  aboutExeVisible: false,</span><br><span class="line">&#125;)</span><br><span class="line">// 点击帮助</span><br><span class="line">const onClickHelp = () =&gt; &#123;</span><br><span class="line">  console.log(`系统帮助`)</span><br><span class="line">  data.aboutExeVisible = true</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、watchEffect的使用"><a href="#4、watchEffect的使用" class="headerlink" title="4、watchEffect的使用"></a>4、watchEffect的使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref, watchEffect &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">let sum = ref(0)</span><br><span class="line"></span><br><span class="line">watchEffect(()=&gt;&#123;</span><br><span class="line">  const x1 = sum.value</span><br><span class="line">  console.log(&#x27;watchEffect所指定的回调执行了&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、watch的使用"><a href="#5、watch的使用" class="headerlink" title="5、watch的使用"></a>5、watch的使用</h4><script setup>
+  import { reactive, watch } from 'vue'
+  //数据
+  let sum = ref(0)
+  let msg = ref('你好啊')
+  let person = reactive({
+    name:'张三',
+    age:18,
+    job:{
+      j1:{
+        salary:20
+      }
+    }
+  })
+  // 两种监听格式
+  watch([sum,msg],(newValue,oldValue)=>{
+    console.log('sum或msg变了',newValue,oldValue)
+  },{immediate:true})
+
+  watch(()=>person.job,(newValue,oldValue)=>{
+    console.log('person的job变化了',newValue,oldValue)
+  },{deep:true})
+</script>
+
+<h4 id="6、computed计算属性的使用"><a href="#6、computed计算属性的使用" class="headerlink" title="6、computed计算属性的使用"></a>6、computed计算属性的使用</h4><p>computed 计算属性有两种写法(简写和考虑读写的完整写法) 代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; reactive, computed &#125; from &#x27;vue&#x27;</span><br><span class="line">  //数据</span><br><span class="line">  let person = reactive(&#123;</span><br><span class="line">    firstName:&#x27;小&#x27;,</span><br><span class="line">    lastName:&#x27;叮当&#x27;</span><br><span class="line">  &#125;)</span><br><span class="line">  // 计算属性简写</span><br><span class="line">  person.fullName = computed(()=&gt;&#123;</span><br><span class="line">    return person.firstName + &#x27;-&#x27; + person.lastName</span><br><span class="line">  &#125;)</span><br><span class="line">  // 完整写法</span><br><span class="line">  person.fullName = computed(&#123;</span><br><span class="line">    get()&#123;</span><br><span class="line">      return person.firstName + &#x27;-&#x27; + person.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    set(value)&#123;</span><br><span class="line">      const nameArr = value.split(&#x27;-&#x27;)</span><br><span class="line">      person.firstName = nameArr[0]</span><br><span class="line">      person.lastName = nameArr[1]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-、props父子传值的使用"><a href="#7-、props父子传值的使用" class="headerlink" title="7 、props父子传值的使用"></a>7 、props父子传值的使用</h4><p>子组件代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123;props.name&#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; defineProps &#125; from &#x27;vue&#x27;</span><br><span class="line">  // 声明props</span><br><span class="line">  const props = defineProps(&#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      default: &#x27;11&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  // 或者</span><br><span class="line">  //const props = defineProps([&#x27;name&#x27;])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>父组件代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;child :name=&#x27;name&#x27;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123;ref&#125; from &#x27;vue&#x27;</span><br><span class="line">  // 引入子组件</span><br><span class="line">  import child from &#x27;./child.vue&#x27;</span><br><span class="line">  let name= ref(&#x27;小叮当&#x27;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-、emit子父传值的使用"><a href="#8-、emit子父传值的使用" class="headerlink" title="8 、emit子父传值的使用"></a>8 、emit子父传值的使用</h4><p>子组件代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">   &lt;a-button @click=&quot;isOk&quot;&gt;确定&lt;/a-button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; defineEmits &#125; from &#x27;vue&#x27;;</span><br><span class="line"></span><br><span class="line">// emit</span><br><span class="line">const emit = defineEmits([&#x27;aboutExeVisible&#x27;])</span><br><span class="line">/**</span><br><span class="line"> * 方法</span><br><span class="line"> */</span><br><span class="line">// 点击确定按钮</span><br><span class="line">const isOk = () =&gt; &#123;</span><br><span class="line">  emit(&#x27;aboutExeVisible&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>父组件代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;AdoutExe @aboutExeVisible=&quot;aboutExeHandleCancel&quot; /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;reactive&#125; from &#x27;vue&#x27;</span><br><span class="line">// 导入子组件</span><br><span class="line">import AdoutExe from &#x27;../components/AdoutExeCom&#x27;</span><br><span class="line"></span><br><span class="line">const data = reactive(&#123;</span><br><span class="line">  aboutExeVisible: false,</span><br><span class="line">&#125;)</span><br><span class="line">// content组件ref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 关于系统隐藏</span><br><span class="line">const aboutExeHandleCancel = () =&gt; &#123;</span><br><span class="line">  data.aboutExeVisible = false</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、获取子组件ref变量和defineExpose暴露"><a href="#9、获取子组件ref变量和defineExpose暴露" class="headerlink" title="9、获取子组件ref变量和defineExpose暴露"></a>9、获取子组件ref变量和defineExpose暴露</h4><p>即 vue2 中的获取子组件的 ref ，直接在父组件中控制子组件方法和变量的方法</p>
+<p>子组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;p&gt;&#123;&#123;data &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; reactive, toRefs &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 数据部分</span><br><span class="line"> * */</span><br><span class="line">const data = reactive(&#123;</span><br><span class="line">  modelVisible: false,</span><br><span class="line">  historyVisible: false,</span><br><span class="line">  reportVisible: false,</span><br><span class="line">&#125;)</span><br><span class="line">defineExpose(&#123;</span><br><span class="line">  ...toRefs(data),</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>父组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button @click=&quot;onClickSetUp&quot;&gt;点击&lt;/button&gt;</span><br><span class="line">  &lt;Content ref=&quot;content&quot; /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">// content组件ref</span><br><span class="line">const content = ref(&#x27;content&#x27;)</span><br><span class="line">// 点击设置</span><br><span class="line">const onClickSetUp = (&#123; key &#125;) =&gt; &#123;</span><br><span class="line">   content.value.modelVisible = true</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10、路由useRoute和us-eRouter的使用"><a href="#10、路由useRoute和us-eRouter的使用" class="headerlink" title="10、路由useRoute和us eRouter的使用"></a>10、路由useRoute和us eRouter的使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; useRoute, useRouter &#125; from &#x27;vue-router&#x27;</span><br><span class="line"></span><br><span class="line">  // 声明</span><br><span class="line">  const route = useRoute()</span><br><span class="line">  const router = useRouter()</span><br><span class="line"></span><br><span class="line">  // 获取query</span><br><span class="line">  console.log(route.query)</span><br><span class="line">  // 获取params</span><br><span class="line">  console.log(route.params)</span><br><span class="line"></span><br><span class="line">  // 路由跳转</span><br><span class="line">  router.push(&#123;</span><br><span class="line">    path: `/index`</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="11、store仓库的使用"><a href="#11、store仓库的使用" class="headerlink" title="11、store仓库的使用"></a>11、store仓库的使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; useStore &#125; from &#x27;vuex&#x27;</span><br><span class="line">  import &#123; num &#125; from &#x27;../store/index&#x27;</span><br><span class="line"></span><br><span class="line">  const store = useStore(num)</span><br><span class="line"></span><br><span class="line">  // 获取Vuex的state</span><br><span class="line">  console.log(store.state.number)</span><br><span class="line">  // 获取Vuex的getters</span><br><span class="line">  console.log(store.state.getNumber)</span><br><span class="line"></span><br><span class="line">  // 提交mutations</span><br><span class="line">  store.commit(&#x27;fnName&#x27;)</span><br><span class="line"></span><br><span class="line">  // 分发actions的方法</span><br><span class="line">  store.dispatch(&#x27;fnName&#x27;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12、await的支持"><a href="#12、await的支持" class="headerlink" title="12、await的支持"></a>12、await的支持</h4><p>setup 语法糖中可直接使用 await ，不需要写 async ， setup 会自动变成 async setup</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import api from &#x27;../api/Api&#x27;</span><br><span class="line">  const data = await Api.getData()</span><br><span class="line">  console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="13、provide-和-inject-祖孙传值"><a href="#13、provide-和-inject-祖孙传值" class="headerlink" title="13、provide 和 inject 祖孙传值"></a>13、provide 和 inject 祖孙传值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;AdoutExe /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; ref, provide &#125; from &#x27;vue&#x27;</span><br><span class="line">  import AdoutExe from &#x27;@/components/AdoutExeCom&#x27;</span><br><span class="line"></span><br><span class="line">  let name = ref(&#x27;Jerry&#x27;)</span><br><span class="line">  // 使用provide</span><br><span class="line">  provide(&#x27;provideState&#x27;, &#123;</span><br><span class="line">    name,</span><br><span class="line">    changeName: () =&gt; &#123;</span><br><span class="line">      name.value = &#x27;小叮当&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>子组件代码如下（示例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">  import &#123; inject &#125; from &#x27;vue&#x27;</span><br><span class="line">  const provideState = inject(&#x27;provideState&#x27;)</span><br><span class="line"></span><br><span class="line">  provideState.changeName()</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Binstar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://hb12321xx.top/2022/07/20/vue3-2%E8%AF%AD%E6%B3%95%E7%B3%96/" title="vue3.2语法糖">http://hb12321xx.top/2022/07/20/vue3-2语法糖/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue3-2%E8%AF%AD%E6%B3%95%E7%B3%96/" rel="tag"># vue3.2语法糖</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/18/js%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91/" rel="prev" title="js数组转树">
+      <i class="fa fa-chevron-left"></i> js数组转树
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue3-2-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E6%89%8D%E8%83%BD%E4%BD%BF%E7%94%A8%E8%AF%AD%E6%B3%95%E7%B3%96%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">vue3.2 版本开始才能使用语法糖！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8setup%E8%AF%AD%E6%B3%95%E7%B3%96"><span class="nav-number">1.1.</span> <span class="nav-text">1、如何使用setup语法糖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81data%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">2、data数据的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81method%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">3、method方法的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81watchEffect%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4、watchEffect的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81watch%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">5、watch的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6%E3%80%81computed%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">6、computed计算属性的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E3%80%81props%E7%88%B6%E5%AD%90%E4%BC%A0%E5%80%BC%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.7.</span> <span class="nav-text">7 、props父子传值的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E3%80%81emit%E5%AD%90%E7%88%B6%E4%BC%A0%E5%80%BC%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.8.</span> <span class="nav-text">8 、emit子父传值的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9%E3%80%81%E8%8E%B7%E5%8F%96%E5%AD%90%E7%BB%84%E4%BB%B6ref%E5%8F%98%E9%87%8F%E5%92%8CdefineExpose%E6%9A%B4%E9%9C%B2"><span class="nav-number">1.9.</span> <span class="nav-text">9、获取子组件ref变量和defineExpose暴露</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10%E3%80%81%E8%B7%AF%E7%94%B1useRoute%E5%92%8Cus-eRouter%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text">10、路由useRoute和us eRouter的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11%E3%80%81store%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">11、store仓库的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12%E3%80%81await%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">1.12.</span> <span class="nav-text">12、await的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13%E3%80%81provide-%E5%92%8C-inject-%E7%A5%96%E5%AD%99%E4%BC%A0%E5%80%BC"><span class="nav-number">1.13.</span> <span class="nav-text">13、provide 和 inject 祖孙传值</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Binstar"
+      src="/images/head.png">
+  <p class="site-author-name" itemprop="name">Binstar</p>
+  <div class="site-description" itemprop="description">I'm a ghost, I'll eat you.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Binstar</span>
+</div>
+  <div class="powered-by">
+
+  </div>
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

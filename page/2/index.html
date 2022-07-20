@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">32</span></a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">36</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">37</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -188,6 +188,77 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/03/03/js%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Binstar">
+      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Where there is a will, there is a way!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title
+        " itemprop="name headline">
+          
+            <a href="/2022/03/03/js%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">js一些实用方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-03 11:13:24 / 修改时间：12:05:33" itemprop="dateCreated datePublished" datetime="2022-03-03T11:13:24+08:00">2022-03-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="采用合理的数据处理算法"><a href="#采用合理的数据处理算法" class="headerlink" title="采用合理的数据处理算法"></a>采用合理的数据处理算法</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数组转树形结构,时间复杂度O(n)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>list 数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>idKey 元素id键</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>parIdKey 元素父id键</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>parId 第一级根节点的父id值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">listToTree</span> (<span class="params">list,idKey,parIdKey,parId</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = &#123;&#125;;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">let</span> len = list.length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建map</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="comment">//将数组中数据转为键值对结构 (这里的数组和obj会相互引用，这是算法实现的重点)</span></span><br><span class="line">        map[list[i][idKey]] = list[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建树形数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> itemParId = list[i][parIdKey];</span><br><span class="line">        <span class="comment">// 顶级节点</span></span><br><span class="line">        <span class="keyword">if</span>(itemParId === parId) &#123;</span><br><span class="line">            result.push(list[i]);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 孤儿节点，舍弃(不存在其父节点)</span></span><br><span class="line">        <span class="keyword">if</span>(!map[itemParId])&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将当前节点插入到父节点的children中（由于是引用数据类型，obj中对于节点变化，result中对应节点会跟着变化）</span></span><br><span class="line">        <span class="keyword">if</span>(map[itemParId].children) &#123;</span><br><span class="line">            map[itemParId].children.push(list[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map[itemParId].children = [list[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="判断一个json字符串"><a href="#判断一个json字符串" class="headerlink" title="判断一个json字符串"></a>判断一个json字符串</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;&#123;&#x27;   retmsg&#x27;:&#x27;success   &#x27;,\n&#x27;  trans_date&#x27;:&#x27;   20170906&#x27;&#125;&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"><span class="comment">//&quot;&#123;&#x27;   retmsg&#x27;:&#x27;success   &#x27;,</span></span><br><span class="line"><span class="comment">//&#x27;  trans_date&#x27;:&#x27;   20170906&#x27;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>去掉空格</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/03/js%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -918,91 +989,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://hb12321xx.top/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="Binstar">
-      <meta itemprop="description" content="I'm a ghost, I'll eat you.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Where there is a will, there is a way!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title
-        " itemprop="name headline">
-          
-            <a href="/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">浏览器的底层响应原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-26 16:13:51" itemprop="dateCreated datePublished" datetime="2022-01-26T16:13:51+08:00">2022-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-10 17:23:01" itemprop="dateModified" datetime="2022-03-10T17:23:01+08:00">2022-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>对于面试的大部分前端开发者来说，对浏览器的了解也算是一知半解，因为我们一开始前端觉得，我们开发中通常使用浏览器来显示和调试页面用的，不会涉入到太过的相关浏览器工作原理知识。</p>
-<p>这你就大错特错了，虽然浏览器默默的为我们工作，但是有关浏览器的工作原理不但在你就业前端面试中属于重中之重，也是在前端优化中占有很大比重。作为一个前端开发如果不了解浏览器的工作原理，只能永远停留在前端“切图仔”水平。</p>
-<p>学习浏览器工作原理是为了能够运用到实际项目中，比如前端的性能优化以及错误排查，都会涉及到浏览器相关的知识，所以掌握浏览器的工作原理是必不可缺的，相信你学完之后，能够对你的个人能力和见识会有很大的提升。</p>
-<p>浏览器涉及到的知识点非常多而且非常重要，文章中可能其中有不足和错误的地方，也欢迎各位指出！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%93%8D%E5%BA%94%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1074,7 +1060,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1087,7 +1073,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
