@@ -39,14 +39,27 @@ npm i -S vuedraggable@next
 // item-key唯一性，一般为子项其中的一个唯一属性
 // @start开始拖动事件
 // @end结束拖动事件
-<draggable 
-  v-model="myArray" 
-  @start="drag=true" 
-  @end="drag=false" 
+<draggable
+  v-model="myArray"
+  @start="drag=true"
+  @end="drag=false"
   item-key="id">
   <template #item="{element}">
     <div>{{element.name}}</div>
    </template>
+</draggable>
+```
+
+```vue
+<draggable
+  element="div"
+  :list="list"
+  v-bind="{group:'title', animation:150}"
+  :no-transition-on-drag="true"
+>
+  <transition-group type="transition" :css="true">
+    <p class="list" v-for="item in list" :key="item.id">{{item.name}}</p>
+  </transition-group>
 </draggable>
 ```
 

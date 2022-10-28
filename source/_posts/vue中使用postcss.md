@@ -38,7 +38,7 @@ module.exports = {
     },
   },
   devServer: {
-  
+
   },
   ...
 }
@@ -115,6 +115,6 @@ npm i amfe-flexible autoprefixer -D
 ##### main.ts配置项
 
 ```js
-import 'amfe-flexible/index.js’
+import 'amfe-flexible/index.js'
 ```
 
