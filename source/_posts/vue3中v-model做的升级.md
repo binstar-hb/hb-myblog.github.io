@@ -2,7 +2,7 @@
 title: vue3中v-model做的升级
 date: 2022-07-26 15:45:04
 tags: vue3中v-model做的升级
-categories：vue
+categories: vue
 ---
 
 - 在自定义组件上使用时，v-model的prop和event默认名称会更改：prop: value => modelValue event: input => update:modelValue

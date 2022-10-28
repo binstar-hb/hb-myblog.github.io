@@ -29,7 +29,7 @@ npm install webpack webpack-cli
 鉴于前端技术变更迅速，祭出本篇文章基于 webpack 的版本号:
 
 ```shell
-├── webpack@4.41.5 
+├── webpack@4.41.5
 └── webpack-cli@3.3.10
 ```
 
@@ -249,7 +249,7 @@ module.exports = {
 }
 ```
 
-此时执行 npx webpack，可以看到 dist 目录下新增了 index.html 文件，并且其中自动插入了 <script> 脚本，引入的是我们打包之后的 js 文件。
+此时执行 npx webpack，可以看到 dist 目录下新增了 index.html 文件，并且其中自动插入了 script 脚本，引入的是我们打包之后的 js 文件。
 
 这里要多说一点点东西，<font color=blue>HtmlWebpackPlugin</font> 还为我们提供了一个 config 的配置，这个配置可以说是非常有用了。
 
@@ -759,3 +759,7 @@ module.exports = {
 ```
 
 至此，我们算是完成了一个基础配置。
+
+[带你深度解读Webpack系列(进阶篇)](https://www.toutiao.com/article/6846293171794608653/?log_from=09f8b62908264_1665642047857)
+
+[带你深度解锁Webpack系列(优化篇)](https://www.toutiao.com/article/6811367006147707406/?log_from=0048b2fbf19d6_1665642286411)
