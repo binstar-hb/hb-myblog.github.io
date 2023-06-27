@@ -13,7 +13,7 @@ categories: vue
 
 只需在 script 标签上写上 setup 代码如下（示例）：
 
-```vue
+```html
 <template>
 </template>
 <script setup>
@@ -26,7 +26,7 @@ categories: vue
 
 由于 setup 不需写 return ，所以直接声明数据即可 代码如下（示例）：
 
-```vue
+```html
 <script setup>
   import { ref, reactive, toRefs } from 'vue'
 
@@ -44,7 +44,7 @@ categories: vue
 
 #### 3、method方法的使用
 
-```vue
+```html
 <template >
   <button @click="onClickHelp">系统帮助</button>
 </template>
@@ -64,7 +64,7 @@ const onClickHelp = () => {
 
 #### 4、watchEffect的使用
 
-```vue
+```html
 <script setup>
 import { ref, watchEffect } from 'vue'
 
@@ -79,6 +79,7 @@ watchEffect(()=>{
 
 #### 5、watch的使用
 
+```html
 <script setup>
   import { reactive, watch } from 'vue'
   //数据
@@ -102,12 +103,13 @@ watchEffect(()=>{
     console.log('person的job变化了',newValue,oldValue)
   },{deep:true})
 </script>
+```
 
 #### 6、computed计算属性的使用
 
 computed 计算属性有两种写法(简写和考虑读写的完整写法) 代码如下（示例）：
 
-```vue
+```html
 <script setup>
   import { reactive, computed } from 'vue'
   //数据
@@ -137,7 +139,7 @@ computed 计算属性有两种写法(简写和考虑读写的完整写法) 代�
 
 子组件代码如下（示例）：
 
-```vue
+```html
 <template>
   <span>{{props.name}}</span>
 </template>
@@ -158,7 +160,7 @@ computed 计算属性有两种写法(简写和考虑读写的完整写法) 代�
 
 父组件代码如下（示例）：
 
-```vue
+```html
 <template>
   <child :name='name'/>
 </template>
@@ -175,7 +177,7 @@ computed 计算属性有两种写法(简写和考虑读写的完整写法) 代�
 
 子组件代码如下（示例）：
 
-```vue
+```html
 <template>
    <a-button @click="isOk">确定</a-button>
 </template>
@@ -197,7 +199,7 @@ const isOk = () => {
 
 父组件代码如下（示例）：
 
-```vue
+```html
 <template>
   <AdoutExe @aboutExeVisible="aboutExeHandleCancel" />
 </template>
@@ -225,13 +227,13 @@ const aboutExeHandleCancel = () => {
 
 子组件
 
-```vue
+```html
 <template>
   <p>{{data }}</p>
 </template>
 
 <script setup>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, defineExpose } from 'vue'
 
 /**
  * 数据部分
@@ -249,7 +251,7 @@ defineExpose({
 
 父组件：
 
-```vue
+```html
 <template>
   <button @click="onClickSetUp">点击</button>
   <Content ref="content" />
@@ -269,9 +271,9 @@ const onClickSetUp = ({ key }) => {
 </style>
 ```
 
-#### 10、路由useRoute和us eRouter的使用
+#### 10、路由useRoute和useRouter的使用
 
-```vue
+```html
 <script setup>
   import { useRoute, useRouter } from 'vue-router'
 
@@ -293,7 +295,7 @@ const onClickSetUp = ({ key }) => {
 
 #### 11、store仓库的使用
 
-```vue
+```html
 <script setup>
   import { useStore } from 'vuex'
   import { num } from '../store/index'
@@ -317,7 +319,7 @@ const onClickSetUp = ({ key }) => {
 
 setup 语法糖中可直接使用 await ，不需要写 async ， setup 会自动变成 async setup
 
-```vue
+```html
 <script setup>
   import api from '../api/Api'
   const data = await Api.getData()
@@ -327,7 +329,7 @@ setup 语法糖中可直接使用 await ，不需要写 async ， setup 会自�
 
 #### 13、provide 和 inject 祖孙传值
 
-```vue
+```html
 <template>
   <AdoutExe />
 </template>
@@ -348,7 +350,7 @@ setup 语法糖中可直接使用 await ，不需要写 async ， setup 会自�
 ```
 
 子组件代码如下（示例）：
-```vue
+```html
 <script setup>
   import { inject } from 'vue'
   const provideState = inject('provideState')

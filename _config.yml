@@ -3,9 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 斌哥不会得新冠
+title: 斌の顶级理解
 subtitle: Improve a little bit every day.
-description: no bug, no bug, no bug!
+description: 尚未决定清与浊的心，是否能成为自己的眼睛
+# description: 知识越匮乏的人，相信的事情越绝对!
 keywords:
 author: Binstar
 language: zh-CN
@@ -116,6 +117,7 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/binstar-hb/hb-myblog.github.io.git
+  # repo: git://github.com/binstar-hb/hb-myblog.github.io.git
   branch: master
 
 # 首页预览配置

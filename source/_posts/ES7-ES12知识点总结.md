@@ -1,9 +1,20 @@
 ---
 title: ES7~ES12知识点总结
 date: 2022-02-23 16:04:34
-tags: ES7~ES12知识点
+tags: ES6~ES12知识点
 categories: javaScript
 ---
+
+#### ES6
+
+##### 解构赋值+重命名
+```JS
+let obj = {a:{b:1}}
+const {a} = obj; //传统解构赋值
+const {a:{{b}} = obj;//连续解构赋值
+const {a:{b:value}} = obj;//连续解构赋值+重命名
+```
+
 
 #### ES2017(ES8)
 
